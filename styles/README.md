@@ -8,7 +8,6 @@ design direction: tokens + CSS + spec + preview, decoupled from any one project.
 | Style | Vibe | Modes | Status |
 |---|---|---|---|
 | [`neon-hud/`](neon-hud/) | sci-fi / tactical HUD — cyan chrome, clipped corners, scanlines | dark + light | ready |
-| [`soviet-hud/`](soviet-hud/) | dense tactical HUD, Soviet twist — crimson / purple chrome, star & chevron motifs, diagonals | dark + light (2 accents) | ready |
 | [`soviet-poster/`](soviet-poster/) | flat cell-shaded propaganda poster — hard borders, sharp offset cell-shadows, orange / violet chrome | light (2 accents) | ready |
 
 ## Anatomy of a style
