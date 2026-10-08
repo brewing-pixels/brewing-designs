@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-theme="soviet-poster" data-accent="orange">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>soviet-poster — preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css" />
+<style>
+  .shell { max-width: 1040px; margin: 0 auto; padding: var(--s5) var(--s4) var(--s7); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s3); margin: var(--s4) 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s4); }
+  .row { display: flex; gap: var(--s3); flex-wrap: wrap; align-items: center; }
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); margin-bottom: var(--s5); }
+  @media (max-width: 760px) { .grid { grid-template-columns: repeat(2,1fr); } .cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="poster-bg"><span class="ring r1"></span><span class="ring r2"></span><span class="tri"></span></div>
+<div class="shell">
+
+  <div class="toolbar">
+    <div class="segmented" id="acc" style="display:inline-flex;gap:6px">
+      <button class="btn-sm" data-accent="orange">Orange</button>
+      <button class="btn-sm" data-accent="violet">Violet</button>
+    </div>
+  </div>
+
+  <header class="banner">
+    <span class="banner-title">AIUR</span>
+    <span class="banner-sub">АВТОМАТИЗИРАН УПРАВУВАЧКИ РОБОТ</span>
+  </header>
+
+  <div class="grid" style="margin-top:var(--s5)">
+    <div class="stat"><div class="label">Uptime</div><div class="value num">99.98</div></div>
+    <div class="stat"><div class="label">Latency</div><div class="value num">12</div></div>
+    <div class="stat"><div class="label">Throughput</div><div class="value num">1.4k</div></div>
+    <div class="stat"><div class="label">Errors</div><div class="value num" style="color:var(--bad)">3</div></div>
+  </div>
+
+  <div class="cols">
+    <section class="panel">
+      <div class="panel-head"><span class="panel-title">Контролна табла</span><span class="panel-rule"></span></div>
+      <div class="panel-body">
+        <div><span class="label">Метод</span><select class="select"><option>t2i_diffuse</option><option>upscale</option></select></div>
+        <div><span class="label">Параметри</span><input class="input" value='{"steps": 20}' /></div>
+        <div><span class="label">Белешка</span><textarea class="textarea" placeholder="Внеси..."></textarea></div>
+        <label class="check"><input type="checkbox" checked> Случаен сид</label>
+        <div class="row">
+          <button class="btn">Изврши</button>
+          <button class="btn btn-ghost">Откажи</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><span class="panel-title">Генерации</span><span class="panel-rule"></span><span class="badge">3 активни</span></div>
+      <div class="panel-body">
+        <div class="status-card">
+          <div class="sid">run-7f3a · t2i_diffuse</div>
+          <div class="sphase">sampling</div>
+          <div class="progress"><span style="width:64%"></span></div>
+        </div>
+        <div class="status-card is-pending">
+          <div class="sid">run-2c11 · upscale</div>
+          <div class="sphase">queued</div>
+          <div class="progress indeterminate"><span></span></div>
+        </div>
+        <div class="row" style="margin-top:6px">
+          <span class="badge plain">online</span>
+          <span class="badge plain">idle</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="cols">
+    <section class="panel">
+      <div class="panel-head"><span class="panel-title">Прикачување</span><span class="panel-rule"></span></div>
+      <div class="panel-body">
+        <div class="drop-zone"><div class="drop-title">ПУШТЕТЕ ДАТОТЕКИ ТУКА</div></div>
+        <nav class="breadcrumb"><a href="#">root</a><span class="sep">/</span><a href="#">out</a><span class="sep">/</span><a href="#">2026</a></nav>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="panel-head"><span class="panel-title">Врска</span><span class="panel-rule"></span></div>
+      <div class="panel-body">
+        <p style="color:var(--ink-2);font-size:13.5px">Текстот на плакатот користи Play, насловите Russo One. Клеточната сенка е остра, без замаглување.</p>
+        <div class="row"><button class="btn btn-sm">Додај</button><button class="btn btn-sm">Избриши</button></div>
+      </div>
+    </section>
+  </div>
+
+</div>
+<script>
+  const html = document.documentElement;
+  document.querySelectorAll("#acc button").forEach(b => b.onclick = () => {
+    html.dataset.accent = b.dataset.accent;
+  });
+</script>
+</body>
+</html>
