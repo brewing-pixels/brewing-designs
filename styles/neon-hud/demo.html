@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-theme="neon-hud" data-mode="dark" data-orn="css">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>neon-hud — preview</title>
+<link rel="stylesheet" href="theme.css" />
+<style>
+  .shell { max-width: 1000px; margin: 0 auto; padding: var(--s5) var(--s4) var(--s7); }
+  .row { display: flex; gap: var(--s3); flex-wrap: wrap; align-items: center; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s3); margin: var(--s4) 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s4); }
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: var(--s3);
+    margin-bottom: var(--s5); padding-bottom: var(--s3); border-bottom: 1px solid var(--chrome-line); }
+  .title { font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+  .title small { color: var(--mut); font-weight: 500; font-size: 12px; display: block; letter-spacing: .1em;
+    text-transform: uppercase; }
+  .sect { margin-top: var(--s5); }
+  .sect h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--mut); margin-bottom: 10px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } .cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="toolbar">
+    <div class="title">NEON-HUD<small>tactical interface style</small></div>
+    <div class="row">
+      <div class="segmented" id="mode">
+        <button class="active" data-mode="dark">Dark</button>
+        <button data-mode="light">Light</button>
+      </div>
+      <div class="segmented" id="orn">
+        <button class="active" data-orn="css">CSS</button>
+        <button data-orn="art">Art</button>
+        <button data-orn="minimal">Minimal</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="stat"><div class="label">Uptime</div><div class="value">99.98<small>%</small></div></div>
+    <div class="stat"><div class="label">Latency</div><div class="value">12<small>ms</small></div></div>
+    <div class="stat"><div class="label">Throughput</div><div class="value">1.4<small>k/s</small></div></div>
+    <div class="stat"><div class="label">Errors</div><div class="value" style="color:var(--warn)">3</div></div>
+  </div>
+
+  <div class="cols">
+    <div class="card">
+      <div class="card-head"><h2>Panel</h2><span class="meta">sector 7·g</span></div>
+      <p style="color:var(--ink-2); font-size:13.5px">
+        A clipped panel with a chrome edge and an inset highlight. Labels are uppercase,
+        data uses tabular numerals, and the scanline texture sits behind everything.
+      </p>
+      <div class="row" style="margin-top:var(--s4)">
+        <button class="btn btn-primary">Engage</button>
+        <button class="btn">Standby</button>
+        <span class="badge on">online</span>
+        <span class="badge">idle</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>Input</h2></div>
+      <div class="row" style="gap:8px">
+        <input class="input" placeholder="Search…" />
+        <button class="btn">Go</button>
+      </div>
+      <p style="margin-top:var(--s4); color:var(--mut); font-size:12.5px">
+        Press <span class="kbd">⌘</span> + <span class="kbd">K</span> to open the palette.
+      </p>
+      <div class="row" style="margin-top:var(--s4)">
+        <span class="badge on">acc</span>
+        <span style="color:var(--chrome)">chrome</span>
+        <span style="color:var(--good)">good</span>
+        <span style="color:var(--warn)">warn</span>
+        <span style="color:var(--bad)">bad</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sect">
+    <h3>Ornaments</h3>
+    <div class="cols">
+      <div class="card"><div class="card-head"><h2>Corner detail</h2></div>
+        <p style="color:var(--mut);font-size:12.5px">Switch ornament mode above to compare css ticks, art, and minimal.</p></div>
+      <div class="card"><div class="card-head"><h2>Scanlines</h2></div>
+        <p style="color:var(--mut);font-size:12.5px">The texture layer is decorative, behind content, and off in light mode.</p></div>
+    </div>
+  </div>
+
+</div>
+<script>
+  const html = document.documentElement;
+  document.querySelectorAll("#mode button").forEach(b => b.onclick = () => {
+    html.dataset.mode = b.dataset.mode;
+    document.querySelectorAll("#mode button").forEach(x => x.classList.toggle("active", x === b));
+  });
+  document.querySelectorAll("#orn button").forEach(b => b.onclick = () => {
+    html.dataset.orn = b.dataset.orn;
+    document.querySelectorAll("#orn button").forEach(x => x.classList.toggle("active", x === b));
+  });
+</script>
+</body>
+</html>

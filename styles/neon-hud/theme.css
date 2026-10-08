@@ -1,0 +1,228 @@
+/* ============================================================
+   neon-hud — a sci-fi / tactical HUD web style
+   Cyan chrome, sharp clipped corners, scanline texture, reticle
+   ornaments. Dark-first, with a light variant.
+
+   Portable: everything below is the STYLE. Project-specific bits
+   (brand accent, status colours) are declared as "PROJECT SLOTS"
+   and left for the host project to fill.
+
+   Usage:
+     <html data-theme="neon-hud" data-mode="dark" data-orn="css">
+     <link rel="stylesheet" href="theme.css">
+   Or drop just the :root block into an existing token system.
+
+   License: MIT (code). Ornament PNGs: see PROVENANCE.md.
+   ============================================================ */
+
+/* ---- tokens: dark (default) ---- */
+:root,
+[data-theme="neon-hud"][data-mode="dark"] {
+  /* neutrals — deep space blue-black */
+  --bg:       #070b0f;  --bg-2:     #04070a;
+  --surface:  #0d1420;  --surface-2:#111b2a;  --surface-3:#162233;
+  --line:     #1d2c40;  --line-2:   #2a3f5a;
+
+  /* ink */
+  --ink:      #dbeaf5;  --ink-2:    #9fb6cc;  --mut:      #6b8299;
+
+  /* chrome — the HUD cyan (metal/accents/frames/glow) */
+  --chrome:       #3fd0e6;
+  --chrome-2:     #1e7f93;
+  --chrome-line:  #245c6b;
+  --chrome-glow:  rgba(63, 208, 230, .30);
+
+  /* shape: sharp 45° clipped corners (top-left + bottom-right) */
+  --clip-panel: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  --clip-btn:   polygon(0 6px, 6px 0, 100% 0, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+
+  /* texture: horizontal scanlines */
+  --tex: repeating-linear-gradient(0deg, rgba(63,208,230,.045) 0 1px, transparent 1px 3px);
+
+  /* radius / space / motion (shared scale) */
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-full: 999px;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --ease: cubic-bezier(.2,.7,.3,1); --dur: 160ms;
+
+  /* type — bring your own; Arsenal (OFL) or any humanist sans / mono HUD font */
+  --f-sans:    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-display: var(--f-sans);
+  --f-mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ── PROJECT SLOTS (host fills these) ──────────────────────
+     The style stays brand-neutral: it renders fine with the
+     fallbacks. A host re-points these to its own brand/status. */
+  --acc:      var(--chrome);      /* primary accent (fallback = chrome) */
+  --acc-soft: color-mix(in srgb, var(--acc) 14%, transparent);
+  --acc-line: color-mix(in srgb, var(--acc) 45%, transparent);
+  --acc-ink:  #04121a;            /* text on --acc */
+  --good: #34d399; --warn: #f0b429; --bad: #ef6a6a; --info: #6ea8fe;
+}
+
+/* ---- tokens: light ---- */
+[data-theme="neon-hud"][data-mode="light"] {
+  --bg:       #eef3f7;  --bg-2:     #e2eaf1;
+  --surface:  #fbfdff;  --surface-2:#eef4f9;  --surface-3:#e3ecf3;
+  --line:     #cdd9e4;  --line-2:   #b3c4d3;
+  --ink:      #0d1b26;  --ink-2:    #3c5163;  --mut:      #6b8093;
+
+  --chrome:       #0f7f93;
+  --chrome-2:     #0b5f70;
+  --chrome-line:  #7fb6c2;
+  --chrome-glow:  rgba(15, 127, 147, .18);
+
+  --tex: none;
+  --acc-ink: #f3fbfd;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.55 var(--f-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+/* texture layer behind content */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: var(--tex, none); opacity: .9;
+}
+.shell { position: relative; z-index: 1; }
+h1,h2,h3 { margin: 0; font-weight: 650; letter-spacing: -.02em; }
+p { margin: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+code, .kbd {
+  font-family: var(--f-mono); font-size: .86em; background: var(--surface-2);
+  border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; color: var(--ink-2);
+}
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; border-radius: 4px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ============================================================
+   COMPONENTS (a starter kit — extend as needed)
+   ============================================================ */
+.card, .hud-panel {
+  background: var(--surface);
+  border: 1px solid var(--chrome-line);
+  border-radius: var(--r-lg);
+  clip-path: var(--clip-panel);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--chrome) 30%, transparent);
+  padding: var(--s4) var(--s5) var(--s5);
+}
+.card-head {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s3);
+  margin-bottom: var(--s4); flex-wrap: wrap;
+}
+.card-head h2 {
+  font-size: 12px; text-transform: uppercase; letter-spacing: .16em; color: var(--ink-2);
+  border-left: 3px solid var(--chrome); padding-left: 9px;
+}
+.meta { font-size: 12px; color: var(--mut); }
+
+.btn {
+  border: 1px solid var(--chrome-line); background: var(--surface-2);
+  border-radius: var(--r-sm); clip-path: var(--clip-btn);
+  padding: 10px 15px; font-size: 13.5px; font-weight: 700; color: var(--ink);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--chrome) 22%, transparent);
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+.btn:hover { background: var(--surface); border-color: var(--chrome); box-shadow: 0 0 10px var(--chrome-glow); }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--acc); border-color: var(--acc); color: var(--acc-ink); }
+.btn-primary:hover { background: color-mix(in srgb, var(--acc) 88%, white); }
+
+.input {
+  width: 100%; background: var(--surface-2); border: 1px solid var(--line);
+  color: var(--ink); border-radius: var(--r-sm); padding: 10px 12px; font: inherit;
+  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.input::placeholder { color: var(--mut); }
+.input:hover { border-color: var(--line-2); }
+.input:focus { outline: none; border-color: var(--acc-line); background: var(--surface); }
+
+/* segmented control / tabs */
+.segmented { display: inline-flex; background: var(--surface-2); border: 1px solid var(--chrome-line);
+  border-radius: var(--r-full); padding: 2px; }
+.segmented button, .tabs button {
+  border: 0; background: transparent; color: var(--mut); font-size: 12px;
+  padding: 5px 12px; border-radius: var(--r-full);
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.segmented button:hover, .tabs button:hover { color: var(--ink-2); }
+.segmented button.active {
+  background: color-mix(in srgb, var(--chrome) 18%, var(--surface)); color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--chrome-line);
+}
+
+.badge {
+  font-size: 9.5px; text-transform: uppercase; letter-spacing: .06em; padding: 1px 7px;
+  border-radius: 20px; border: 1px solid var(--line); color: var(--mut);
+}
+.badge.on { color: var(--acc); border-color: var(--acc-line); }
+
+/* a stat/KPI block with a chrome top-tick */
+.stat {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--chrome) 7%, transparent), transparent 55%), var(--surface);
+  border: 1px solid var(--chrome-line); border-radius: var(--r-md);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%);
+  padding: var(--s3) var(--s4); position: relative;
+}
+.stat::before { content: ""; position: absolute; left: 0; top: 0; height: 2px; width: 46px;
+  background: linear-gradient(90deg, var(--chrome), transparent); }
+.stat .label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--mut); }
+.stat .value { font-size: 26px; font-weight: 700; letter-spacing: -.03em; line-height: 1.15; margin-top: 2px; }
+.stat .value small { font-size: 12px; font-weight: 500; color: var(--mut); margin-left: 3px; }
+
+/* truncated text util */
+.truncate { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ============================================================
+   ORNAMENTS  (data-orn="css" | "art" | "minimal")
+   ============================================================ */
+/* css: reticle corner ticks drawn in pure CSS */
+[data-orn="css"] .card, [data-orn="css"] .hud-panel { position: relative; }
+[data-orn="css"] .card::after, [data-orn="css"] .hud-panel::after {
+  content: ""; position: absolute; inset: 5px; pointer-events: none;
+  opacity: .7;
+  background:
+    linear-gradient(var(--chrome),var(--chrome)) left 0 top 0/16px 2px no-repeat,
+    linear-gradient(var(--chrome),var(--chrome)) left 0 top 0/2px 16px no-repeat,
+    linear-gradient(var(--chrome),var(--chrome)) right 0 top 0/16px 2px no-repeat,
+    linear-gradient(var(--chrome),var(--chrome)) right 0 top 0/2px 16px no-repeat,
+    linear-gradient(var(--chrome),var(--chrome)) left 0 bottom 0/16px 2px no-repeat,
+    linear-gradient(var(--chrome),var(--chrome)) left 0 bottom 0/2px 16px no-repeat,
+    linear-gradient(var(--chrome),var(--chrome)) right 0 bottom 0/16px 2px no-repeat,
+    linear-gradient(var(--chrome),var(--chrome)) right 0 bottom 0/2px 16px no-repeat;
+}
+/* minimal: no ornaments, no clip */
+[data-orn="minimal"] .card, [data-orn="minimal"] .hud-panel { clip-path: none; }
+[data-orn="minimal"] .card::after, [data-orn="minimal"] .hud-panel::after { content: none; }
+
+/* art: generated corner + emblem PNGs (set --orn-corner / --orn-emblem) */
+[data-orn="art"] {
+  --orn-corner: url("ornaments/corner.png");
+  --orn-emblem: url("ornaments/emblem.png");
+}
+[data-orn="art"] .card, [data-orn="art"] .hud-panel { position: relative; }
+[data-orn="art"] .card::before, [data-orn="art"] .hud-panel::before {
+  content: ""; position: absolute; top: 6px; left: 6px; width: 46px; height: 46px;
+  background: var(--orn-corner) left top/contain no-repeat; opacity: .85;
+  pointer-events: none; z-index: 2;
+}
+[data-orn="art"] .card::after, [data-orn="art"] .hud-panel::after {
+  content: ""; position: absolute; bottom: 6px; right: 6px; width: 46px; height: 46px;
+  background: var(--orn-corner) right bottom/contain no-repeat; opacity: .85;
+  transform: scaleX(-1) scaleY(-1); pointer-events: none; z-index: 2;
+  inset: auto 6px 6px auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+}
