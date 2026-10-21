@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en" data-theme="systemcraft-hud" data-accent="horde" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<script>
+(() => {
+  const accents = new Set(["terran", "horde", "zerg", "protoss", "night-elf", "human"]);
+  const modes = new Set(["dark", "light"]);
+  try {
+    const accent = localStorage.getItem("systemcraft.accent") || "horde";
+    const mode = localStorage.getItem("systemcraft.mode") || "dark";
+    const root = document.documentElement;
+    root.dataset.accent = accents.has(accent) ? accent : "horde";
+    root.dataset.mode = modes.has(mode) ? mode : "dark";
+  } catch (e) {}
+})();
+</script>
+<title>systemcraft-hud — style demo</title>
+<link rel="stylesheet" href="theme.css">
+<style>
+  .demo-section { margin-top: 28px; }
+  .demo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .demo-two { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 14px; }
+  .demo-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .demo-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .demo-fields .wide { grid-column: 1 / -1; }
+  .demo-display { display: flex; flex-direction: column; gap: 12px; }
+  .demo-display .big { font-size: clamp(24px, 4vw, 38px); letter-spacing: -0.04em; line-height: 1.05; }
+  .demo-display .big b { color: var(--acc); font-weight: 650; }
+  .demo-swatches { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .demo-swatches .chip { font-family: var(--f-mono); text-transform: none; }
+  .demo-note { font-size: 11px; color: var(--mut); }
+  .demo-footer { margin-top: 32px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .demo-list { display: flex; flex-direction: column; gap: 8px; }
+  .demo-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 12.5px; }
+  .demo-row:last-child { border-bottom: 0; }
+  .demo-row .name { color: var(--ink); }
+  .demo-cards { display: flex; flex-direction: column; gap: 10px; }
+  .demo-flags { display: flex; gap: 4px; flex-wrap: wrap; }
+  @media (max-width: 860px) {
+    .demo-grid { grid-template-columns: 1fr; }
+    .demo-two { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .demo-fields { grid-template-columns: 1fr; }
+    .demo-fields .wide { grid-column: auto; }
+    .sc-shell { width: calc(100% - 24px); padding-top: 18px; }
+  }
+</style>
+</head>
+<body class="sc-hatch">
+<div class="sc-shell">
+
+  <header class="sc-top">
+    <div class="sc-brand">
+      <span class="sc-mark" aria-hidden="true">SC</span>
+      <div>
+        <h1>SYSTEM<b>CRAFT</b></h1>
+        <div class="sc-kicker">systemcraft-hud · style specimen</div>
+      </div>
+    </div>
+    <div class="sc-theme" aria-label="Theme controls">
+      <div class="sc-theme-group">
+        <span class="sc-theme-label">Accent</span>
+        <div class="sc-theme-row">
+          <button class="sc-accent-btn" type="button" data-accent-choice="terran" aria-label="Terran Cyan" title="Terran Cyan" aria-pressed="false"><span class="sc-swatch" style="--sw:#6fe3f2"></span></button>
+          <button class="sc-accent-btn" type="button" data-accent-choice="horde" aria-label="Horde Lime" title="Horde Lime" aria-pressed="true"><span class="sc-swatch" style="--sw:#b6f34a"></span></button>
+          <button class="sc-accent-btn" type="button" data-accent-choice="zerg" aria-label="Zerg Purple" title="Zerg Purple" aria-pressed="false"><span class="sc-swatch" style="--sw:#88409c"></span></button>
+          <button class="sc-accent-btn" type="button" data-accent-choice="protoss" aria-label="Protoss Gold" title="Protoss Gold" aria-pressed="false"><span class="sc-swatch" style="--sw:#d9b24c"></span></button>
+          <button class="sc-accent-btn" type="button" data-accent-choice="night-elf" aria-label="Night Elf Emerald" title="Night Elf Emerald" aria-pressed="false"><span class="sc-swatch" style="--sw:#3ddc97"></span></button>
+          <button class="sc-accent-btn" type="button" data-accent-choice="human" aria-label="Humans Blue" title="Humans Blue" aria-pressed="false"><span class="sc-swatch" style="--sw:#5b8cff"></span></button>
+        </div>
+      </div>
+      <div class="sc-theme-group">
+        <span class="sc-theme-label">Mode</span>
+        <div class="sc-theme-row">
+          <button class="sc-mode-btn" type="button" data-mode-choice="dark" aria-pressed="true">Dark</button>
+          <button class="sc-mode-btn" type="button" data-mode-choice="light" aria-pressed="false">Light</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="demo-display">
+    <div class="sc-kicker">metallic HUD · single accent · 45° hatch</div>
+    <h2 class="big">Metal surfaces. <b>One accent.</b><br>Everything else recedes.</h2>
+    <p class="sc-sub" style="max-width: 70ch;">A flat, industrial interface language for dense operational tools:
+      near-black cards on graphite panels, a single accent line, tabular numbers, and a subtle diagonal hatch
+      that follows the accent. No glow, no gradients except progress bars.</p>
+  </section>
+
+  <section class="sc-kpis demo-section" aria-label="Sample metrics">
+    <div class="sc-stat"><div class="label">Objects</div><div class="value">26</div><div class="sub">tracked</div></div>
+    <div class="sc-stat"><div class="label">In motion</div><div class="value">8</div><div class="sub">active / live</div></div>
+    <div class="sc-stat"><div class="label">Gated</div><div class="value">5</div><div class="sub">awaiting a decision</div></div>
+    <div class="sc-stat"><div class="label">Open tasks</div><div class="value">20</div><div class="sub">0 due today</div></div>
+    <div class="sc-stat"><div class="label">Paying strangers</div><div class="value">0</div><div class="sub">the honest number</div></div>
+  </section>
+
+  <section class="demo-section demo-grid" aria-label="Project cards">
+    <article class="sc-card">
+      <div class="sc-card-kicker">Content factory</div>
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;">
+        <h3>Orbital Foundry</h3>
+        <span class="sc-prio n2">N2</span>
+      </div>
+      <p>Batch generation pipeline: research → generate → curate → publish. The machine runs; distribution is the open edge.</p>
+      <div class="sc-bar-row"><span class="bl">Build</span><span class="sc-bar build"><span class="fill" style="width:90%"></span></span><span class="bv">90%</span></div>
+      <div class="sc-bar-row"><span class="bl">Traction</span><span class="sc-bar traction"><span class="fill" style="width:5%"></span></span><span class="bv">5%</span></div>
+      <div class="sc-flags"><span class="sc-flag accent">poc done</span><span class="sc-flag">waiting</span></div>
+      <div class="sc-card-foot">
+        <div><b>Next:</b> restart the nightly job</div>
+        <div><b>Gate:</b> 0 observed sales</div>
+      </div>
+    </article>
+
+    <article class="sc-card">
+      <div class="sc-card-kicker">Web arcade</div>
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;">
+        <h3>Signal Run</h3>
+        <span class="sc-prio n1">N1</span>
+      </div>
+      <p>A small, finite campaign with seeded challenge runs. Content complete; the next gate is a real human playtest.</p>
+      <div class="sc-bar-row"><span class="bl">Build</span><span class="sc-bar build"><span class="fill" style="width:98%"></span></span><span class="bv">98%</span></div>
+      <div class="sc-bar-row"><span class="bl">Traction</span><span class="sc-bar traction"><span class="fill" style="width:10%"></span></span><span class="bv">10%</span></div>
+      <div class="sc-flags"><span class="sc-flag live">live</span><span class="sc-flag accent">poc done</span></div>
+      <div class="sc-card-foot">
+        <div><b>Next:</b> ship to one channel</div>
+        <div><b>Gate:</b> fun is the user's call</div>
+      </div>
+    </article>
+
+    <article class="sc-card">
+      <div class="sc-card-kicker">Field notes</div>
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start;">
+        <h3>Quiet Archive</h3>
+        <span class="sc-prio n4">N4</span>
+      </div>
+      <p>A local-first reference tool. Read-only corpus, full-text search, and no account at all. Parked until the main line ships.</p>
+      <div class="sc-bar-row"><span class="bl">Build</span><span class="sc-bar build"><span class="fill" style="width:35%"></span></span><span class="bv">35%</span></div>
+      <div class="sc-bar-row"><span class="bl">Traction</span><span class="sc-bar traction"><span class="fill" style="width:0%"></span></span><span class="bv">0%</span></div>
+      <div class="sc-flags"><span class="sc-flag">parked</span></div>
+      <div class="sc-card-foot">
+        <div><b>Next:</b> none until Q1</div>
+        <div><b>Gate:</b> attention budget</div>
+      </div>
+    </article>
+  </section>
+
+  <section class="demo-section demo-two">
+    <div class="sc-panel">
+      <div class="sc-panel-head"><h2>Controls &amp; surfaces</h2><span class="sc-meta">one accent, used sparingly</span></div>
+      <div class="demo-actions" style="margin-bottom:14px;">
+        <button class="sc-btn primary" type="button">Primary action</button>
+        <button class="sc-btn" type="button">Secondary</button>
+        <button class="sc-btn ghost" type="button">Ghost</button>
+        <button class="sc-btn danger" type="button">Danger</button>
+      </div>
+      <div class="sc-chips" style="margin-bottom:14px;">
+        <button class="sc-chip active" type="button">Active</button>
+        <button class="sc-chip" type="button">Open</button>
+        <button class="sc-chip" type="button">Gated</button>
+        <button class="sc-chip" type="button">Archived</button>
+      </div>
+      <div class="demo-fields">
+        <label class="sc-field"><span>Name</span><input class="sc-input" value="Orbital Foundry"></label>
+        <label class="sc-field"><span>Group</span><input class="sc-input" value="pipelines"></label>
+        <label class="sc-field wide"><span>Note</span><textarea class="sc-textarea" rows="2">Keep the hatch on panels, never behind body text.</textarea></label>
+      </div>
+      <div class="demo-flags" style="margin-top:14px;">
+        <span class="sc-ts open">open</span>
+        <span class="sc-ts doing">doing</span>
+        <span class="sc-ts blocked">blocked</span>
+        <span class="sc-ts done">done</span>
+        <span class="sc-ts dropped">dropped</span>
+        <span class="sc-ts overdue">overdue</span>
+        <span class="sc-prio n1">N1</span>
+        <span class="sc-prio n2">N2</span>
+        <span class="sc-prio n3">N3</span>
+        <span class="sc-prio n4">N4</span>
+      </div>
+    </div>
+
+    <div class="sc-panel">
+      <div class="sc-panel-head"><h2>Table</h2><span class="sc-meta">tabular data</span></div>
+      <table class="sc-table">
+        <thead><tr><th>Item</th><th>State</th><th style="text-align:right;">Value</th></tr></thead>
+        <tbody>
+          <tr><td>Nightly job</td><td><span class="sc-ts done">done</span></td><td style="text-align:right;">04:10</td></tr>
+          <tr><td>Listing import</td><td><span class="sc-ts doing">doing</span></td><td style="text-align:right;">128</td></tr>
+          <tr><td>Customer calls</td><td><span class="sc-ts blocked">blocked</span></td><td style="text-align:right;">0</td></tr>
+          <tr><td>Queue depth</td><td><span class="sc-ts open">open</span></td><td style="text-align:right;">3</td></tr>
+        </tbody>
+      </table>
+      <p class="demo-note" style="margin-top:14px;">Numbers are tabular. Accent is reserved for the one thing that matters in a row.</p>
+    </div>
+  </section>
+
+  <section class="sc-panel demo-section">
+    <div class="sc-panel-head"><h2>Token specimen</h2><span class="sc-meta">data-accent / data-mode</span></div>
+    <div class="demo-swatches">
+      <span class="sc-chip" style="color:var(--bg);background:var(--bg);border-color:var(--line-2);">--bg</span>
+      <span class="sc-chip" style="color:var(--surface);background:var(--surface);border-color:var(--line-2);">--surface</span>
+      <span class="sc-chip" style="color:var(--surface-card);background:var(--surface-card);border-color:var(--line-2);">--surface-card</span>
+      <span class="sc-chip" style="color:var(--ink);background:var(--ink);border-color:var(--line-2);">--ink</span>
+      <span class="sc-chip" style="color:var(--acc-ink);background:var(--acc-tone);border-color:var(--acc-tone);">--acc-tone</span>
+      <span class="sc-chip" style="color:var(--acc);border-color:var(--acc-line);">--acc</span>
+    </div>
+    <p class="demo-note" style="margin-top:12px;">Hatch: 45°, 21/22 px, `--acc-tone` at 12% (dark) / 18% (light). Decorative only.</p>
+  </section>
+
+  <footer class="demo-footer">
+    <span class="sc-meta">systemcraft-hud · MIT code · no game assets or logos bundled</span>
+    <span class="sc-meta">six presets · dark + light · reduced-motion guard</span>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const accents = new Set(["terran", "horde", "zerg", "protoss", "night-elf", "human"]);
+  const modes = new Set(["dark", "light"]);
+  const root = document.documentElement;
+
+  const sync = () => {
+    document.querySelectorAll("[data-accent-choice]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.accentChoice === root.dataset.accent));
+    });
+    document.querySelectorAll("[data-mode-choice]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.modeChoice === root.dataset.mode));
+    });
+  };
+
+  const apply = (accent, mode) => {
+    root.dataset.accent = accents.has(accent) ? accent : "horde";
+    root.dataset.mode = modes.has(mode) ? mode : "dark";
+    try {
+      localStorage.setItem("systemcraft.accent", root.dataset.accent);
+      localStorage.setItem("systemcraft.mode", root.dataset.mode);
+    } catch (e) {}
+    sync();
+  };
+
+  document.querySelectorAll("[data-accent-choice]").forEach((button) => {
+    button.addEventListener("click", () => apply(button.dataset.accentChoice, root.dataset.mode));
+  });
+  document.querySelectorAll("[data-mode-choice]").forEach((button) => {
+    button.addEventListener("click", () => apply(root.dataset.accent, button.dataset.modeChoice));
+  });
+  sync();
+})();
+</script>
+</body>
+</html>
