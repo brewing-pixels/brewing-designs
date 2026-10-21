@@ -8,7 +8,7 @@ directions, one specimen page, no build step.
 | Style | Modes | Extras |
 |---|---|---|
 | [`neon-hud`](styles/neon-hud/) | dark + light | `data-orn`: `css`, `art`, `minimal` |
-| [`construct-poster`](styles/construct-poster/) | light | `data-accent`: `orange`, `violet` |
+| [`construct-poster`](styles/construct-poster/) | dark + light | `data-accent`: `orange`, `violet` |
 | [`moderncraft-hud`](styles/moderncraft-hud/) | dark + light | `data-accent`: six presets |
 | [`mechcraft-hud`](styles/mechcraft-hud/) | dark + light | single amber/cyan console palette |
 | [`systemcraft-hud`](styles/systemcraft-hud/) | dark + light | independent prime/secondary/tertiary roles (27 combos) · Sahara/Grid |

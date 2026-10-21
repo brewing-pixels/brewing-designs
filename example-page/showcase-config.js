@@ -29,8 +29,8 @@
       name: "construct-poster",
       tagline: "Flat constructivist poster",
       description:
-        "Warm paper neutrals, heavy black borders, sharp unblurred offset shadows, constructivist decoration and display type. Light only, with orange and violet accents.",
-      modes: ["light"],
+        "Warm paper neutrals — or a warm-black night ground — heavy borders, sharp unblurred offset shadows, constructivist decoration and display type. Dark and light, with orange and violet accents.",
+      modes: ["dark", "light"],
       defaultMode: "light",
       choices: [
         {

@@ -27,6 +27,10 @@
   --ds-on-accent: var(--line);
 }
 
+[data-theme="construct-poster"][data-mode="dark"] {
+  --ds-on-accent: var(--bg);
+}
+
 [data-theme="moderncraft-hud"] {
   --ds-card-surface: var(--surface-card);
   --ds-card-border: var(--card-border);
@@ -41,8 +45,7 @@
 html[data-mode="dark"] {
   color-scheme: dark;
 }
-html[data-mode="light"],
-html[data-theme="construct-poster"] {
+html[data-mode="light"] {
   color-scheme: light;
 }
 
@@ -3218,13 +3221,13 @@ x-specimen {
 }
 
 [data-theme="construct-poster"] .ds-btn.primary {
-  color: var(--line);
+  color: var(--ds-on-accent);
   background: var(--chrome);
 }
 
 [data-theme="construct-poster"] .ds-btn.primary:hover {
   background: var(--chrome-bright);
-  color: var(--line);
+  color: var(--ds-on-accent);
 }
 
 [data-theme="construct-poster"] .ds-chip,

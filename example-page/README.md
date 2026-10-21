@@ -42,7 +42,7 @@ https://brewing-pixels.github.io/brewing-designs/example-page/
 | Style | Modes | Extras |
 |---|---|---|
 | `neon-hud` | dark + light | `data-orn`: `css`, `art`, `minimal` |
-| `construct-poster` | light | `data-accent`: `orange`, `violet` |
+| `construct-poster` | dark + light | `data-accent`: `orange`, `violet` |
 | `moderncraft-hud` | dark + light | `data-accent`: six presets |
 | `mechcraft-hud` | dark + light | single amber/cyan console palette |
 | `systemcraft-hud` | dark + light | `data-prime` / `data-secondary` / `data-tertiary`: 27 assignments · `data-bg`: `sahara`, `grid` |
@@ -54,7 +54,7 @@ use those images.
 ## Controls and URLs
 
 - **Design tabs** (header and gallery) switch the active stylesheet.
-- **Mode** is remembered where supported; `construct-poster` is light-only.
+- **Mode** is remembered per style; every style supports dark and light.
 - **Accent** appears for styles that declare an accent choice.
 - **Roles / background** appear for `systemcraft-hud`: three independent amber/cyan/lime role
   assignments (27 combinations) and the Sahara/Grid page texture.
@@ -67,6 +67,7 @@ Examples:
 ```text
 ?style=neon-hud&mode=dark&orn=art
 ?style=construct-poster&mode=light&accent=violet
+?style=construct-poster&mode=dark&accent=orange
 ?style=moderncraft-hud&mode=light&accent=protoss
 ?style=mechcraft-hud&mode=dark
 ?style=systemcraft-hud&mode=dark&prime=cyan&secondary=lime&tertiary=amber&bg=grid

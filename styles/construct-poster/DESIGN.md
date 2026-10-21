@@ -3,8 +3,9 @@
 **A flat, cell-shaded constructivist-poster web style.** Warm paper neutrals, a
 single chrome hue, heavy flat borders, sharp un-blurred "cell" shadows, and
 constructivist background decoration (diagonal stripes, rings, a triangle).
-Light-only. Loud, structured, poster-like — built for dashboards, control panels,
-and command decks that want personality, not subtlety.
+Dark and light: warm paper by day, a warm-black night ground with a cream line
+and brighter chrome. Loud, structured, poster-like — built for dashboards,
+control panels, and command decks that want personality, not subtlety.
 
 - Aliases: `aiur-poster`, `construct`, `orange-poster` (internal names in the AIUR project).
 - Extracted from: AIUR (`/rabotilnica/aiur`), the original `gateway.css` theme, 2026-10.
@@ -21,7 +22,11 @@ and command decks that want personality, not subtlety.
 ## Palette
 
 The whole style is **paper neutrals + one chrome hue + gold rules**. The chrome is
-either the canonical orange or the muted violet alt.
+either the canonical orange or the muted violet alt. The dark variant keeps the
+same structure but inverts the value: a warm-black ground, a cream line, and a
+brighter chrome.
+
+### Light (canonical)
 
 | Role | Orange | Violet |
 |---|---|---|
@@ -40,7 +45,31 @@ either the canonical orange or the muted violet alt.
 | cell-shadow | `#1a0800` | `#241d33` |
 | gold (rules) | `#f1c40f` | `#cbbf8f` |
 
-Switch accents with `data-accent="orange|violet"` on the themed root.
+### Dark
+
+| Role | Orange night | Violet night |
+|---|---|---|
+| bg | `#120b08` | `#110d16` |
+| surface | `#1c0f09` | `#1b1424` |
+| surface-2 | `#26140c` | `#241a30` |
+| line | `#f4e3cb` | `#efe4ff` |
+| ink | `#f6e8d6` | `#f3ecfb` |
+| ink-2 | `#d8c3aa` | `#d3c1ec` |
+| mut | `#a88d75` | `#a795c2` |
+| **chrome** | `#ff7a1a` | `#b8a6e0` |
+| chrome-2 (readable) | `#ffb066` | `#d8c8ff` |
+| chrome-bright | `#ffc08a` | `#e7dcff` |
+| chrome-soft | `#6a3210` | `#4a3a66` |
+| chrome-pale | `#2a1309` | `#241b33` |
+| cell-shadow | `#050201` | `#07040c` |
+| gold (rules) | `#e6c15c` | `#d9c98a` |
+
+Switch modes with `data-mode="light|dark"`; switch accents with
+`data-accent="orange|violet"` on the themed root. `data-mode` defaults to light
+when omitted, matching the canonical paper poster. In dark, the heavy border
+becomes a cream line and the near-black cell shadow sits on the warm night
+ground; the chrome fill keeps near-black ink, so the poster hierarchy survives
+the inversion.
 
 **Project slots (NOT part of the style):** `--acc`, `--acc-soft`, `--acc-line`,
 `--acc-ink`, and `--good/--warn/--bad/--info`. The style renders fine with its
@@ -87,13 +116,17 @@ Generic recipes in `theme.css`: `.banner`, `.panel` (`.panel-head`/`.panel-title
 - **Don't** add a second hue to the chrome.
 - **Don't** round corners much; the poster is rectilinear.
 
-Scrollbars: 12 px, square black thumb on the paper track; chrome on hover.
+Scrollbars: 12 px, square line-coloured thumb on the surface track; chrome on
+hover. In dark the thumb is cream on a night track.
 
 ## Accessibility
 
-- The canonical orange `--chrome` is used mostly as a **fill** with `--bg` (paper)
-  as text on it — verify that pair. As link/text colour on paper, prefer the
-  deeper `--chrome-2`.
+- The chrome is used mostly as a **fill** with `--bg` as text on it — paper in
+  light, warm black in dark. Verify that pair when re-pointing the chrome. As
+  link/text colour, prefer `--chrome-2`: the deeper light value on paper, the
+  brighter night value on dark.
+- In dark the border is a cream line on the night ground; keep the line at least
+  3:1 against the surface so the poster grid stays visible.
 - The `.poster-bg` texture is decorative and low-opacity; it must never reduce
   text contrast below WCAG AA.
 - Focus ring uses `--chrome`; keep it visible (`:focus-visible`, never removed).

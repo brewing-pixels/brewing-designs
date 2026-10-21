@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="construct-poster" data-accent="orange">
+<html lang="en" data-theme="construct-poster" data-mode="light" data-accent="orange">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,6 +13,7 @@
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s4); }
   .row { display: flex; gap: var(--s3); flex-wrap: wrap; align-items: center; }
   .toolbar { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); margin-bottom: var(--s5); }
+  .toolbar .btn-sm[aria-pressed="true"] { background: var(--chrome); color: var(--bg); border-color: var(--line); }
   @media (max-width: 760px) { .grid { grid-template-columns: repeat(2,1fr); } .cols { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -21,9 +22,15 @@
 <div class="shell">
 
   <div class="toolbar">
-    <div class="segmented" id="acc" style="display:inline-flex;gap:6px">
-      <button class="btn-sm" data-accent="orange">Orange</button>
-      <button class="btn-sm" data-accent="violet">Violet</button>
+    <div class="row" style="gap:8px">
+      <div class="segmented" id="acc" style="display:inline-flex;gap:6px">
+        <button class="btn-sm" data-accent="orange" aria-pressed="true">Orange</button>
+        <button class="btn-sm" data-accent="violet" aria-pressed="false">Violet</button>
+      </div>
+      <div class="segmented" id="mode" style="display:inline-flex;gap:6px">
+        <button class="btn-sm" data-mode="light" aria-pressed="true">Light</button>
+        <button class="btn-sm" data-mode="dark" aria-pressed="false">Dark</button>
+      </div>
     </div>
   </div>
 
@@ -95,8 +102,17 @@
 </div>
 <script>
   const html = document.documentElement;
-  document.querySelectorAll("#acc button").forEach(b => b.onclick = () => {
-    html.dataset.accent = b.dataset.accent;
+  function select(group, attr, value) {
+    html.dataset[attr] = value;
+    document.querySelectorAll(`#${group} button`).forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset[attr] === value));
+    });
+  }
+  document.querySelectorAll("#acc button").forEach((button) => {
+    button.onclick = () => select("acc", "accent", button.dataset.accent);
+  });
+  document.querySelectorAll("#mode button").forEach((button) => {
+    button.onclick = () => select("mode", "mode", button.dataset.mode);
   });
 </script>
 </body>
