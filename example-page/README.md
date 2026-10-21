@@ -1,16 +1,18 @@
-# designs / example-page
+# brewing-designs / example-page
 
 One specimen page for every style in the library. Five designs, the same
 lorem-ipsum content, switchable without a reload. No build step, no framework,
 no server-side code.
 
+**Live:** <https://brewing-pixels.github.io/brewing-designs/example-page/>
+
 ## Open it
 
 The page links the canonical stylesheets with `../styles/<style>/theme.css`, so
-serve the **`designs/`** directory (not the page folder by itself):
+serve the **repository root** (not the page folder by itself):
 
 ```bash
-cd /rabotilnica/library/designs
+cd brewing-designs
 python3 -m http.server 8000
 # http://localhost:8000/example-page/
 ```
@@ -21,15 +23,16 @@ Fonts used by `construct-poster` simply need network access.
 ## GitHub Pages
 
 Relative paths are intentional: keep `example-page/` next to `styles/` in the
-same repository. With Pages publishing from the repo root, the page lives at:
+same repository. Pages publishes from the repo root, the root `index.html`
+redirects to the page, and the demo lives at:
 
 ```text
-https://<user>.github.io/<repo>/designs/example-page/
+https://brewing-pixels.github.io/brewing-designs/example-page/
 ```
 
 - There is nothing to build. Push the folder and it works.
-- `.nojekyll` is included here. If Pages publishes from the repository root,
-  also keep a `.nojekyll` at that root so Jekyll does not process the tree.
+- `.nojekyll` is at the repository root (and in this folder), so Jekyll leaves
+  the static files alone.
 - Do not publish `example-page/` alone unless you vendor the five theme
   stylesheets into it (the page deliberately references the canon instead of
   duplicating it).
