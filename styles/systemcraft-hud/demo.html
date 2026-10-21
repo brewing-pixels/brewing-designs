@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en" data-theme="systemcraft-hud" data-mode="dark" data-roles="amber-cyan-lime" data-bg="sahara">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+(() => {
+  const roles = new Set([
+    "amber-cyan-lime", "amber-lime-cyan", "cyan-amber-lime",
+    "cyan-lime-amber", "lime-amber-cyan", "lime-cyan-amber",
+  ]);
+  const backgrounds = new Set(["sahara", "grid"]);
+  const modes = new Set(["dark", "light"]);
+  let roleOrder = "amber-cyan-lime";
+  let bg = "sahara";
+  let mode = "dark";
+  try {
+    roleOrder = localStorage.getItem("systemcraft.roles") || roleOrder;
+    bg = localStorage.getItem("systemcraft.bg") || bg;
+    mode = localStorage.getItem("systemcraft.mode") || mode;
+  } catch (e) {}
+  const root = document.documentElement;
+  root.dataset.roles = roles.has(roleOrder) ? roleOrder : "amber-cyan-lime";
+  root.dataset.bg = backgrounds.has(bg) ? bg : "sahara";
+  root.dataset.mode = modes.has(mode) ? mode : "dark";
+})();
+</script>
+<title>systemcraft-hud — style demo</title>
+<link rel="stylesheet" href="theme.css">
+<style>
+  .demo-shell { padding-bottom: 34px; }
+  .sy-hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s5);
+    padding: 18px 0 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sy-hero h2 {
+    max-width: 780px;
+    font-size: clamp(36px, 6vw, 68px);
+    line-height: 0.98;
+  }
+  .sy-hero h2 b {
+    color: var(--acc);
+    font-weight: 700;
+  }
+  .sy-hero p {
+    max-width: 520px;
+    margin-top: 12px;
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+  .sy-role-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .sy-role-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--mut);
+    font: 600 9px/1 var(--f-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .sy-role-legend i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--sw);
+  }
+  .sy-role-legend b {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+  .sy-specimen-controls {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 14px 0 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sy-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .sy-role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(170px, 1fr));
+    gap: 4px;
+  }
+  .sy-role-btn,
+  .sy-seg button {
+    appearance: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 30px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--surface-card);
+    color: var(--mut);
+    padding: 5px 8px;
+    font: 600 9px/1.2 var(--f-mono);
+    letter-spacing: 0.04em;
+    text-align: left;
+    cursor: pointer;
+  }
+  .sy-role-btn:hover,
+  .sy-seg button:hover {
+    color: var(--ink-2);
+    border-color: var(--line-2);
+  }
+  .sy-role-btn[aria-pressed="true"],
+  .sy-seg button[aria-pressed="true"] {
+    color: var(--ink);
+    border-color: var(--acc);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--acc) 25%, transparent);
+  }
+  .sy-role-swatches {
+    display: inline-flex;
+    gap: 2px;
+    flex: 0 0 auto;
+  }
+  .sy-role-swatches i {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--sw);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+  }
+  .sy-seg {
+    display: flex;
+    gap: 4px;
+  }
+  .sy-seg button {
+    justify-content: center;
+    min-width: 64px;
+    font-family: var(--f-mono);
+  }
+  .sy-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .sy-kpi {
+    min-height: 96px;
+  }
+  .sy-kpi .l {
+    color: var(--mut);
+    font: 600 9px/1.2 var(--f-mono);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+  .sy-kpi .v {
+    margin-top: 8px;
+    color: var(--sec);
+    font: 700 34px/1 var(--f-display);
+    letter-spacing: 0.01em;
+  }
+  .sy-kpi:nth-child(2) .v { color: var(--ter); }
+  .sy-kpi:nth-child(3) .v { color: var(--acc); }
+  .sy-kpi .s {
+    margin-top: 7px;
+    color: var(--mut);
+    font: 10px/1.3 var(--f-mono);
+  }
+  .sy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .sy-project {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-height: 250px;
+  }
+  .sy-project-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .sy-project h3 {
+    color: var(--acc);
+    font-size: 21px;
+    letter-spacing: 0.03em;
+  }
+  .sy-project .sy-desc {
+    flex: 1;
+    color: var(--ink-2);
+    font-size: 12px;
+  }
+  .sy-project .sy-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    color: var(--mut);
+    font: 9px/1.3 var(--f-mono);
+  }
+  .sy-project .sy-foot a {
+    color: var(--sec);
+    text-decoration: none;
+  }
+  .sy-two {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .sy-controls-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sy-control-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .sy-note {
+    color: var(--mut);
+    font: 10px/1.5 var(--f-mono);
+  }
+  .sy-command {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    padding: 8px 9px;
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-sm);
+    background: var(--surface-card);
+  }
+  .sy-command .sy-label {
+    padding: 0 8px;
+  }
+  .sy-command .sy-spacer {
+    flex: 1;
+  }
+  .demo-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    color: var(--mut);
+    font: 9px/1.5 var(--f-mono);
+  }
+  @media (max-width: 1000px) {
+    .sy-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sy-grid { grid-template-columns: 1fr; }
+    .sy-two { grid-template-columns: 1fr; }
+    .sy-hero { align-items: flex-start; flex-direction: column; }
+  }
+  @media (max-width: 620px) {
+    .sy-role-grid { grid-template-columns: 1fr; }
+    .sy-kpis { grid-template-columns: 1fr; }
+    .demo-footer { display: block; }
+  }
+</style>
+</head>
+<body>
+<div class="sy-shell demo-shell">
+
+  <header class="sy-masthead">
+    <div class="sy-brand">
+      <span class="sy-mark" aria-hidden="true">SC</span>
+      <div>
+        <h1>SYSTEM<b>CRAFT</b></h1>
+        <div class="sy-kicker">hybrid systems HUD · style specimen</div>
+      </div>
+    </div>
+    <nav class="sy-nav" aria-label="Sections">
+      <button type="button" class="active">Board</button>
+      <button type="button">Tasks</button>
+      <button type="button">Vault</button>
+    </nav>
+    <div class="sy-actions">
+      <span class="sy-meta">SYNCED JUST NOW</span>
+      <button class="sy-btn ghost" type="button">Refresh</button>
+      <button class="sy-btn primary" type="button">+ Project</button>
+    </div>
+  </header>
+
+  <div class="sy-specimen-controls">
+    <div class="sy-control-group">
+      <span class="sy-label">Color roles</span>
+      <div class="sy-role-grid" id="role-options" role="group" aria-label="Color role order">
+        <button class="sy-role-btn" type="button" data-role-choice="amber-cyan-lime" aria-pressed="true">
+          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#f2a23b"></i><i style="--sw:#63d4e4"></i><i style="--sw:#b6f34a"></i></span>
+          Amber · Cyan · Lime
+        </button>
+        <button class="sy-role-btn" type="button" data-role-choice="amber-lime-cyan" aria-pressed="false">
+          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#f2a23b"></i><i style="--sw:#b6f34a"></i><i style="--sw:#63d4e4"></i></span>
+          Amber · Lime · Cyan
+        </button>
+        <button class="sy-role-btn" type="button" data-role-choice="cyan-amber-lime" aria-pressed="false">
+          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#63d4e4"></i><i style="--sw:#f2a23b"></i><i style="--sw:#b6f34a"></i></span>
+          Cyan · Amber · Lime
+        </button>
+        <button class="sy-role-btn" type="button" data-role-choice="cyan-lime-amber" aria-pressed="false">
+          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#63d4e4"></i><i style="--sw:#b6f34a"></i><i style="--sw:#f2a23b"></i></span>
+          Cyan · Lime · Amber
+        </button>
+        <button class="sy-role-btn" type="button" data-role-choice="lime-amber-cyan" aria-pressed="false">
+          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#b6f34a"></i><i style="--sw:#f2a23b"></i><i style="--sw:#63d4e4"></i></span>
+          Lime · Amber · Cyan
+        </button>
+        <button class="sy-role-btn" type="button" data-role-choice="lime-cyan-amber" aria-pressed="false">
+          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#b6f34a"></i><i style="--sw:#63d4e4"></i><i style="--sw:#f2a23b"></i></span>
+          Lime · Cyan · Amber
+        </button>
+      </div>
+    </div>
+    <div class="sy-control-group">
+      <span class="sy-label">Background</span>
+      <div class="sy-seg" id="bg-options" role="group" aria-label="Background texture">
+        <button type="button" data-bg-choice="sahara" aria-pressed="true">Sahara</button>
+        <button type="button" data-bg-choice="grid" aria-pressed="false">Grid</button>
+      </div>
+    </div>
+    <div class="sy-control-group">
+      <span class="sy-label">Mode</span>
+      <div class="sy-seg" id="mode-options" role="group" aria-label="Color mode">
+        <button type="button" data-mode-choice="dark" aria-pressed="true">Dark</button>
+        <button type="button" data-mode-choice="light" aria-pressed="false">Light</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="sy-hero">
+    <div>
+      <div class="sy-label">SYSTEMCRAFT / HYBRID HUD</div>
+      <h2>One board.<br><b>Three roles.</b> No dead pixels.</h2>
+      <p>A darker operational surface with Mechcraft bones and Moderncraft restraint. Pick the background, rotate the palette, keep the hierarchy.</p>
+      <div class="sy-role-legend">
+        <span><i style="--sw:#f2a23b" data-swatch="prime"></i>prime <b data-role-label="prime">Amber</b></span>
+        <span><i style="--sw:#63d4e4" data-swatch="secondary"></i>secondary <b data-role-label="secondary">Cyan</b></span>
+        <span><i style="--sw:#b6f34a" data-swatch="tertiary"></i>tertiary <b data-role-label="tertiary">Lime</b></span>
+      </div>
+    </div>
+    <div class="sy-pip">6 role orders · 2 backgrounds</div>
+  </section>
+
+  <section class="sy-kpis" aria-label="Key metrics">
+    <article class="sy-card sy-kpi">
+      <div class="l">Objects</div>
+      <div class="v">26</div>
+      <div class="s">tracked across the board</div>
+    </article>
+    <article class="sy-card sy-kpi">
+      <div class="l">In motion</div>
+      <div class="v">08</div>
+      <div class="s">active / live</div>
+    </article>
+    <article class="sy-card sy-kpi">
+      <div class="l">Gated</div>
+      <div class="v">05</div>
+      <div class="s">awaiting a decision</div>
+    </article>
+    <article class="sy-card sy-kpi">
+      <div class="l">Open tasks</div>
+      <div class="v">20</div>
+      <div class="s">0 due today</div>
+    </article>
+  </section>
+
+  <section class="sy-grid" aria-label="Project modules">
+    <article class="sy-card sy-project">
+      <div class="sy-project-top">
+        <h3>Orbital Foundry</h3>
+        <span class="sy-chip active">N2</span>
+      </div>
+      <p class="sy-desc">Batch generation pipeline: research → generate → curate → publish. The machine runs; distribution is the open edge.</p>
+      <div class="sy-bar"><span>Build</span><span class="sy-track"><span class="sy-fill" style="width:90%"></span></span><b>90%</b></div>
+      <div class="sy-bar"><span>Traction</span><span class="sy-track"><span class="sy-fill secondary" style="width:5%"></span></span><b>5%</b></div>
+      <div class="sy-foot"><span><span class="sy-dot"></span> LIVE</span><span>Next: restart the nightly job</span><a href="#project">Open ↗</a></div>
+    </article>
+
+    <article class="sy-card sy-project">
+      <div class="sy-project-top">
+        <h3>Signal Run</h3>
+        <span class="sy-chip active">N1</span>
+      </div>
+      <p class="sy-desc">A small, finite campaign with seeded challenge runs. Content complete; the next gate is a real human playtest.</p>
+      <div class="sy-bar"><span>Build</span><span class="sy-track"><span class="sy-fill" style="width:98%"></span></span><b>98%</b></div>
+      <div class="sy-bar"><span>Traction</span><span class="sy-track"><span class="sy-fill secondary" style="width:10%"></span></span><b>10%</b></div>
+      <div class="sy-foot"><span><span class="sy-dot"></span> LIVE</span><span>Next: ship to one channel</span><a href="#project">Open ↗</a></div>
+    </article>
+
+    <article class="sy-card sy-project">
+      <div class="sy-project-top">
+        <h3>Quiet Archive</h3>
+        <span class="sy-chip active">N4</span>
+      </div>
+      <p class="sy-desc">A local-first reference tool. Read-only corpus, full-text search, and no account at all. Parked until the main line ships.</p>
+      <div class="sy-bar"><span>Build</span><span class="sy-track"><span class="sy-fill" style="width:35%"></span></span><b>35%</b></div>
+      <div class="sy-bar"><span>Traction</span><span class="sy-track"><span class="sy-fill secondary" style="width:0%"></span></span><b>0%</b></div>
+      <div class="sy-foot"><span><span class="sy-dot warn"></span> PARKED</span><span>Next: none until Q1</span><a href="#project">Open ↗</a></div>
+    </article>
+  </section>
+
+  <section class="sy-two">
+    <article class="sy-panel sy-controls-card">
+      <div class="sy-panel-head"><h2 class="sy-title">Controls &amp; surfaces</h2><span class="sy-meta">one hierarchy, three roles</span></div>
+      <div class="sy-control-row">
+        <button class="sy-btn primary" type="button">Primary action</button>
+        <button class="sy-btn secondary" type="button">Secondary</button>
+        <button class="sy-btn ghost" type="button">Ghost</button>
+        <span class="sy-pill">Tertiary status</span>
+      </div>
+      <div class="sy-control-row">
+        <label class="sy-field" style="flex:1 1 180px"><span>Name</span><input class="sy-input" value="Orbital Foundry"></label>
+        <label class="sy-field" style="flex:1 1 130px"><span>Group</span><select class="sy-select"><option>pipelines</option><option>games</option></select></label>
+      </div>
+      <div class="sy-control-row">
+        <span class="sy-pip">service up</span>
+        <span class="sy-pip">2 directives</span>
+        <span class="sy-note">Prime = action. Secondary = data. Tertiary = state.</span>
+      </div>
+    </article>
+
+    <article class="sy-panel">
+      <div class="sy-panel-head"><h2 class="sy-title">Table</h2><span class="sy-meta">tabular data</span></div>
+      <table class="sy-table">
+        <thead><tr><th>Item</th><th>State</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Nightly job</td><td><span class="sy-chip active">done</span></td><td>04:10</td></tr>
+          <tr><td>Listing import</td><td><span class="sy-chip">doing</span></td><td>128</td></tr>
+          <tr><td>Customer calls</td><td><span class="sy-chip">blocked</span></td><td>0</td></tr>
+          <tr><td>Queue depth</td><td><span class="sy-chip">open</span></td><td>3</td></tr>
+        </tbody>
+      </table>
+      <p class="sy-note" style="margin-top:12px">Numbers are tabular. Keep role colours meaningful, not decorative.</p>
+    </article>
+  </section>
+
+  <div class="sy-command" role="toolbar" aria-label="Specimen commands">
+    <span class="sy-label">Command</span>
+    <button class="sy-btn primary" type="button">+ Objective</button>
+    <button class="sy-btn ghost" type="button">Spec</button>
+    <button class="sy-btn ghost" type="button">Fields</button>
+    <button class="sy-btn ghost" type="button">Flags</button>
+    <span class="sy-spacer"></span>
+    <span class="sy-meta">1 open · 2 directives</span>
+  </div>
+
+  <footer class="demo-footer">
+    <span>systemcraft-hud · MIT code · Saira Condensed under OFL · no game assets or logos</span>
+    <span>six role orders · sahara / grid · dark + light</span>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const roleOrders = {
+    "amber-cyan-lime": { prime: "Amber", secondary: "Cyan", tertiary: "Lime", colors: ["#f2a23b", "#63d4e4", "#b6f34a"] },
+    "amber-lime-cyan": { prime: "Amber", secondary: "Lime", tertiary: "Cyan", colors: ["#f2a23b", "#b6f34a", "#63d4e4"] },
+    "cyan-amber-lime": { prime: "Cyan", secondary: "Amber", tertiary: "Lime", colors: ["#63d4e4", "#f2a23b", "#b6f34a"] },
+    "cyan-lime-amber": { prime: "Cyan", secondary: "Lime", tertiary: "Amber", colors: ["#63d4e4", "#b6f34a", "#f2a23b"] },
+    "lime-amber-cyan": { prime: "Lime", secondary: "Amber", tertiary: "Cyan", colors: ["#b6f34a", "#f2a23b", "#63d4e4"] },
+    "lime-cyan-amber": { prime: "Lime", secondary: "Cyan", tertiary: "Amber", colors: ["#b6f34a", "#63d4e4", "#f2a23b"] },
+  };
+  const backgrounds = new Set(["sahara", "grid"]);
+  const modes = new Set(["dark", "light"]);
+  const root = document.documentElement;
+
+  const sync = () => {
+    const order = root.dataset.roles;
+    const cfg = roleOrders[order] || roleOrders["amber-cyan-lime"];
+    document.querySelectorAll("[data-role-choice]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.roleChoice === order));
+    });
+    document.querySelectorAll("[data-bg-choice]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.bgChoice === root.dataset.bg));
+    });
+    document.querySelectorAll("[data-mode-choice]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.modeChoice === root.dataset.mode));
+    });
+    const roleNames = ["prime", "secondary", "tertiary"];
+    roleNames.forEach((role, index) => {
+      document.querySelectorAll(`[data-role-label="${role}"]`).forEach((node) => {
+        node.textContent = cfg[role];
+      });
+      document.querySelectorAll(`[data-swatch="${role}"]`).forEach((node) => {
+        node.style.setProperty("--sw", cfg.colors[index]);
+      });
+    });
+  };
+
+  const apply = (roles, bg, mode) => {
+    root.dataset.roles = roleOrders[roles] ? roles : root.dataset.roles;
+    root.dataset.bg = backgrounds.has(bg) ? bg : root.dataset.bg;
+    root.dataset.mode = modes.has(mode) ? mode : root.dataset.mode;
+    try {
+      localStorage.setItem("systemcraft.roles", root.dataset.roles);
+      localStorage.setItem("systemcraft.bg", root.dataset.bg);
+      localStorage.setItem("systemcraft.mode", root.dataset.mode);
+    } catch (e) {}
+    sync();
+  };
+
+  document.querySelectorAll("[data-role-choice]").forEach((button) => {
+    button.addEventListener("click", () => apply(button.dataset.roleChoice, root.dataset.bg, root.dataset.mode));
+  });
+  document.querySelectorAll("[data-bg-choice]").forEach((button) => {
+    button.addEventListener("click", () => apply(root.dataset.roles, button.dataset.bgChoice, root.dataset.mode));
+  });
+  document.querySelectorAll("[data-mode-choice]").forEach((button) => {
+    button.addEventListener("click", () => apply(root.dataset.roles, root.dataset.bg, button.dataset.modeChoice));
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

@@ -11,6 +11,7 @@ design direction: tokens + CSS + spec + preview, decoupled from any one project.
 | [`soviet-poster/`](soviet-poster/) | flat cell-shaded propaganda poster — hard borders, sharp offset cell-shadows, orange / violet chrome | light (2 accents) | ready |
 | [`moderncraft-hud/`](moderncraft-hud/) | industrial metallic HUD — graphite panels, near-black cards, one active accent, 45° accent hatch, six presets | dark + light (6 accents) | ready |
 | [`mechcraft-hud/`](mechcraft-hud/) | command-console HUD — layered metal, black screens, amber/cyan | dark + light | ready |
+| [`systemcraft-hud/`](systemcraft-hud/) | hybrid systems HUD — Mechcraft cards/type, Moderncraft texture, 3-colour role rotation, combined header | dark + light (6 role orders) | ready |
 
 ## Anatomy of a style
 
