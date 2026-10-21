@@ -10,7 +10,7 @@ monochrome combinations such as amber/amber/amber. Dark and light. Sahara or gri
 - **Role assignment:** any of amber / cyan / lime in each role (27 combinations)
 - **Backgrounds:** `sahara` (default) · `grid`
 - **Type:** Saira Condensed (OFL, bundled) + system sans + system mono
-- **Shape:** 3 px cards and controls, 1 px secondary borders, inset highlight, 1 px secondary bottom rail
+- **Shape:** 3 px cards and controls, 1 px secondary-tinted borders, inset highlight, 1 px secondary bottom rail
 - **Texture:** 45° Sahara hatch, or a 47/48 px technical grid
 - **Motion:** 160 ms, border and hue transitions, reduced-motion guard
 - **Dependencies:** `color-mix()` only; no JS framework
@@ -111,9 +111,9 @@ of cards or compete with text. Switch with `data-bg="sahara|grid"`.
 
 ## Shape and surface
 
-- **Cards:** 3 px radius, 1 px **secondary** border, near-black screen, inset
+- **Cards:** 3 px radius, 1 px **secondary-tinted** border (30% secondary + card-line), near-black screen, inset
   top highlight, and a 1 px **secondary** rail across the bottom edge. Hover keeps
-  the secondary border and adds a 1 px secondary ring; the background does not
+  a full secondary border and adds a 1 px secondary ring; the background does not
   lighten and the card does not move.
 - **KPI / stat cards:** a 3 px prime top border instead of a bottom rail, so
   the metric cards remain distinct from normal cards.
@@ -155,7 +155,7 @@ Mechcraft keep their existing two-row header.
 - `sy-masthead` — combined brand / nav / action row with bottom delimiter.
 - `sy-brand` + `sy-mark` — identity block.
 - `sy-nav` — page tabs with a single active underline.
-- `sy-card`, `sy-panel` — dark screen, 3 px corners, secondary border, secondary bottom rail.
+- `sy-card`, `sy-panel` — dark screen, 3 px corners, secondary-tinted border, secondary bottom rail.
 - `sy-kpi` — 3 px prime top border, no bottom rail.
 - `sy-title` — accent section label with a 2 px left rule.
 - `sy-btn` — primary / secondary / ghost.
@@ -189,7 +189,7 @@ Mechcraft keep their existing two-row header.
 - use the role controls to re-key the whole surface, not patchwork
   colours;
 - keep the masthead as one row on desktop;
-- keep cards near-black / near-white with secondary borders and a secondary bottom rail;
+- keep cards near-black / near-white with secondary-tinted borders and a secondary bottom rail;
 - use the grid when the page is data-dense and Sahara when it is editorial.
 
 **Do not**

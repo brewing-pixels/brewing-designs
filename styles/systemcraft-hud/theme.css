@@ -125,7 +125,7 @@
   --chrome-2: var(--acc-soft);
   --chrome-line: var(--acc-line);
   --chrome-glow: color-mix(in srgb, var(--acc) 22%, transparent);
-  --card-border: var(--sec);
+  --card-border: color-mix(in srgb, var(--sec) 30%, var(--card-line));
   --card-shadow-hot: 0 0 0 1px var(--acc),
     0 12px 26px color-mix(in srgb, var(--acc) 15%, transparent);
 }
