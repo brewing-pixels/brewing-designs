@@ -9,7 +9,7 @@ secondary and tertiary roles. Dark and light. Sahara or grid background.**
 - **Role orders:** all six permutations of amber / cyan / lime
 - **Backgrounds:** `sahara` (default) · `grid`
 - **Type:** Saira Condensed (OFL, bundled) + system sans + system mono
-- **Shape:** 3 px cards and controls, 1 px borders, inset top highlight, 1 px accent rail
+- **Shape:** 3 px cards and controls, 1 px secondary borders, inset highlight, 1 px prime bottom rail
 - **Texture:** 45° Sahara hatch, or a 47/48 px technical grid
 - **Motion:** 160 ms, border and hue transitions, reduced-motion guard
 - **Dependencies:** `color-mix()` only; no JS framework
@@ -109,12 +109,18 @@ of cards or compete with text. Switch with `data-bg="sahara|grid"`.
 
 ## Shape and surface
 
-- **Cards:** 3 px radius, 1 px border, near-black screen, inset 1 px top
-  highlight, 1 px accent rail along the top. Hover gets a full accent border
-  and a 1 px accent ring; the background does not lighten and the card does
-  not move.
-- **Buttons / inputs:** 3 px radius, 1 px border, 34 px minimum height.
-- **Labels:** small caps, mono or display, high tracking.
+- **Cards:** 3 px radius, 1 px **secondary** border, near-black screen, inset
+  top highlight, and a 1 px **prime** rail across the bottom edge. Hover keeps
+  the secondary border and adds a 1 px secondary ring; the background does not
+  lighten and the card does not move.
+- **KPI / stat cards:** a 3 px prime top border instead of a bottom rail, so
+  the metric cards remain distinct from normal cards.
+- **Buttons / inputs:** 3 px radius, 1 px border, 34 px minimum height. Form
+  fields use a secondary-tinted border, a near-black raised surface, display
+  labels, and a prime focus border + ring. Checkboxes/radios use `accent-color:
+  prime`.
+- **Labels / metadata:** small caps, mono or display, high tracking; metadata
+  uses the tertiary role.
 - **No heavy metal gradients.** Mechcraft contributes geometry and material
   cues, not a full console treatment.
 
@@ -147,14 +153,16 @@ Mechcraft keep their existing two-row header.
 - `sy-masthead` — combined brand / nav / action row with bottom delimiter.
 - `sy-brand` + `sy-mark` — identity block.
 - `sy-nav` — page tabs with a single active underline.
-- `sy-card`, `sy-panel` — dark screen, 3 px corners, accent top rail.
+- `sy-card`, `sy-panel` — dark screen, 3 px corners, secondary border, prime bottom rail.
+- `sy-kpi` — 3 px prime top border, no bottom rail.
 - `sy-title` — accent section label with a 2 px left rule.
 - `sy-btn` — primary / secondary / ghost.
-- `sy-input`, `sy-select`, `sy-field`.
+- `sy-input`, `sy-select`, `sy-field` — secondary-tinted field border, prime focus.
 - `sy-chip`, `sy-pill`, `sy-pip`, `sy-dot`.
 - `sy-bar`, `sy-track`, `sy-fill`.
 - `sy-table`.
 - `sy-command` — sticky command strip at the bottom of a briefing.
+- Scrollbars — thin secondary thumb on the ground track; prime on hover.
 
 ---
 
@@ -164,6 +172,7 @@ Mechcraft keep their existing two-row header.
   grounds. The amber/cyan/lime fills use dark ink (`--*-ink`) rather than
   white, so primary-button text stays readable in both modes.
 - Do not rely on hue alone for state; pair pips/chips with labels.
+- Tertiary metadata is checked against both card grounds for AA.
 - Focus is a 2 px prime ring with 2 px offset.
 - The background texture is decorative and `pointer-events: none`.
 - Honour `prefers-reduced-motion`; transitions are 160 ms and non-essential.
@@ -178,7 +187,7 @@ Mechcraft keep their existing two-row header.
 - use the role order control to re-key the whole surface, not patchwork
   colours;
 - keep the masthead as one row on desktop;
-- keep cards near-black / near-white with accent-tinted borders;
+- keep cards near-black / near-white with secondary borders and a prime bottom rail;
 - use the grid when the page is data-dense and Sahara when it is editorial.
 
 **Do not**
@@ -188,6 +197,17 @@ Mechcraft keep their existing two-row header.
 - put the texture over the cards;
 - use lime as a success colour; status stays semantic;
 - brighten the card on hover or move it.
+
+---
+
+## Form fields and scrollbars
+
+- Fields sit on `--surface-2`, with a 1 px secondary-tinted border, 3 px radius
+  and an inset highlight. Focus switches to the prime token with a 1 px ring.
+- Labels are display-font small caps in the tertiary role. Placeholders and
+  helper text stay muted.
+- Scrollbars are thin. The track uses the page ground; the thumb is secondary,
+  with a prime hover. WebKit and Firefox are both styled.
 
 ---
 

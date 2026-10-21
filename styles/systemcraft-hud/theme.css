@@ -124,7 +124,7 @@
   --chrome-2: var(--acc-soft);
   --chrome-line: var(--acc-line);
   --chrome-glow: color-mix(in srgb, var(--acc) 22%, transparent);
-  --card-border: color-mix(in srgb, var(--acc) 30%, var(--card-line));
+  --card-border: var(--sec);
   --card-shadow-hot: 0 0 0 1px var(--acc),
     0 12px 26px color-mix(in srgb, var(--acc) 15%, transparent);
 }
@@ -413,9 +413,8 @@
   color: var(--acc);
 }
 
-[data-theme="systemcraft-hud"] .sy-kicker,
-[data-theme="systemcraft-hud"] .sy-label {
-  color: var(--mut);
+[data-theme="systemcraft-hud"] .sy-kicker {
+  color: var(--ter);
   font: 600 10px/1.35 var(--f-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -464,8 +463,15 @@
   flex-wrap: wrap;
 }
 
-[data-theme="systemcraft-hud"] .sy-meta {
+[data-theme="systemcraft-hud"] .sy-label {
   color: var(--mut);
+  font: 600 10px/1.35 var(--f-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+[data-theme="systemcraft-hud"] .sy-meta {
+  color: var(--ter);
   font: 10px/1.35 var(--f-mono);
   letter-spacing: 0.04em;
 }
@@ -487,12 +493,20 @@
   padding: var(--s4) var(--s5);
 }
 
+[data-theme="systemcraft-hud"] .sy-kpi {
+  border-top: 3px solid var(--acc);
+}
+
+[data-theme="systemcraft-hud"] .sy-kpi::before {
+  display: none;
+}
+
 [data-theme="systemcraft-hud"] .sy-card:hover,
 [data-theme="systemcraft-hud"] .sy-panel:hover {
-  border-color: var(--acc);
+  border-color: var(--sec);
   box-shadow:
-    0 0 0 1px var(--acc),
-    0 12px 24px color-mix(in srgb, var(--acc) 14%, transparent),
+    0 0 0 1px var(--sec),
+    0 12px 24px color-mix(in srgb, var(--sec) 14%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--ink) 7%, transparent);
 }
 
@@ -500,12 +514,13 @@
 [data-theme="systemcraft-hud"] .sy-panel::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 10px;
-  right: 10px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 1px;
+  border-radius: 0 0 var(--r-sm) var(--r-sm);
   background: var(--acc);
-  opacity: 0.45;
+  opacity: 0.9;
   pointer-events: none;
 }
 
@@ -608,12 +623,13 @@
 [data-theme="systemcraft-hud"] .sy-select {
   width: 100%;
   min-height: 34px;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--sec) 45%, var(--line));
   border-radius: var(--r-sm);
   background: var(--surface-2);
   color: var(--ink);
   padding: 7px 9px;
   font: 13px/1.3 var(--f-sans);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 5%, transparent);
 }
 
 [data-theme="systemcraft-hud"] .sy-input::placeholder {
@@ -627,6 +643,16 @@
   box-shadow: 0 0 0 1px var(--acc);
 }
 
+[data-theme="systemcraft-hud"] .sy-input[type="checkbox"],
+[data-theme="systemcraft-hud"] .sy-input[type="radio"] {
+  accent-color: var(--acc);
+}
+
+[data-theme="systemcraft-hud"] .sy-select option {
+  background: var(--surface);
+  color: var(--ink);
+}
+
 [data-theme="systemcraft-hud"] .sy-field {
   display: flex;
   flex-direction: column;
@@ -634,8 +660,8 @@
 }
 
 [data-theme="systemcraft-hud"] .sy-field > span {
-  color: var(--mut);
-  font: 600 10px/1.2 var(--f-mono);
+  color: var(--ter);
+  font: 600 10px/1.2 var(--f-display);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -823,4 +849,43 @@
   [data-theme="systemcraft-hud"] .sy-nav button {
     transition: none;
   }
+}
+
+
+/* ------------------------------------------------------------ scrollbars */
+[data-theme="systemcraft-hud"] {
+  scrollbar-color: color-mix(in srgb, var(--sec) 65%, var(--surface-2)) var(--bg-2);
+  scrollbar-width: thin;
+}
+
+[data-theme="systemcraft-hud"]::-webkit-scrollbar,
+[data-theme="systemcraft-hud"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="systemcraft-hud"]::-webkit-scrollbar-track,
+[data-theme="systemcraft-hud"] ::-webkit-scrollbar-track {
+  background: var(--bg-2);
+}
+
+[data-theme="systemcraft-hud"]::-webkit-scrollbar-thumb,
+[data-theme="systemcraft-hud"] ::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--sec) 65%, var(--surface-2));
+  border: 2px solid var(--bg-2);
+  border-radius: var(--r-full);
+}
+
+[data-theme="systemcraft-hud"]::-webkit-scrollbar-thumb:hover,
+[data-theme="systemcraft-hud"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--sec);
+}
+
+[data-theme="systemcraft-hud"]::-webkit-scrollbar-corner,
+[data-theme="systemcraft-hud"] ::-webkit-scrollbar-corner {
+  background: var(--bg-2);
+}
+
+[data-theme="systemcraft-hud"] textarea.sy-input {
+  scrollbar-color: color-mix(in srgb, var(--sec) 65%, var(--surface-2)) var(--surface-2);
 }
