@@ -22,11 +22,12 @@ numbers, and state must be readable at a glance.
 
 ## Core idea
 
-The style is **metal, not neon**. Surfaces are cool graphite; project cards are
-near-black (dark) or near-white (light); one accent is used for chrome,
-selection, focus, primary actions, and the hatch. Everything else is neutral.
-Depth comes from one-pixel borders and surface value changes, never from glow
-or large shadows.
+The style is **metal, not neon**. The page ground and controls are cool
+graphite; every card is near-black (dark) or near-white (light). One accent
+drives chrome, card titles, card borders, selection, focus, primary actions,
+and the hatch. Everything else is neutral. Depth is a one-pixel border and a
+surface value change; the only accent shadow is the low-opacity hover shadow
+on cards.
 
 The 45° hatch is the recognisable texture. It is decorative and always low
 contrast; it sits behind opaque content and never behind body text. The hatch
@@ -46,15 +47,16 @@ affiliation. A host project can re-point `--acc*` to its own brand.
 |---|---|---|
 | `--bg` | `#191e24` | page |
 | `--bg-2` | `#20262e` | modals / raised ground |
-| `--surface` | `#252c34` | panels |
-| `--surface-card` | `#0f1317` | cards (near-black) |
-| `--surface-2` | `#2f3842` | inputs, hover rails |
+| `--surface` | `#252c34` | controls / chrome |
+| `--surface-card` | `#0f1317` | every card (near-black) |
+| `--surface-2` | `#2f3842` | inputs, rails inside cards |
 | `--surface-3` | `#39434f` | pressed / strong rail |
 | `--line` | `#38434f` | borders |
 | `--line-2` | `#4d5a68` | strong borders |
-| `--card-line` | `#222a33` | card borders |
+| `--card-line` | `#222a33` | card border base |
+| `--card-border` | accent mix | 1 px card border: 30% accent + base |
+| `--card-shadow-hot` | accent mix | hover ring + tinted shadow |
 | `--card-track` | `#1a2028` | progress tracks |
-| `--card-bg-hover` | `#141a20` | card hover |
 | `--ink` | `#f2f7fb` | primary text |
 | `--ink-2` | `#d2dee8` | body text |
 | `--mut` | `#a7b8c6` | muted text / labels |
@@ -154,13 +156,18 @@ No scanlines, no glow, no grain, no vignette.
 
 ## Components
 
-- **Panel** (`sc-panel`): graphite surface, 1 px line, 10 px radius, 24 px
-  padding. A heading gets a 2 px accent left bar.
-- **Card** (`sc-card`): near-black/near-white, 1 px card-line, 12 px radius,
-  16 px padding. Hover lifts the border toward the accent and changes the
-  background to `--card-bg-hover`; no transform, no shadow.
-- **Stat / KPI** (`sc-stat`): panel with a 2 px accent top line; value is the
-  accent, 26 px, tabular. Label is uppercase mono.
+- **Panel** (`sc-panel`): near-black/near-white card surface, 1 px accent-tinted
+  border, 10 px radius, 24 px padding. A heading gets a 2 px accent left bar.
+  Controls inside stay on `--surface-2` for contrast.
+- **Card** (`sc-card`): near-black/near-white, 1 px accent-tinted border,
+  12 px radius, 16 px padding. The title is accent. Hover keeps the black
+  surface, sets the border to full accent, and adds a 1 px accent ring plus a
+  soft hue shadow; no background lightening, no transform.
+- **Stat / KPI** (`sc-stat`): near-black card with a 2 px accent top line; value
+  is the accent, 26 px, tabular. Label is uppercase mono. Same card hover.
+- **Card interaction:** all card-like surfaces share the near-black background,
+  accent-tinted border, accent title, and hover ring/shadow. The visual border
+  becomes 2 px via `box-shadow: 0 0 0 1px var(--acc)`; layout does not shift.
 - **Primary button** (`sc-btn.primary`): solid `--acc-tone`, `--acc-ink` text,
   no shadow. Hover mixes the fill with the page ink (lighter in dark, darker in
   light), so it stays in-family in both modes.
@@ -186,10 +193,11 @@ No scanlines, no glow, no grain, no vignette.
 ## Interaction
 
 - All interactive elements have a visible `:focus-visible` ring in `--acc`.
-- Hover changes border/background/text, never size or position. No `scale`,
-  no `translate` on hover.
-- Transition only `background`, `border-color`, `color`, and `width` (bars);
-  use `160ms` and the shared ease.
+- Cards hover without moving: border goes to `--acc`, a 1 px accent ring makes
+  the edge read as 2 px, and a low-opacity accent shadow appears. The surface
+  stays black; no background lightening, no `scale`, no `translate`.
+- Transition only `background`, `border-color`, `color`, `box-shadow`, and
+  `width` (bars); use `160ms` and the shared ease.
 - `prefers-reduced-motion: reduce` collapses durations to 0.01 ms.
 - Keyboard: native controls; do not remove focus outlines. The demo includes
   buttons, links, inputs, and the theme controls as real focusable elements.
@@ -212,6 +220,9 @@ No scanlines, no glow, no grain, no vignette.
 - The hatch is decorative and low contrast; it must never be the only cue.
   State is always also encoded by text/border.
 - Focus rings are accent-coloured and 2 px; do not rely on colour alone.
+- Card titles use the readable accent (`--acc`), not `--acc-tone`; the accent
+  border and hover shadow are decorative, so the title must still be legible
+  without them.
 - The accent swatches in the theme picker carry `aria-label`; mode buttons use
   `aria-pressed`.
 - Test every new text/background pair. `color-mix()` values in this file are
@@ -223,16 +234,21 @@ No scanlines, no glow, no grain, no vignette.
 
 **Do**
 - Use one accent per screen; let primary actions own the solid fill.
-- Keep cards near-black (dark) / near-white (light) and panels graphite/mist.
-- Use mono for IDs, labels, and numbers; sans for prose.
+- Keep every card near-black (dark) / near-white (light); use graphite/mist for
+  the page and controls inside cards.
+- Use the accent for card titles and the card border; keep body copy neutral.
 - Use 1 px rules and surface value changes for separation.
+- Use the accent ring + hue shadow on card hover; no movement.
 - Keep the hatch behind opaque surfaces.
 - Use tabular numbers in tables, KPIs, and bars.
 
 **Don't**
-- Don't add glow, neon bloom, gradients on surfaces, or scanlines.
+- Don't add glow, neon bloom, gradients on surfaces, or scanlines. The card
+  hover shadow is the only accent shadow and stays at 16% or lower.
 - Don't use the accent for large background areas.
 - Don't use `--acc` as a solid button fill when its ink is not verified.
+- Don't use a second grey card surface; cards are `--surface-card`.
+- Don't lighten the card background on hover or lift it with `transform`.
 - Don't place body text over the hatch.
 - Don't mix more than one accent preset in a single view.
 - Don't use pure black `#000` or pure white `#fff` as page surfaces.
@@ -254,8 +270,10 @@ The six presets are complete palettes. A host can also re-point:
 ```
 
 Keep `--acc` readable as text and `--acc-tone` readable with `--acc-ink`.
-Set `--hatch-line` from `--acc-tone` at the mode percentage. Status colours
-can be re-pointed independently; keep them as text + border + tint.
+Set `--hatch-line` from `--acc-tone` at the mode percentage. Card borders and
+hover shadows are computed from `--acc` and `--card-line`; keep them in the
+same file when re-pointing an accent. Status colours can be re-pointed
+independently; keep them as text + border + tint.
 
 ## Files
 

@@ -76,6 +76,9 @@
   --acc-soft: #5f8f1f;
   --acc-line: #6f9b2e;
   --acc-ink: #142006;
+  --card-border: color-mix(in srgb, var(--acc) 30%, var(--card-line));
+  --card-shadow-hot: 0 0 0 1px var(--acc),
+    0 12px 30px color-mix(in srgb, var(--acc) 16%, transparent);
 }
 
 /* ------------------------------------------------------------ tokens: light */
@@ -437,10 +440,12 @@ textarea {
 }
 
 .sc-panel {
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: var(--surface-card);
+  border: 1px solid var(--card-border);
   border-radius: var(--r-md);
   padding: var(--s5);
+  transition: border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
 }
 
 .sc-panel-head {
@@ -456,26 +461,21 @@ textarea {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--ink-2);
+  color: var(--acc);
   padding-left: 8px;
   border-left: 2px solid var(--acc);
 }
 
 .sc-card {
   background: var(--surface-card);
-  border: 1px solid var(--card-line);
+  border: 1px solid var(--card-border);
   border-radius: var(--r-lg);
   padding: var(--s4);
   display: flex;
   flex-direction: column;
   gap: 10px;
   transition: border-color var(--dur) var(--ease),
-    background var(--dur) var(--ease);
-}
-
-.sc-card:hover {
-  border-color: color-mix(in srgb, var(--acc) 26%, var(--line-2));
-  background: var(--card-bg-hover);
+    box-shadow var(--dur) var(--ease);
 }
 
 .sc-card .sc-card-kicker {
@@ -489,6 +489,7 @@ textarea {
   font-size: 18px;
   letter-spacing: -0.025em;
   line-height: 1.15;
+  color: var(--acc);
 }
 
 .sc-card p {
@@ -519,11 +520,13 @@ textarea {
 }
 
 .sc-stat {
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: var(--surface-card);
+  border: 1px solid var(--card-border);
   border-top: 2px solid var(--acc-line);
   border-radius: var(--r-md);
   padding: var(--s3) var(--s4);
+  transition: border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
 }
 
 .sc-stat .label {
@@ -879,11 +882,29 @@ textarea {
   width: min(520px, 100%);
   max-height: calc(100vh - 40px);
   overflow: auto;
-  background: var(--bg-2);
-  border: 1px solid var(--line-2);
+  background: var(--surface-card);
+  border: 1px solid var(--card-border);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow);
   padding: var(--s5);
+  transition: border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+
+/* card interaction — every card keeps its black surface and gains the accent
+   ring + hue shadow on hover, with no background lightening or layout shift */
+.sc-panel:hover,
+.sc-card:hover,
+.sc-stat:hover,
+.sc-modal .sc-modal-card:hover {
+  border-color: var(--acc);
+  box-shadow: var(--card-shadow-hot);
+}
+
+.sc-modal .sc-modal-card:hover {
+  box-shadow: var(--shadow), 0 0 0 1px var(--acc),
+    0 12px 30px color-mix(in srgb, var(--acc) 16%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
