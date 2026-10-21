@@ -171,7 +171,9 @@
     const parameters = new URLSearchParams();
     parameters.set("style", state.style);
     parameters.set("mode", state.mode);
-    if (config.choice) parameters.set(config.choice.attr, state.choices[state.style]);
+    for (const choice of config.choices || []) {
+      parameters.set(choice.attr, state.choices[state.style][choice.attr]);
+    }
     if (config.ornaments) parameters.set("orn", state.orn);
     try {
       history.replaceState(
@@ -230,38 +232,70 @@
       );
     });
 
-    const choiceOption = $('[data-opt="choice"]');
-    if (choiceOption) choiceOption.hidden = !config.choice;
-    if (config.choice) {
-      const label = $("#choice-label");
-      if (label) label.textContent = config.choice.label;
-      const wrap = $("#choice-options");
-      if (wrap) {
-        if (wrap.dataset.for !== config.id) {
-          wrap.textContent = "";
-          config.choice.options.forEach((option) => {
+    const choiceGroups = $("#choice-groups");
+    if (choiceGroups) {
+      const choices = config.choices || [];
+      choiceGroups.hidden = choices.length === 0;
+      if (choiceGroups.dataset.for !== config.id) {
+        choiceGroups.textContent = "";
+        choices.forEach((choice) => {
+          const group = document.createElement("div");
+          group.className = "ds-opt";
+
+          const label = document.createElement("span");
+          label.className = "ds-opt-label";
+          label.id = `choice-label-${config.id}-${choice.attr}`;
+          label.textContent = choice.label;
+          group.appendChild(label);
+
+          const control = document.createElement("div");
+          control.className =
+            choice.type === "text" ? "ds-seg" : choice.type === "roles" ? "ds-roles" : "ds-swatches";
+          control.setAttribute("role", "group");
+          control.setAttribute("aria-labelledby", label.id);
+
+          choice.options.forEach((option) => {
             const button = document.createElement("button");
             button.type = "button";
-            button.className = "ds-swatchbtn";
-            button.dataset.choice = option.id;
-            button.style.setProperty("--dot", option.hex);
-            button.setAttribute("aria-label", option.label);
-            button.title = option.label;
+            button.dataset.choiceAttr = choice.attr;
+            button.dataset.choiceValue = option.id;
             button.setAttribute("aria-pressed", "false");
-            const swatch = document.createElement("span");
-            swatch.setAttribute("aria-hidden", "true");
-            button.appendChild(swatch);
-            wrap.appendChild(button);
+
+            if (choice.type === "roles") {
+              button.className = "ds-rolebtn";
+              button.setAttribute("aria-label", option.label);
+              button.title = option.label;
+              (option.colors || []).forEach((color) => {
+                const dot = document.createElement("span");
+                dot.setAttribute("aria-hidden", "true");
+                dot.style.setProperty("--dot", color);
+                button.appendChild(dot);
+              });
+            } else if (choice.type === "text") {
+              button.textContent = option.label;
+            } else {
+              button.className = "ds-swatchbtn";
+              button.style.setProperty("--dot", option.hex);
+              button.setAttribute("aria-label", option.label);
+              button.title = option.label;
+              const swatch = document.createElement("span");
+              swatch.setAttribute("aria-hidden", "true");
+              button.appendChild(swatch);
+            }
+
+            control.appendChild(button);
           });
-          wrap.dataset.for = config.id;
-        }
-        $$("[data-choice]", wrap).forEach((button) => {
-          button.setAttribute(
-            "aria-pressed",
-            String(button.dataset.choice === state.choices[state.style])
-          );
+
+          group.appendChild(control);
+          choiceGroups.appendChild(group);
         });
+        choiceGroups.dataset.for = config.id;
       }
+
+      $$("[data-choice-attr]", choiceGroups).forEach((button) => {
+        const current = state.choices[state.style] && state.choices[state.style][button.dataset.choiceAttr];
+        button.setAttribute("aria-pressed", String(current === button.dataset.choiceValue));
+      });
     }
 
     const note = $("#style-note");
@@ -290,7 +324,10 @@
     setText("#tokens-style-desc", config.description);
     setText("#tokens-theme", config.id);
     setText("#tokens-mode", state.mode);
-    setText("#tokens-choice", config.choice ? state.choices[config.id] : "—");
+    const choiceText = (config.choices || [])
+      .map((choice) => `${choice.attr}: ${state.choices[config.id][choice.attr]}`)
+      .join(" · ");
+    setText("#tokens-choice", choiceText || "—");
     setText("#tokens-orn", config.ornaments ? state.orn : "—");
 
     const design = $("#style-design");
@@ -486,9 +523,9 @@
         return;
       }
 
-      const choiceButton = target.closest("[data-choice]");
+      const choiceButton = target.closest("[data-choice-value]");
       if (choiceButton) {
-        state.choices[state.style] = choiceButton.dataset.choice;
+        state.choices[state.style][choiceButton.dataset.choiceAttr] = choiceButton.dataset.choiceValue;
         commit();
         return;
       }
@@ -1126,7 +1163,9 @@
     if (!snippet) return;
     const config = STYLES[state.style];
     const attributes = [`data-theme="${config.id}"`, `data-mode="${state.mode}"`];
-    if (config.choice) attributes.push(`data-${config.choice.attr}="${state.choices[config.id]}"`);
+    for (const choice of config.choices || []) {
+      attributes.push(`data-${choice.attr}="${state.choices[config.id][choice.attr]}"`);
+    }
     if (config.ornaments) attributes.push(`data-orn="${state.orn}"`);
     snippet.textContent = `<html ${attributes.join(" ")}>\n<link rel="stylesheet" href="../styles/${config.id}/theme.css">`;
   }
@@ -1245,6 +1284,20 @@
     if (kpi) kpi.textContent = String(total);
   }
 
+  function updateKpis() {
+    const styles = ORDER.length;
+    const modes = ORDER.reduce((total, id) => total + STYLES[id].modes.length, 0);
+    const presets = ORDER.reduce(
+      (total, id) =>
+        total +
+        (STYLES[id].choices || []).reduce((sum, choice) => sum + choice.options.length, 0),
+      0
+    );
+    setText("#kpi-styles", String(styles));
+    setText("#kpi-modes", String(modes));
+    setText("#kpi-presets", String(presets));
+  }
+
   function registerSpecimen() {
     if (customElements.get("x-specimen")) return;
     const template = $("#specimen-template");
@@ -1271,6 +1324,7 @@
     bindTable();
     setupTabs();
     renderCoverage();
+    updateKpis();
     watchThemeLoading();
 
     requestAnimationFrame(() => {

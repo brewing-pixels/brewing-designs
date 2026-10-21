@@ -11,7 +11,7 @@ design direction: tokens + CSS + spec + preview, decoupled from any one project.
 | [`construct-poster/`](construct-poster/) | flat cell-shaded constructivist poster — hard borders, sharp offset cell-shadows, orange / violet chrome | light (2 accents) | ready |
 | [`moderncraft-hud/`](moderncraft-hud/) | industrial metallic HUD — graphite panels, near-black cards, one active accent, 45° accent hatch, six presets | dark + light (6 accents) | ready |
 | [`mechcraft-hud/`](mechcraft-hud/) | command-console HUD — layered metal, black screens, amber/cyan | dark + light | ready |
-| [`systemcraft-hud/`](systemcraft-hud/) | hybrid systems HUD — Mechcraft cards/type, Moderncraft texture, 3-colour role rotation, combined header | dark + light (6 role orders) | ready |
+| [`systemcraft-hud/`](systemcraft-hud/) | hybrid systems HUD — Mechcraft cards/type, Moderncraft texture, 3-colour role rotation, combined header | dark + light (6 role orders · 2 backgrounds) | ready |
 
 ## Anatomy of a style
 
@@ -21,7 +21,7 @@ design direction: tokens + CSS + spec + preview, decoupled from any one project.
   theme.css       # drop-in portable CSS: tokens + base + starter components + ornaments
   tokens.json     # DTCG tokens (primitive → semantic); generate other platforms from this
   demo.html       # self-contained preview (open in a browser)
-  preview.png      # screenshot of the preview
+  preview.png      # 1440x900 screenshot of the example page in this style
   ornaments/      # any asset art the style needs (optional)
   PROVENANCE.md   # origin + licensing
 ```

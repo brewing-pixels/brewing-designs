@@ -15,7 +15,7 @@
         "Deep space-blue neutrals, one cyan chrome, clipped 45° corners, scanline texture and reticle ornaments. Dark-first, with a light variant and three ornament modes.",
       modes: ["dark", "light"],
       defaultMode: "dark",
-      choice: null,
+      choices: [],
       ornaments: ["css", "art", "minimal"],
       defaultOrn: "css",
       extras: "3 ornament modes",
@@ -32,15 +32,18 @@
         "Warm paper neutrals, heavy black borders, sharp unblurred offset shadows, constructivist decoration and display type. Light only, with orange and violet accents.",
       modes: ["light"],
       defaultMode: "light",
-      choice: {
-        attr: "accent",
-        label: "Accent",
-        default: "orange",
-        options: [
-          { id: "orange", label: "Orange", hex: "#e8600a" },
-          { id: "violet", label: "Violet", hex: "#8578a8" },
-        ],
-      },
+      choices: [
+        {
+          attr: "accent",
+          label: "Accent",
+          type: "swatch",
+          default: "orange",
+          options: [
+            { id: "orange", label: "Orange", hex: "#e8600a" },
+            { id: "violet", label: "Violet", hex: "#8578a8" },
+          ],
+        },
+      ],
       ornaments: null,
       extras: "2 accents",
       preview: "../styles/construct-poster/preview.png",
@@ -56,19 +59,22 @@
         "A graphite ground, near-black cards, one accent held in reserve, a 45° accent hatch and tabular numbers. Six accent presets, dark and light.",
       modes: ["dark", "light"],
       defaultMode: "dark",
-      choice: {
-        attr: "accent",
-        label: "Accent",
-        default: "horde",
-        options: [
-          { id: "terran", label: "Terran cyan", hex: "#6fe3f2" },
-          { id: "horde", label: "Horde lime", hex: "#b6f34a" },
-          { id: "zerg", label: "Zerg purple", hex: "#c084fc" },
-          { id: "protoss", label: "Protoss gold", hex: "#f0cf78" },
-          { id: "night-elf", label: "Night elf emerald", hex: "#7ef0bd" },
-          { id: "human", label: "Human blue", hex: "#9db9ff" },
-        ],
-      },
+      choices: [
+        {
+          attr: "accent",
+          label: "Accent",
+          type: "swatch",
+          default: "horde",
+          options: [
+            { id: "terran", label: "Terran cyan", hex: "#6fe3f2" },
+            { id: "horde", label: "Horde lime", hex: "#b6f34a" },
+            { id: "zerg", label: "Zerg purple", hex: "#c084fc" },
+            { id: "protoss", label: "Protoss gold", hex: "#f0cf78" },
+            { id: "night-elf", label: "Night elf emerald", hex: "#7ef0bd" },
+            { id: "human", label: "Human blue", hex: "#9db9ff" },
+          ],
+        },
+      ],
       ornaments: null,
       extras: "6 accents",
       preview: "../styles/moderncraft-hud/preview.png",
@@ -84,7 +90,7 @@
         "Layered metal, recessed black screens, an amber/cyan command accent and a cold cyan secondary. Bezels, technical grid and condensed display type. Dark and light.",
       modes: ["dark", "light"],
       defaultMode: "dark",
-      choice: null,
+      choices: [],
       ornaments: null,
       extras: "amber/cyan",
       preview: "../styles/mechcraft-hud/preview.png",
@@ -92,17 +98,61 @@
       demo: "../styles/mechcraft-hud/demo.html",
       theme: "../styles/mechcraft-hud/theme.css",
     },
+    "systemcraft-hud": {
+      id: "systemcraft-hud",
+      name: "systemcraft-hud",
+      tagline: "Hybrid systems HUD",
+      description:
+        "Mechcraft type and card geometry, Moderncraft texture and restraint, on a darker black. Amber, cyan and lime rotate through prime, secondary and tertiary roles. Sahara or grid background.",
+      modes: ["dark", "light"],
+      defaultMode: "dark",
+      choices: [
+        {
+          attr: "roles",
+          label: "Roles",
+          type: "roles",
+          default: "amber-cyan-lime",
+          options: [
+            { id: "amber-cyan-lime", label: "Amber prime · cyan secondary · lime tertiary", colors: ["#f2a23b", "#63d4e4", "#b6f34a"] },
+            { id: "amber-lime-cyan", label: "Amber prime · lime secondary · cyan tertiary", colors: ["#f2a23b", "#b6f34a", "#63d4e4"] },
+            { id: "cyan-amber-lime", label: "Cyan prime · amber secondary · lime tertiary", colors: ["#63d4e4", "#f2a23b", "#b6f34a"] },
+            { id: "cyan-lime-amber", label: "Cyan prime · lime secondary · amber tertiary", colors: ["#63d4e4", "#b6f34a", "#f2a23b"] },
+            { id: "lime-amber-cyan", label: "Lime prime · amber secondary · cyan tertiary", colors: ["#b6f34a", "#f2a23b", "#63d4e4"] },
+            { id: "lime-cyan-amber", label: "Lime prime · cyan secondary · amber tertiary", colors: ["#b6f34a", "#63d4e4", "#f2a23b"] },
+          ],
+        },
+        {
+          attr: "bg",
+          label: "Background",
+          type: "text",
+          default: "sahara",
+          options: [
+            { id: "sahara", label: "Sahara" },
+            { id: "grid", label: "Grid" },
+          ],
+        },
+      ],
+      ornaments: null,
+      extras: "6 role orders · 2 backgrounds",
+      preview: "../styles/systemcraft-hud/preview.png",
+      design: "../styles/systemcraft-hud/DESIGN.md",
+      demo: "../styles/systemcraft-hud/demo.html",
+      theme: "../styles/systemcraft-hud/theme.css",
+    },
   };
 
-  const ORDER = ["neon-hud", "construct-poster", "moderncraft-hud", "mechcraft-hud"];
-  const STORAGE_KEY = "designs.showcase.v2";
+  const ORDER = ["neon-hud", "construct-poster", "moderncraft-hud", "mechcraft-hud", "systemcraft-hud"];
+  const STORAGE_KEY = "designs.showcase.v3";
   const ORN_VALUES = ["css", "art", "minimal"];
+  const CHOICE_ATTRS = ["accent", "variant", "roles", "bg"];
 
   function defaults() {
     const choices = {};
     for (const id of ORDER) {
-      const cfg = STYLES[id];
-      if (cfg.choice) choices[id] = cfg.choice.default;
+      choices[id] = {};
+      for (const choice of STYLES[id].choices || []) {
+        choices[id][choice.attr] = choice.default;
+      }
     }
     return { style: "neon-hud", mode: "dark", choices, orn: "css" };
   }
@@ -128,19 +178,31 @@
 
     state.style = pick(params.get("style"), ORDER, pick(saved.style, ORDER, state.style));
 
-    const cfg = STYLES[state.style];
-    state.mode = pick(params.get("mode"), cfg.modes, pick(saved.mode, cfg.modes, cfg.defaultMode));
+    const activeStyle = STYLES[state.style];
+    state.mode = pick(
+      params.get("mode"),
+      activeStyle.modes,
+      pick(saved.mode, activeStyle.modes, activeStyle.defaultMode)
+    );
 
     for (const id of ORDER) {
       const style = STYLES[id];
-      if (!style.choice) continue;
-      const values = style.choice.options.map((option) => option.id);
-      const fromUrl =
-        id === state.style
-          ? params.get(style.choice.attr) || params.get("accent")
-          : null;
-      const fromSave = saved.choices && saved.choices[id];
-      state.choices[id] = pick(fromUrl, values, pick(fromSave, values, style.choice.default));
+      for (const choice of style.choices || []) {
+        const values = choice.options.map((option) => option.id);
+        const fromUrl = id === state.style ? params.get(choice.attr) : null;
+        let fromSave = saved.choices && saved.choices[id];
+        if (fromSave && typeof fromSave === "object") {
+          fromSave = fromSave[choice.attr];
+        } else if (choice.attr !== "accent") {
+          /* v2 stored a single accent string; roles/bg did not exist. */
+          fromSave = null;
+        }
+        state.choices[id][choice.attr] = pick(
+          fromUrl,
+          values,
+          pick(fromSave, values, choice.default)
+        );
+      }
     }
 
     state.orn = pick(params.get("orn"), ORN_VALUES, pick(saved.orn, ORN_VALUES, "css"));
@@ -156,12 +218,14 @@
     root.dataset.theme = cfg.id;
     root.dataset.mode = state.mode;
 
-    root.removeAttribute("data-accent");
-    if (cfg.choice) {
-      const values = cfg.choice.options.map((option) => option.id);
-      const value = pick(state.choices[cfg.id], values, cfg.choice.default);
-      state.choices[cfg.id] = value;
-      root.dataset[cfg.choice.attr] = value;
+    for (const attr of CHOICE_ATTRS) root.removeAttribute(`data-${attr}`);
+
+    state.choices[cfg.id] = state.choices[cfg.id] || {};
+    for (const choice of cfg.choices || []) {
+      const values = choice.options.map((option) => option.id);
+      const value = pick(state.choices[cfg.id][choice.attr], values, choice.default);
+      state.choices[cfg.id][choice.attr] = value;
+      root.dataset[choice.attr] = value;
     }
 
     if (cfg.ornaments) {
@@ -189,6 +253,7 @@
     ORDER,
     STORAGE_KEY,
     ORN_VALUES,
+    CHOICE_ATTRS,
     defaults,
     read,
     apply,

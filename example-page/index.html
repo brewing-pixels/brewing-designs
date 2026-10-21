@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="A single specimen page for every style in the design library: four switchable themes, live tokens, contrast checks and complete HTML element coverage.">
+  <meta name="description" content="A single specimen page for every style in the design library: five switchable themes, live tokens, contrast checks and complete HTML element coverage.">
   <meta name="theme-color" content="#070b0f" id="meta-theme">
   <title>Designs — style showcase</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="../styles/construct-poster/theme.css" media="not all" data-theme-css="construct-poster">
   <link rel="stylesheet" href="../styles/moderncraft-hud/theme.css" media="not all" data-theme-css="moderncraft-hud">
   <link rel="stylesheet" href="../styles/mechcraft-hud/theme.css" media="not all" data-theme-css="mechcraft-hud">
+  <link rel="stylesheet" href="../styles/systemcraft-hud/theme.css" media="not all" data-theme-css="systemcraft-hud">
   <script>showcaseBootstrap();</script>
   <link rel="stylesheet" href="showcase.css">
   <script src="showcase.js" defer></script>
@@ -55,6 +56,7 @@
         <button type="button" data-style-choice="construct-poster" aria-pressed="false"><span class="ds-dot" style="--dot:#e8600a" aria-hidden="true"></span>construct-poster</button>
         <button type="button" data-style-choice="moderncraft-hud" aria-pressed="false"><span class="ds-dot" style="--dot:#b6f34a" aria-hidden="true"></span>moderncraft-hud</button>
         <button type="button" data-style-choice="mechcraft-hud" aria-pressed="false"><span class="ds-dot" style="--dot:#f2a23b" aria-hidden="true"></span>mechcraft-hud</button>
+        <button type="button" data-style-choice="systemcraft-hud" aria-pressed="false"><span class="ds-dot" style="--dot:#f2a23b" aria-hidden="true"></span>systemcraft-hud</button>
       </div>
 
       <div class="ds-tools">
@@ -67,10 +69,7 @@
     </div>
 
     <div class="ds-options" role="group" aria-label="Style options">
-      <div class="ds-opt" data-opt="choice" hidden>
-        <span class="ds-opt-label" id="choice-label">Accent</span>
-        <div class="ds-swatches" id="choice-options" role="group" aria-labelledby="choice-label"></div>
-      </div>
+      <div class="ds-choicegroups" id="choice-groups" hidden></div>
       <div class="ds-opt" data-opt="orn">
         <span class="ds-opt-label" id="orn-label">Ornaments</span>
         <div class="ds-seg" role="group" aria-labelledby="orn-label">
@@ -149,17 +148,17 @@
         </div>
         <div class="ds-stat">
           <div class="ds-stat-label">Styles</div>
-          <div class="ds-stat-value">4</div>
+          <div class="ds-stat-value" id="kpi-styles">5</div>
           <div class="ds-stat-sub">one page · instant switch</div>
         </div>
         <div class="ds-stat">
           <div class="ds-stat-label">Presets</div>
-          <div class="ds-stat-value">8</div>
-          <div class="ds-stat-sub">accent presets</div>
+          <div class="ds-stat-value" id="kpi-presets">16</div>
+          <div class="ds-stat-sub">appearance presets</div>
         </div>
         <div class="ds-stat">
           <div class="ds-stat-label">Theme modes</div>
-          <div class="ds-stat-value">7</div>
+          <div class="ds-stat-value" id="kpi-modes">9</div>
           <div class="ds-stat-sub">dark · light combinations</div>
         </div>
       </div>
@@ -278,6 +277,10 @@
           <button class="ds-gallery-item" type="button" data-style-choice="mechcraft-hud" aria-pressed="false">
             <img src="../styles/mechcraft-hud/preview.png" alt="mechcraft-hud preview" width="640" height="400" loading="lazy">
             <span>mechcraft-hud</span><small>Command console · amber/cyan</small>
+          </button>
+          <button class="ds-gallery-item" type="button" data-style-choice="systemcraft-hud" aria-pressed="false">
+            <img src="../styles/systemcraft-hud/preview.png" alt="systemcraft-hud preview" width="640" height="400" loading="lazy">
+            <span>systemcraft-hud</span><small>Hybrid systems · roles + backgrounds</small>
           </button>
         </div>
       </section>
@@ -1060,7 +1063,7 @@
 
   <footer class="ds-footer">
     <div class="ds-footer-inner">
-      <span>designs / example-page — four styles, one specimen, zero build steps.</span>
+      <span>designs / example-page — five styles, one specimen, zero build steps.</span>
       <span><a href="../styles/README.md">style index</a> · <a href="../SPEC.md">library spec</a> · lorem ipsum content</span>
     </div>
   </footer>
