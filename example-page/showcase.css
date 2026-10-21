@@ -247,8 +247,6 @@ pre {
   font: 12.5px/1.7 var(--f-mono);
   color: var(--ink-2);
   tab-size: 2;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line-2) transparent;
 }
 
 pre code {
@@ -1539,6 +1537,31 @@ dialog.ds-dialog::backdrop {
   max-width: 40ch;
   color: var(--mut);
   font-size: 12px;
+}
+
+.ds-scroll {
+  max-height: 210px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  scrollbar-gutter: stable;
+}
+
+.ds-scroll-inner {
+  width: 1350px;
+  min-height: 340px;
+  padding: var(--s4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+
+.ds-scroll-inner p {
+  max-width: 90ch;
+  color: var(--ink-2);
+  font-size: 12.5px;
+  line-height: 1.6;
 }
 
 .ds-skeleton {

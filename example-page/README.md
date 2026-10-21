@@ -88,6 +88,9 @@ Section hashes: `#overview`, `#typography`, `#components`, `#forms`, `#data`,
 - `showcase.js` handles tabs, the settings UI, permalinks, the dialog, toasts,
   form validation, table sorting, the canvas sparkline, the live token palette,
   computed WCAG contrast, and the element coverage audit.
+- The Components tab includes a vertical + horizontal scrollbar specimen. The
+  page, code blocks, table wrappers and that specimen all use the active
+  style's scrollbar colours.
 - The Tokens tab reads the **computed** custom properties from the active theme.
   It shows the palette, contrast ratios for the pairs this page actually uses,
   type/radii/spacing scales, the current usage snippet, and a live check of every
