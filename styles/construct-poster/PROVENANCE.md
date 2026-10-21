@@ -6,7 +6,7 @@ shipped as the original `gateway.css` theme (plus `galerija.css` and `upload.css
 extensions). AIUR's UI is Macedonian Cyrillic; the style itself is language-neutral.
 Also internally known as `aiur-poster` / `construct` / `orange-poster`.
 
-It was extracted and archived before AIUR adopted the newer `soviet-hud` skin, so
+It was extracted and archived before AIUR adopted its newer skin, so
 the original poster look is preserved as a reusable style.
 
 ## Code
