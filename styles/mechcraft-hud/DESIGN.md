@@ -155,8 +155,9 @@ A project page becomes a three-pod command console:
 - On narrow screens the pods stack: briefing, directives, spec, telemetry,
   links, fields.
 
-The library demo shows the briefing arrangement. The Overmind Gateway demo
-adds a temporary Reskin ↔ Briefing switch so the same data can be compared.
+The library demo shows the briefing arrangement. The Overmind Gateway uses
+the same Reskin/Briefing composition across both styles; the layout is not part
+of the skin.
 
 ---
 
