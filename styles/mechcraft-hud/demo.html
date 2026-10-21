@@ -1,25 +1,21 @@
 <!doctype html>
-<html lang="en" data-theme="centercraft-hud" data-variant="amber" data-mode="dark">
+<html lang="en" data-theme="mechcraft-hud" data-mode="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
 <script>
 (() => {
-  const variants = new Set(["amber", "lime"]);
   const modes = new Set(["dark", "light"]);
-  let variant = "amber";
   let mode = "dark";
   try {
-    variant = localStorage.getItem("centercraft.variant") || variant;
-    mode = localStorage.getItem("centercraft.mode") || mode;
+    mode = localStorage.getItem("mechcraft.mode") || mode;
   } catch (e) {}
   const root = document.documentElement;
-  root.dataset.variant = variants.has(variant) ? variant : "amber";
   root.dataset.mode = modes.has(mode) ? mode : "dark";
 })();
 </script>
-<title>centercraft-hud — command console specimen</title>
+<title>mechcraft-hud — command console specimen</title>
 <link rel="stylesheet" href="theme.css">
 <style>
   .demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -36,21 +32,14 @@
 <div class="cc-shell">
   <header class="cc-top">
     <div class="cc-brand">
-      <span class="cc-mark" aria-hidden="true">CC</span>
+      <span class="cc-mark" aria-hidden="true">MC</span>
       <div>
-        <h1>CENTER<b>CRAFT</b></h1>
+        <h1>MECH<b>CRAFT</b></h1>
         <div class="cc-kicker">command HUD · specimen</div>
       </div>
       <span class="cc-tag">v1</span>
     </div>
     <div class="cc-theme" aria-label="Theme controls">
-      <div class="cc-theme-group">
-        <span class="cc-theme-label">Variant</span>
-        <div class="cc-theme-row">
-          <button class="cc-swatch-btn" type="button" data-variant-choice="amber" aria-label="Amber and cyan" aria-pressed="true" title="Amber / Cyan"><span class="cc-swatch" style="--sw:#f2a23b"></span></button>
-          <button class="cc-swatch-btn" type="button" data-variant-choice="lime" aria-label="Lime and cyan" aria-pressed="false" title="Lime / Cyan"><span class="cc-swatch" style="--sw:#b6f34a"></span></button>
-        </div>
-      </div>
       <div class="cc-theme-group">
         <span class="cc-theme-label">Mode</span>
         <div class="cc-theme-row">
@@ -252,38 +241,29 @@
   </div>
 
   <footer class="demo-footer">
-    <span class="demo-note">centercraft-hud · MIT code · no game assets, logos or portraits bundled</span>
-    <span class="demo-note">amber/cyan · lime/cyan · dark + light</span>
+    <span class="demo-note">mechcraft-hud · MIT code · no game assets, logos or portraits bundled</span>
+    <span class="demo-note">amber/cyan · dark + light</span>
   </footer>
 </div>
 
 <script>
 (() => {
-  const variants = new Set(["amber", "lime"]);
   const modes = new Set(["dark", "light"]);
   const root = document.documentElement;
   const sync = () => {
-    document.querySelectorAll("[data-variant-choice]").forEach((button) => {
-      button.setAttribute("aria-pressed", String(button.dataset.variantChoice === root.dataset.variant));
-    });
     document.querySelectorAll("[data-mode-choice]").forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.modeChoice === root.dataset.mode));
     });
   };
-  const apply = (variant, mode) => {
-    root.dataset.variant = variants.has(variant) ? variant : "amber";
+  const apply = (mode) => {
     root.dataset.mode = modes.has(mode) ? mode : "dark";
     try {
-      localStorage.setItem("centercraft.variant", root.dataset.variant);
-      localStorage.setItem("centercraft.mode", root.dataset.mode);
+      localStorage.setItem("mechcraft.mode", root.dataset.mode);
     } catch (e) {}
     sync();
   };
-  document.querySelectorAll("[data-variant-choice]").forEach((button) => {
-    button.addEventListener("click", () => apply(button.dataset.variantChoice, root.dataset.mode));
-  });
   document.querySelectorAll("[data-mode-choice]").forEach((button) => {
-    button.addEventListener("click", () => apply(root.dataset.variant, button.dataset.modeChoice));
+    button.addEventListener("click", () => apply(button.dataset.modeChoice));
   });
   sync();
 })();

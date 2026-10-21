@@ -1,18 +1,18 @@
-# Provenance — centercraft-hud
+# Provenance — mechcraft-hud
 
 ## Origin
 
 - **Authored:** 2026-10-21, for the Overmind Gateway command-console exploration.
 - **Author:** Nikolche / PixelWeave, with Fenix.
-- **Status:** ready; the gateway demo uses it with a temporary Reskin ↔ Briefing
-  layout switch.
-- **Name:** “centercraft” is a working style label: a center-command console,
+- **Status:** ready; used by the Overmind Gateway. Reskin/Briefing is a
+  skin-independent project-page composition available to both styles.
+- **Name:** “mechcraft” is a working style label: a center-command console,
   not an affiliation with StarCraft or Blizzard Entertainment.
 
 The CSS, token architecture, demo, command components, and layouts are original
 work. The style borrows only generic real-time-strategy HUD grammar:
 a central command deck, side instrument pods, layered metal/glass, small caps,
-mono numbers, status lamps, and a warm/cold accent tension.
+mono numbers, status lamps, and an amber/cyan accent tension.
 
 ## Reference analysis
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="systemcraft-hud" data-accent="horde" data-mode="dark">
+<html lang="en" data-theme="moderncraft-hud" data-accent="horde" data-mode="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,15 +9,15 @@
   const accents = new Set(["terran", "horde", "zerg", "protoss", "night-elf", "human"]);
   const modes = new Set(["dark", "light"]);
   try {
-    const accent = localStorage.getItem("systemcraft.accent") || "horde";
-    const mode = localStorage.getItem("systemcraft.mode") || "dark";
+    const accent = localStorage.getItem("moderncraft.accent") || "horde";
+    const mode = localStorage.getItem("moderncraft.mode") || "dark";
     const root = document.documentElement;
     root.dataset.accent = accents.has(accent) ? accent : "horde";
     root.dataset.mode = modes.has(mode) ? mode : "dark";
   } catch (e) {}
 })();
 </script>
-<title>systemcraft-hud — style demo</title>
+<title>moderncraft-hud — style demo</title>
 <link rel="stylesheet" href="theme.css">
 <style>
   .demo-section { margin-top: 28px; }
@@ -55,10 +55,10 @@
 
   <header class="sc-top">
     <div class="sc-brand">
-      <span class="sc-mark" aria-hidden="true">SC</span>
+      <span class="sc-mark" aria-hidden="true">MC</span>
       <div>
-        <h1>SYSTEM<b>CRAFT</b></h1>
-        <div class="sc-kicker">systemcraft-hud · style specimen</div>
+        <h1>MODERN<b>CRAFT</b></h1>
+        <div class="sc-kicker">moderncraft-hud · style specimen</div>
       </div>
     </div>
     <div class="sc-theme" aria-label="Theme controls">
@@ -213,7 +213,7 @@
   </section>
 
   <footer class="demo-footer">
-    <span class="sc-meta">systemcraft-hud · MIT code · no game assets or logos bundled</span>
+    <span class="sc-meta">moderncraft-hud · MIT code · no game assets or logos bundled</span>
     <span class="sc-meta">six presets · dark + light · reduced-motion guard</span>
   </footer>
 </div>
@@ -237,8 +237,8 @@
     root.dataset.accent = accents.has(accent) ? accent : "horde";
     root.dataset.mode = modes.has(mode) ? mode : "dark";
     try {
-      localStorage.setItem("systemcraft.accent", root.dataset.accent);
-      localStorage.setItem("systemcraft.mode", root.dataset.mode);
+      localStorage.setItem("moderncraft.accent", root.dataset.accent);
+      localStorage.setItem("moderncraft.mode", root.dataset.mode);
     } catch (e) {}
     sync();
   };

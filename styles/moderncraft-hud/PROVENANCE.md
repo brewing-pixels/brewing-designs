@@ -1,4 +1,4 @@
-# Provenance — systemcraft-hud
+# Provenance — moderncraft-hud
 
 ## Origin
 
@@ -44,7 +44,7 @@ or endorsement by Blizzard Entertainment or any other rights holder.
 
 - Removed all Overmind-specific content, project data, and the Command Center
   logo.
-- Replaced the app's brand name with the neutral `SYSTEMCRAFT` demo mark.
+- Replaced the app's brand name with the neutral `MODERNCRAFT` demo mark.
 - Renamed the app's component classes to the portable `sc-*` prefix.
 - Kept the six accent values and both mode token sets verbatim.
 - Added the `tokens.json` DTCG export, `DESIGN.md`, demo, and preview.

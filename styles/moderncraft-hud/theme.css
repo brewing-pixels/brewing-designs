@@ -1,9 +1,9 @@
 /* ============================================================
-   systemcraft-hud — a metallic, flat HUD web style
+   moderncraft-hud — a metallic, flat HUD web style
    Near-black cards, one accent, 45° accent hatch, six presets.
 
    Usage:
-     <html data-theme="systemcraft-hud" data-accent="horde" data-mode="dark">
+     <html data-theme="moderncraft-hud" data-accent="horde" data-mode="dark">
      <link rel="stylesheet" href="theme.css">
 
    Accent presets: terran · horde · zerg · protoss · night-elf · human
@@ -15,7 +15,7 @@
 
 /* ------------------------------------------------------------ tokens: dark */
 :root,
-[data-theme="systemcraft-hud"][data-mode="dark"] {
+[data-theme="moderncraft-hud"][data-mode="dark"] {
   /* neutrals — cool graphite metal */
   --bg: #191e24;
   --bg-2: #20262e;
@@ -82,7 +82,7 @@
 }
 
 /* ------------------------------------------------------------ tokens: light */
-[data-theme="systemcraft-hud"][data-mode="light"] {
+[data-theme="moderncraft-hud"][data-mode="light"] {
   --bg: #e6eaee;
   --bg-2: #f4f6f8;
   --surface: #f3f5f8;
@@ -115,42 +115,42 @@
 }
 
 /* ------------------------------------------------------------ accents: dark */
-[data-theme="systemcraft-hud"][data-accent="terran"] {
+[data-theme="moderncraft-hud"][data-accent="terran"] {
   --acc: #6fe3f2;
   --acc-tone: #6fe3f2;
   --acc-soft: #2e9cae;
   --acc-line: #478694;
   --acc-ink: #082026;
 }
-[data-theme="systemcraft-hud"][data-accent="horde"] {
+[data-theme="moderncraft-hud"][data-accent="horde"] {
   --acc: #b6f34a;
   --acc-tone: #b6f34a;
   --acc-soft: #5f8f1f;
   --acc-line: #6f9b2e;
   --acc-ink: #142006;
 }
-[data-theme="systemcraft-hud"][data-accent="zerg"] {
+[data-theme="moderncraft-hud"][data-accent="zerg"] {
   --acc: #c084fc;
   --acc-tone: #88409c;
   --acc-soft: #5e2a6e;
   --acc-line: #6b2f7d;
   --acc-ink: #ffffff;
 }
-[data-theme="systemcraft-hud"][data-accent="protoss"] {
+[data-theme="moderncraft-hud"][data-accent="protoss"] {
   --acc: #f0cf78;
   --acc-tone: #d9b24c;
   --acc-soft: #8a6a1f;
   --acc-line: #b08b2e;
   --acc-ink: #1a1405;
 }
-[data-theme="systemcraft-hud"][data-accent="night-elf"] {
+[data-theme="moderncraft-hud"][data-accent="night-elf"] {
   --acc: #7ef0bd;
   --acc-tone: #3ddc97;
   --acc-soft: #1f8a5d;
   --acc-line: #47b583;
   --acc-ink: #04140d;
 }
-[data-theme="systemcraft-hud"][data-accent="human"] {
+[data-theme="moderncraft-hud"][data-accent="human"] {
   --acc: #9db9ff;
   --acc-tone: #5b8cff;
   --acc-soft: #345bb0;
@@ -159,42 +159,42 @@
 }
 
 /* ------------------------------------------------------------ accents: light */
-[data-theme="systemcraft-hud"][data-mode="light"][data-accent="terran"] {
+[data-theme="moderncraft-hud"][data-mode="light"][data-accent="terran"] {
   --acc: #155e75;
   --acc-tone: #155e75;
   --acc-soft: #0f4a5c;
   --acc-line: #6d9aa8;
   --acc-ink: #ffffff;
 }
-[data-theme="systemcraft-hud"][data-mode="light"][data-accent="horde"] {
+[data-theme="moderncraft-hud"][data-mode="light"][data-accent="horde"] {
   --acc: #3f6212;
   --acc-tone: #3f6212;
   --acc-soft: #2f4a0b;
   --acc-line: #8aa05a;
   --acc-ink: #ffffff;
 }
-[data-theme="systemcraft-hud"][data-mode="light"][data-accent="zerg"] {
+[data-theme="moderncraft-hud"][data-mode="light"][data-accent="zerg"] {
   --acc: #88409c;
   --acc-tone: #88409c;
   --acc-soft: #6d2f7e;
   --acc-line: #a06bb0;
   --acc-ink: #ffffff;
 }
-[data-theme="systemcraft-hud"][data-mode="light"][data-accent="protoss"] {
+[data-theme="moderncraft-hud"][data-mode="light"][data-accent="protoss"] {
   --acc: #7a5b12;
   --acc-tone: #c9a227;
   --acc-soft: #6b4f0f;
   --acc-line: #b08b2e;
   --acc-ink: #1a1405;
 }
-[data-theme="systemcraft-hud"][data-mode="light"][data-accent="night-elf"] {
+[data-theme="moderncraft-hud"][data-mode="light"][data-accent="night-elf"] {
   --acc: #0f6b45;
   --acc-tone: #1f7a52;
   --acc-soft: #0b5436;
   --acc-line: #4f9f7b;
   --acc-ink: #ffffff;
 }
-[data-theme="systemcraft-hud"][data-mode="light"][data-accent="human"] {
+[data-theme="moderncraft-hud"][data-mode="light"][data-accent="human"] {
   --acc: #2f4fa0;
   --acc-tone: #3f6fe0;
   --acc-soft: #25407f;

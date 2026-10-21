@@ -1,11 +1,10 @@
-# centercraft-hud
+# mechcraft-hud
 
-**A command-console HUD: layered metal, recessed black screens, one command
-accent, cyan holo secondary, and a central briefing composition.** Dark-first,
-with a working light variant. Two accents: **Amber/Cyan** and **Lime/Cyan**.
+**A command-console HUD: layered metal, recessed black screens, an amber/cyan
+command accent, and a central briefing composition.** Dark-first, with a
+working light mode.
 
-- **Theme:** `centercraft-hud`
-- **Variants:** `amber` (default) · `lime`
+- **Theme:** `mechcraft-hud`
 - **Modes:** `dark` (default) · `light`
 - **Type:** Saira Condensed (OFL, bundled) + system sans + system mono
 - **Shape:** 2–6 px radii, 1 px metal bezels, recessed screens, 40 px command keys
@@ -14,7 +13,7 @@ with a working light variant. Two accents: **Amber/Cyan** and **Lime/Cyan**.
 - **Dependencies:** `color-mix()` only; no JS framework
 
 ```
-<html data-theme="centercraft-hud" data-variant="amber" data-mode="dark">
+<html data-theme="mechcraft-hud" data-mode="dark">
 <link rel="stylesheet" href="theme.css">
 ```
 
@@ -30,8 +29,8 @@ command consoles; it does not copy game artwork, portraits, logos, icons or
 fonts.
 
 The visual target is not “neon HUD”. It is **a dark, physical console**: graphite
-metal, near-black screens, one warm or acid accent, cold cyan data, and small
-status lamps. Depth comes from bezels and recesses, not from large glows.
+metal, near-black screens, one amber accent, cold cyan data, and small status
+lamps. Depth comes from bezels and recesses, not from large glows.
 
 ---
 
@@ -84,18 +83,10 @@ This style keeps that grammar, removes the game-density, and adds web rules:
 | gold | `#d2b466` |
 | good / warn / bad | `#7bd88f` / `#f2d85a` / `#e45c50` |
 
-### Lime / Cyan — dark
-
-Ground `#070b06`, plate `#141d11`, card `#0a1008`, raised `#1e2a19`,
-bezel `#4a5842` / `#293720`, ink `#e4eedc`, lime `#b6f34a` (fill `#9ad43c`),
-cyan `#63d4e4`.
-
 ### Light modes
 
 - **Amber light:** warm steel/ivory ground `#e7e4dc`, plate `#eeeae1`, screen
   `#fbf8f1`, amber-brown text `#8a4a12`, amber fill `#d9852c`, cyan `#0e6672`.
-- **Lime light:** cool pale steel/mint ground `#e7ece3`, plate `#eef3eb`,
-  screen `#fbfdf8`, lime text `#3f6212`, lime fill `#84cc16`, cyan `#0f6672`.
 
 Light modes keep the metal bezels, inset screens and grid. They are **daylight
 hangar**, not SaaS white.
@@ -139,7 +130,7 @@ Priority N1–N4 uses the same tinted text/border treatment as the system.
 
 ### Reskin
 
-The existing information architecture with the centercraft skin. Same board,
+The existing information architecture with the mechcraft skin. Same board,
 same project columns, same spec card; objectives remain in the main column.
 Use this when density and familiarity matter.
 
@@ -208,11 +199,10 @@ adds a temporary Reskin ↔ Briefing switch so the same data can be compared.
 
 - Body 14–16px; labels 10–11px; no game-HUD 8px body copy.
 - Accent text uses `--acc`; fills use `--acc-tone` + `--acc-ink`.
-- Dark zerg-style light accents on dark are readable; in this style the
-  amber/lime variants are checked for AA against their dark/light grounds.
+- The amber/cyan palette is checked for AA against its dark and light grounds.
 - Status is always labeled; the lamp is an accent, not the only cue.
 - Grid and glow are decorative; they do not carry state.
-- Theme controls use `aria-pressed`; mode/variant labels are visible.
+- Theme controls use `aria-pressed`; mode labels are visible.
 - Command bar wraps on mobile; no horizontal scrolling.
 
 ---
@@ -220,11 +210,11 @@ adds a temporary Reskin ↔ Briefing switch so the same data can be compared.
 ## Files
 
 ```
-centercraft-hud/
+mechcraft-hud/
   DESIGN.md       this spec
   theme.css       tokens + base + command components
   tokens.json     DTCG tokens (primitive → semantic + component)
-  demo.html       command-console specimen with variant/mode controls
+  demo.html       command-console specimen with mode controls
   preview.png     amber/dark preview of the demo
   fonts/          Saira Condensed 600/700 (OFL) + OFL.txt
   PROVENANCE.md   source references + licensing

@@ -1,11 +1,11 @@
-# systemcraft-hud
+# moderncraft-hud
 
 **A flat, metallic operations HUD: graphite metal, near-black cards, one
 accent, and a 45° accent hatch.** Dark-first, with a light variant. Six
 accent presets. Built for dense project/task/ops interfaces where hierarchy,
 numbers, and state must be readable at a glance.
 
-- **Theme:** `systemcraft-hud`
+- **Theme:** `moderncraft-hud`
 - **Modes:** `dark` (default) · `light`
 - **Accents:** `terran` · `horde` (default) · `zerg` · `protoss` · `night-elf` · `human`
 - **Shape:** 6/10/12 px radii, hard edges, no clipped corners
@@ -14,7 +14,7 @@ numbers, and state must be readable at a glance.
 - **Dependencies:** none (system sans/mono stacks, `color-mix()`)
 
 ```
-<html data-theme="systemcraft-hud" data-accent="horde" data-mode="dark">
+<html data-theme="moderncraft-hud" data-accent="horde" data-mode="dark">
 <link rel="stylesheet" href="theme.css">
 ```
 
@@ -260,7 +260,7 @@ No scanlines, no glow, no grain, no vignette.
 The six presets are complete palettes. A host can also re-point:
 
 ```css
-[data-theme="systemcraft-hud"] {
+[data-theme="moderncraft-hud"] {
   --acc: #your-accent;
   --acc-tone: #your-fill;
   --acc-soft: #your-deep;
@@ -278,7 +278,7 @@ independently; keep them as text + border + tint.
 ## Files
 
 ```
-systemcraft-hud/
+moderncraft-hud/
   DESIGN.md       this spec
   theme.css       tokens + base + starter components
   tokens.json     DTCG tokens (primitive → semantic)

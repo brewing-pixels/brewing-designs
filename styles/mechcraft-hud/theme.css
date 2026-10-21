@@ -1,11 +1,10 @@
 /* ============================================================
-   centercraft-hud
+   mechcraft-hud
    A command-console HUD: layered metal, recessed black screens,
-   one command accent (amber or lime), cyan holo secondary.
-   Dark + light. Two variants.
+   amber/cyan command accent, cyan holo secondary. Dark + light.
 
    Usage:
-     <html data-theme="centercraft-hud" data-variant="amber" data-mode="dark">
+     <html data-theme="mechcraft-hud" data-mode="dark">
      <link rel="stylesheet" href="theme.css">
 
    Brand-neutral. No game logos, portraits, screenshots or fonts
@@ -28,7 +27,7 @@
   font-display: swap;
 }
 
-[data-theme="centercraft-hud"] {
+[data-theme="mechcraft-hud"] {
   --f-display: "Saira Condensed", "Arial Narrow", "Roboto Condensed",
     system-ui, sans-serif;
   --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -53,7 +52,7 @@
     0 0 22px color-mix(in srgb, var(--cc-cyan) 7%, transparent);
 }
 
-[data-theme="centercraft-hud"][data-variant="amber"][data-mode="dark"] {
+[data-theme="mechcraft-hud"][data-mode="dark"] {
   --bg: #070a0c;
   --bg-2: #0d1215;
   --surface: #141b1f;
@@ -92,7 +91,7 @@
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
 }
 
-[data-theme="centercraft-hud"][data-variant="amber"][data-mode="light"] {
+[data-theme="mechcraft-hud"][data-mode="light"] {
   --bg: #e7e4dc;
   --bg-2: #f2efe7;
   --surface: #eeeae1;
@@ -129,84 +128,6 @@
   --sheen: rgba(255, 255, 255, 0.48);
   --scrim: rgba(30, 26, 20, 0.45);
   --shadow: 0 20px 50px rgba(50, 40, 20, 0.18);
-}
-
-[data-theme="centercraft-hud"][data-variant="lime"][data-mode="dark"] {
-  --bg: #070b06;
-  --bg-2: #0d130b;
-  --surface: #141d11;
-  --surface-card: #0a1008;
-  --surface-2: #1e2a19;
-  --surface-3: #293721;
-  --line: #40523a;
-  --line-2: #60795a;
-  --card-line: #1e2b1a;
-  --card-track: #050904;
-  --ink: #e4eedc;
-  --ink-2: #b6c6ad;
-  --mut: #82947a;
-  --acc: #b6f34a;
-  --acc-tone: #9ad43c;
-  --acc-soft: #4f6b1f;
-  --acc-line: #7daa3a;
-  --acc-ink: #0d1605;
-  --cc-cyan: #63d4e4;
-  --cc-cyan-deep: #1e6672;
-  --cc-bezel: #4a5842;
-  --cc-bezel-2: #293720;
-  --cc-hi: #93a68b;
-  --cc-gold: #b7b06e;
-  --good: #7bd88f;
-  --good-ink: #07120b;
-  --warn: #d8d05a;
-  --bad: #e45c50;
-  --info: #63d4e4;
-  --n1: #d0a6ff;
-  --n2: #ff8f8f;
-  --n3: #ffab6b;
-  --n4: #ffdc5c;
-  --sheen: rgba(255, 255, 255, 0.04);
-  --scrim: rgba(2, 6, 3, 0.8);
-  --shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
-}
-
-[data-theme="centercraft-hud"][data-variant="lime"][data-mode="light"] {
-  --bg: #e7ece3;
-  --bg-2: #f2f6ef;
-  --surface: #eef3eb;
-  --surface-card: #fbfdf8;
-  --surface-2: #e3e9df;
-  --surface-3: #d7dfd2;
-  --line: #b5c1ae;
-  --line-2: #8d9c86;
-  --card-line: #d3ddcd;
-  --card-track: #e7ede2;
-  --ink: #121a0f;
-  --ink-2: #3e4b39;
-  --mut: #6a7764;
-  --acc: #3f6212;
-  --acc-tone: #84cc16;
-  --acc-soft: #4f6b1f;
-  --acc-line: #6f8f3a;
-  --acc-ink: #0d1605;
-  --cc-cyan: #0f6672;
-  --cc-cyan-deep: #0b4b55;
-  --cc-bezel: #aab6a2;
-  --cc-bezel-2: #d3ddcd;
-  --cc-hi: #ffffff;
-  --cc-gold: #7e762e;
-  --good: #047857;
-  --good-ink: #ffffff;
-  --warn: #92400e;
-  --bad: #b91c1c;
-  --info: #0f6672;
-  --n1: #7e22ce;
-  --n2: #b91c1c;
-  --n3: #9a3412;
-  --n4: #854d0e;
-  --sheen: rgba(255, 255, 255, 0.5);
-  --scrim: rgba(24, 30, 20, 0.45);
-  --shadow: 0 20px 50px rgba(35, 45, 25, 0.18);
 }
 
 /* ------------------------------------------------------------ base */
