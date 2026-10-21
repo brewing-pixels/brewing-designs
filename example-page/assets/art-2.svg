@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Abstract warm poster specimen with orange disc and violet triangle">
+  <rect width="800" height="500" fill="#f0dcc0"/>
+  <circle cx="612" cy="176" r="126" fill="#e8600a"/>
+  <rect x="60" y="66" width="286" height="24" fill="#1a0800"/>
+  <rect x="60" y="102" width="186" height="10" fill="#1a0800"/>
+  <path d="M60 442 L268 276 L438 442 Z" fill="#8578a8"/>
+  <rect x="60" y="372" width="240" height="8" fill="#1a0800" opacity=".85"/>
+  <rect x="60" y="390" width="160" height="8" fill="#1a0800" opacity=".5"/>
+  <g stroke="#1a0800" stroke-width="3">
+    <line x1="500" y1="330" x2="700" y2="330"/>
+    <line x1="500" y1="352" x2="650" y2="352"/>
+    <line x1="500" y1="374" x2="690" y2="374"/>
+  </g>
+  <circle cx="612" cy="176" r="32" fill="#f0dcc0"/>
+</svg>

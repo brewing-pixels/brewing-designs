@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Abstract dark specimen with cyan orbital lines">
+  <rect width="800" height="500" fill="#0e151b"/>
+  <g fill="none" stroke="#3fd0e6">
+    <circle cx="590" cy="210" r="150" opacity=".34" stroke-width="2"/>
+    <circle cx="590" cy="210" r="112" opacity=".22"/>
+    <circle cx="590" cy="210" r="70" opacity=".16"/>
+    <path d="M0 410 L180 330 L350 360 L540 230 L800 280" opacity=".28" stroke-width="2"/>
+  </g>
+  <path d="M0 410 L180 330 L350 360 L540 230 L800 280 L800 500 L0 500Z" fill="#3fd0e6" opacity=".12"/>
+  <rect x="64" y="70" width="176" height="12" fill="#3fd0e6"/>
+  <rect x="64" y="94" width="104" height="6" fill="#6b8299"/>
+  <rect x="64" y="112" width="132" height="6" fill="#6b8299" opacity=".7"/>
+  <circle cx="590" cy="210" r="9" fill="#f2a23b"/>
+  <path d="M590 210 L726 132" stroke="#f2a23b" stroke-width="2" opacity=".7"/>
+  <circle cx="726" cy="132" r="4" fill="#f2a23b"/>
+  <g fill="#dbeaf5" opacity=".5">
+    <rect x="64" y="420" width="48" height="3"/>
+    <rect x="120" y="420" width="24" height="3" opacity=".5"/>
+    <rect x="152" y="420" width="64" height="3" opacity=".3"/>
+  </g>
+</svg>

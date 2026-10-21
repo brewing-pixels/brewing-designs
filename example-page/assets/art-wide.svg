@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500" role="img" aria-label="Wide dark abstract specimen with layered bands and a cyan ring">
+  <rect width="1200" height="500" fill="#0d1420"/>
+  <rect width="420" height="500" fill="#111b2a"/>
+  <g fill="none" stroke="#3fd0e6">
+    <circle cx="210" cy="250" r="152" opacity=".42" stroke-width="2"/>
+    <circle cx="210" cy="250" r="96" opacity=".25"/>
+    <circle cx="210" cy="250" r="42" opacity=".14"/>
+  </g>
+  <rect x="520" y="86" width="600" height="16" fill="#3fd0e6" opacity=".85"/>
+  <rect x="520" y="118" width="360" height="7" fill="#6b8299" opacity=".7"/>
+  <rect x="520" y="136" width="470" height="7" fill="#6b8299" opacity=".45"/>
+  <g fill="#f2a23b" opacity=".8">
+    <rect x="520" y="206" width="24" height="24"/>
+    <rect x="556" y="206" width="24" height="24" opacity=".55"/>
+    <rect x="592" y="206" width="24" height="24" opacity=".3"/>
+  </g>
+  <path d="M520 400 L700 300 L850 340 L1030 240 L1200 300 L1200 500 L520 500Z" fill="#3fd0e6" opacity=".1"/>
+  <path d="M520 400 L700 300 L850 340 L1030 240 L1200 300" fill="none" stroke="#3fd0e6" stroke-width="2" opacity=".5"/>
+  <circle cx="1030" cy="240" r="6" fill="#f2a23b"/>
+</svg>

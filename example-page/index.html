@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="en" data-theme="neon-hud" data-mode="dark" data-orn="css">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="A single specimen page for every style in the design library: four switchable themes, live tokens, contrast checks and complete HTML element coverage.">
+  <meta name="theme-color" content="#070b0f" id="meta-theme">
+  <title>Designs — style showcase</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Russo+One&display=swap" rel="stylesheet">
+
+  <script src="showcase-config.js"></script>
+  <script>
+    (() => {
+      const sections = ["overview", "typography", "components", "forms", "data", "media", "tokens"];
+      const hash = location.hash.slice(1);
+      if (sections.includes(hash)) {
+        window.__initialSection = hash;
+        try {
+          history.replaceState(null, "", location.pathname + location.search);
+        } catch (error) {
+          /* file:// — keep the hash; the tab still activates below */
+        }
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="../styles/neon-hud/theme.css" media="all" data-theme-css="neon-hud">
+  <link rel="stylesheet" href="../styles/soviet-poster/theme.css" media="not all" data-theme-css="soviet-poster">
+  <link rel="stylesheet" href="../styles/moderncraft-hud/theme.css" media="not all" data-theme-css="moderncraft-hud">
+  <link rel="stylesheet" href="../styles/mechcraft-hud/theme.css" media="not all" data-theme-css="mechcraft-hud">
+  <script>showcaseBootstrap();</script>
+  <link rel="stylesheet" href="showcase.css">
+  <script src="showcase.js" defer></script>
+</head>
+<body>
+<div class="poster-bg" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="tri"></span></div>
+
+<div class="ds-app">
+  <header class="ds-header">
+    <div class="ds-bar">
+      <a class="ds-brand" href="#overview" aria-label="Design showcase — overview">
+        <svg class="ds-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <path d="M16 2.5l11.7 6.8v13.4L16 29.5 4.3 22.7V9.3z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M16 9l6.2 3.6v6.8L16 23l-6.2-3.6v-6.8z" fill="currentColor" opacity=".28"/>
+          <circle cx="16" cy="16" r="2" fill="currentColor"/>
+        </svg>
+        <span><strong>designs</strong><small>style showcase</small></span>
+      </a>
+
+      <div class="ds-style-tabs" role="group" aria-label="Design style">
+        <button type="button" data-style-choice="neon-hud" aria-pressed="true"><span class="ds-dot" style="--dot:#3fd0e6" aria-hidden="true"></span>neon-hud</button>
+        <button type="button" data-style-choice="soviet-poster" aria-pressed="false"><span class="ds-dot" style="--dot:#e8600a" aria-hidden="true"></span>soviet-poster</button>
+        <button type="button" data-style-choice="moderncraft-hud" aria-pressed="false"><span class="ds-dot" style="--dot:#b6f34a" aria-hidden="true"></span>moderncraft-hud</button>
+        <button type="button" data-style-choice="mechcraft-hud" aria-pressed="false"><span class="ds-dot" style="--dot:#f2a23b" aria-hidden="true"></span>mechcraft-hud</button>
+      </div>
+
+      <div class="ds-tools">
+        <div class="ds-seg" role="group" aria-label="Colour mode">
+          <button type="button" data-mode-choice="dark" aria-pressed="true">Dark</button>
+          <button type="button" data-mode-choice="light" aria-pressed="false">Light</button>
+        </div>
+        <button class="ds-btn small" type="button" id="copy-link">Copy link</button>
+      </div>
+    </div>
+
+    <div class="ds-options" role="group" aria-label="Style options">
+      <div class="ds-opt" data-opt="choice" hidden>
+        <span class="ds-opt-label" id="choice-label">Accent</span>
+        <div class="ds-swatches" id="choice-options" role="group" aria-labelledby="choice-label"></div>
+      </div>
+      <div class="ds-opt" data-opt="orn">
+        <span class="ds-opt-label" id="orn-label">Ornaments</span>
+        <div class="ds-seg" role="group" aria-labelledby="orn-label">
+          <button type="button" data-orn-choice="css" aria-pressed="true">CSS</button>
+          <button type="button" data-orn-choice="art" aria-pressed="false">Art</button>
+          <button type="button" data-orn-choice="minimal" aria-pressed="false">Minimal</button>
+        </div>
+      </div>
+      <span class="ds-style-note" id="style-note">dark + light · 3 ornament modes</span>
+    </div>
+
+    <nav class="ds-tabbar" aria-label="Showcase sections">
+      <div class="ds-tablist" role="tablist" aria-label="Showcase sections" data-tabgroup="sections">
+        <button role="tab" id="tab-overview" aria-controls="overview" aria-selected="true" tabindex="0">Overview</button>
+        <button role="tab" id="tab-typography" aria-controls="typography" aria-selected="false" tabindex="-1">Typography</button>
+        <button role="tab" id="tab-components" aria-controls="components" aria-selected="false" tabindex="-1">Components</button>
+        <button role="tab" id="tab-forms" aria-controls="forms" aria-selected="false" tabindex="-1">Forms</button>
+        <button role="tab" id="tab-data" aria-controls="data" aria-selected="false" tabindex="-1">Data</button>
+        <button role="tab" id="tab-media" aria-controls="media" aria-selected="false" tabindex="-1">Media</button>
+        <button role="tab" id="tab-tokens" aria-controls="tokens" aria-selected="false" tabindex="-1">Tokens</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="ds-main" id="main">
+    <noscript>
+      <div class="ds-alert is-warn" role="note">
+        <div><strong>JavaScript is off</strong>Style switching, token readouts and the interactive specimens are inactive. The page still renders the default neon-hud style and all content.</div>
+      </div>
+    </noscript>
+
+    <!-- ============================================================
+         OVERVIEW
+         ============================================================ -->
+    <section class="ds-section" role="tabpanel" id="overview" aria-labelledby="tab-overview" tabindex="0">
+      <div class="ds-hero">
+        <div class="ds-hero-main">
+          <span class="ds-kicker">Design library · specimen page</span>
+          <hgroup>
+            <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+            <p class="ds-lead">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </hgroup>
+          <div class="ds-actions">
+            <button class="ds-btn primary" type="button" data-demo-toast="Primary action — specimen only.">Primary action</button>
+            <button class="ds-btn" type="button" data-tab-target="components">See components</button>
+            <button class="ds-btn ghost" type="button" data-dialog-open="specimen-dialog">Open dialog</button>
+          </div>
+          <p class="ds-hero-note">Currently viewing <strong id="hero-style">neon-hud</strong> · <span id="hero-mode">dark</span> · <span id="hero-choice">3 ornament modes</span>. <a href="#tokens">Inspect the tokens →</a></p>
+        </div>
+
+        <aside class="ds-hero-side" aria-label="Active style">
+          <figure class="ds-stylecard ds-card">
+            <img id="style-preview" src="../styles/neon-hud/preview.png" alt="Preview of neon-hud" width="640" height="400">
+            <figcaption>
+              <span class="ds-kicker" id="style-tagline">Sci-fi tactical HUD</span>
+              <h2 id="style-name">neon-hud</h2>
+              <p id="style-desc">Deep space-blue neutrals, one cyan chrome, clipped 45° corners, scanline texture and reticle ornaments. Dark-first, with a light variant and three ornament modes.</p>
+              <dl class="ds-facts">
+                <div><dt>Modes</dt><dd id="style-modes">dark · light</dd></div>
+                <div><dt>Extras</dt><dd id="style-extras">3 ornament modes</dd></div>
+              </dl>
+              <div class="ds-row">
+                <a class="ds-link" id="style-design" href="../styles/neon-hud/DESIGN.md">DESIGN.md →</a>
+                <a class="ds-link" id="style-demo" href="../styles/neon-hud/demo.html">Standalone demo →</a>
+              </div>
+            </figcaption>
+          </figure>
+        </aside>
+      </div>
+
+      <div class="ds-kpis">
+        <div class="ds-stat">
+          <div class="ds-stat-label">Elements</div>
+          <div class="ds-stat-value" id="kpi-elements">113</div>
+          <div class="ds-stat-sub">covered in this specimen</div>
+        </div>
+        <div class="ds-stat">
+          <div class="ds-stat-label">Styles</div>
+          <div class="ds-stat-value">4</div>
+          <div class="ds-stat-sub">one page · instant switch</div>
+        </div>
+        <div class="ds-stat">
+          <div class="ds-stat-label">Presets</div>
+          <div class="ds-stat-value">8</div>
+          <div class="ds-stat-sub">accent presets</div>
+        </div>
+        <div class="ds-stat">
+          <div class="ds-stat-label">Theme modes</div>
+          <div class="ds-stat-value">7</div>
+          <div class="ds-stat-sub">dark · light combinations</div>
+        </div>
+      </div>
+
+      <div class="ds-grid ds-grid-3">
+        <article class="ds-card">
+          <span class="ds-kicker">Lorem ipsum</span>
+          <h3>Dolor sit amet</h3>
+          <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <div class="ds-barrow" role="progressbar" aria-label="Build progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="72">
+            <span>Build</span><span class="ds-bar-track"><span style="width:72%"></span></span><span class="ds-barval">72%</span>
+          </div>
+          <div class="ds-row"><span class="ds-badge is-accent">poc done</span><span class="ds-badge">lorem</span></div>
+          <div class="ds-cardfoot"><div><b>Next:</b> consectetur adipiscing</div><div><b>Gate:</b> sed do eiusmod</div></div>
+        </article>
+
+        <article class="ds-card">
+          <span class="ds-kicker">Dolor sit</span>
+          <h3>Consectetur adipiscing</h3>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+          <div class="ds-barrow" role="progressbar" aria-label="Build progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="94">
+            <span>Build</span><span class="ds-bar-track"><span style="width:94%"></span></span><span class="ds-barval">94%</span>
+          </div>
+          <div class="ds-row"><span class="ds-badge is-good">done</span><span class="ds-badge is-info">live</span></div>
+          <div class="ds-cardfoot"><div><b>Next:</b> duis aute irure</div><div><b>Gate:</b> in reprehenderit</div></div>
+        </article>
+
+        <article class="ds-card">
+          <span class="ds-kicker">Sed do</span>
+          <h3>Eiusmod tempor</h3>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          <div class="ds-barrow" role="progressbar" aria-label="Build progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38">
+            <span>Build</span><span class="ds-bar-track"><span style="width:38%"></span></span><span class="ds-barval">38%</span>
+          </div>
+          <div class="ds-row"><span class="ds-badge is-warn">blocked</span><span class="ds-badge">parked</span></div>
+          <div class="ds-cardfoot"><div><b>Next:</b> excepteur sint</div><div><b>Gate:</b> occaecat cupidatat</div></div>
+        </article>
+      </div>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Console</h2><span>nested tabs</span></div>
+          <div class="ds-tabs" data-tabs>
+            <div class="ds-tablist" role="tablist" aria-label="Console panes">
+              <button role="tab" id="tab-console" aria-controls="pane-console" aria-selected="true" tabindex="0">Console</button>
+              <button role="tab" id="tab-logs" aria-controls="pane-logs" aria-selected="false" tabindex="-1">Logs</button>
+              <button role="tab" id="tab-config" aria-controls="pane-config" aria-selected="false" tabindex="-1">Config</button>
+            </div>
+            <div role="tabpanel" id="pane-console" aria-labelledby="tab-console">
+              <pre class="ds-log"><code><span class="is-good">[ok]</span>   lorem ipsum dolor sit amet
+<span class="is-good">[ok]</span>   consectetur adipiscing elit
+<span class="is-warn">[warn]</span> sed do eiusmod tempor
+<span class="is-good">[ok]</span>   incididunt ut labore et dolore
+<span class="is-bad">[fail]</span> magna aliqua ut enim ad minim
+<span class="is-good">[ok]</span>   veniam quis nostrud exercitation</code></pre>
+            </div>
+            <div role="tabpanel" id="pane-logs" aria-labelledby="tab-logs" hidden>
+              <p class="ds-note">Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+              <pre class="ds-log"><code>09:14:02  lorem.ipsum      start
+09:14:03  dolor.sit        ok
+09:14:04  amet.consectetur warn
+09:14:05  adipiscing.elit ok</code></pre>
+            </div>
+            <div role="tabpanel" id="pane-config" aria-labelledby="tab-config" hidden>
+              <dl class="ds-facts">
+                <div><dt>Mode</dt><dd>lorem</dd></div>
+                <div><dt>Seed</dt><dd>42</dd></div>
+                <div><dt>Steps</dt><dd>20</dd></div>
+                <div><dt>Scale</dt><dd>1.5</dd></div>
+              </dl>
+              <p class="ds-note" style="margin-top: 10px;"><code>lorem.ipsum({ dolor: true })</code></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Activity</h2><span>ol · time · avatar</span></div>
+          <ol class="ds-feed">
+            <li>
+              <span class="ds-avatar" aria-hidden="true">LI</span>
+              <div><p><strong>Lorem Ipsum</strong> dolor sit amet, consectetur adipiscing elit.</p><time datetime="2026-10-21T09:14:00Z">09:14 UTC</time></div>
+            </li>
+            <li>
+              <span class="ds-avatar" aria-hidden="true">DS</span>
+              <div><p><strong>Dolor Sit</strong> sed do eiusmod tempor incididunt ut labore.</p><time datetime="2026-10-21T08:42:00Z">08:42 UTC</time></div>
+            </li>
+            <li>
+              <span class="ds-avatar" aria-hidden="true">AC</span>
+              <div><p><strong>Amet Consectetur</strong> ut enim ad minim veniam, quis nostrud.</p><time datetime="2026-10-20T21:07:00Z">Yesterday</time></div>
+            </li>
+          </ol>
+          <div class="ds-avatars" aria-label="Participants">
+            <span class="ds-avatar" aria-hidden="true">LI</span>
+            <span class="ds-avatar" aria-hidden="true">DS</span>
+            <span class="ds-avatar" aria-hidden="true">AC</span>
+            <span class="ds-avatar" aria-hidden="true">+5</span>
+          </div>
+        </section>
+      </div>
+
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>All styles</h2><span>click a preview to switch</span></div>
+        <div class="ds-gallery-grid">
+          <button class="ds-gallery-item" type="button" data-style-choice="neon-hud" aria-pressed="true">
+            <img src="../styles/neon-hud/preview.png" alt="neon-hud preview" width="640" height="400" loading="lazy">
+            <span>neon-hud</span><small>Sci-fi tactical · dark + light</small>
+          </button>
+          <button class="ds-gallery-item" type="button" data-style-choice="soviet-poster" aria-pressed="false">
+            <img src="../styles/soviet-poster/preview.png" alt="soviet-poster preview" width="640" height="400" loading="lazy">
+            <span>soviet-poster</span><small>Cell-shaded poster · light</small>
+          </button>
+          <button class="ds-gallery-item" type="button" data-style-choice="moderncraft-hud" aria-pressed="false">
+            <img src="../styles/moderncraft-hud/preview.png" alt="moderncraft-hud preview" width="640" height="400" loading="lazy">
+            <span>moderncraft-hud</span><small>Industrial metallic · 6 accents</small>
+          </button>
+          <button class="ds-gallery-item" type="button" data-style-choice="mechcraft-hud" aria-pressed="false">
+            <img src="../styles/mechcraft-hud/preview.png" alt="mechcraft-hud preview" width="640" height="400" loading="lazy">
+            <span>mechcraft-hud</span><small>Command console · amber/cyan</small>
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <!-- ============================================================
+         TYPOGRAPHY
+         ============================================================ -->
+    <section class="ds-section" role="tabpanel" id="typography" aria-labelledby="tab-typography" tabindex="0" hidden>
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>Heading scale</h2><span>h1–h6</span></div>
+        <div class="ds-hstack">
+          <div class="ds-hrow"><span class="ds-token">h1</span><h1>Lorem ipsum dolor sit amet</h1><span class="ds-size" data-size-for="h1"></span></div>
+          <div class="ds-hrow"><span class="ds-token">h2</span><h2>Consectetur adipiscing elit</h2><span class="ds-size" data-size-for="h2"></span></div>
+          <div class="ds-hrow"><span class="ds-token">h3</span><h3>Sed do eiusmod tempor</h3><span class="ds-size" data-size-for="h3"></span></div>
+          <div class="ds-hrow"><span class="ds-token">h4</span><h4>Incididunt ut labore</h4><span class="ds-size" data-size-for="h4"></span></div>
+          <div class="ds-hrow"><span class="ds-token">h5</span><h5>Et dolore magna aliqua</h5><span class="ds-size" data-size-for="h5"></span></div>
+          <div class="ds-hrow"><span class="ds-token">h6</span><h6>Ut enim ad minim veniam</h6><span class="ds-size" data-size-for="h6"></span></div>
+        </div>
+      </section>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Inline semantics</h2><span>prose</span></div>
+          <div class="ds-prose">
+            <p>Lorem <strong>ipsum dolor sit amet</strong>, <em>consectetur adipiscing</em> elit, sed do <b>eiusmod</b> tempor <i>incididunt</i> ut <u>labore et dolore</u> magna <small>aliqua</small>. <mark>Ut enim ad minim veniam</mark>, quis nostrud <abbr title="HyperText Markup Language">HTML</abbr> exercitation ullamco <dfn title="Lorem ipsum">lorem ipsum</dfn> laboris nisi ut <a href="#tokens">aliquip ex ea</a> commodo consequat. Duis aute irure dolor in <cite>reprehenderit</cite> in voluptate velit esse <q cite="https://example.com/lorem">cillum dolore eu fugiat</q> nulla pariatur.</p>
+            <p>Excepteur <code>sint occaecat</code> cupidatat non proident, sunt in culpa qui <kbd>Ctrl</kbd> + <kbd>K</kbd> officia deserunt <samp>mollit anim id est laborum</samp>. Press <var>x</var> = <data value="42">42</data> at <time datetime="2026-10-21T09:14:00Z">09:14 UTC</time>, <del datetime="2026-10-20">old value</del> <ins datetime="2026-10-21">new value</ins>, H<sub>2</sub>O and E = mc<sup>2</sup>; <s>superseded</s>.</p>
+            <p><bdi>مرحبا</bdi> · <bdo dir="rtl">Lorem ipsum</bdo> · <ruby>漢<rp>(</rp><rt>kan</rt><rp>)</rp></ruby> · a long token: <span>https://example.com/<wbr>lorem/<wbr>ipsum-dolor-sit-amet</span> · <span>a plain span</span>.<br>Second line after a <code>&lt;br&gt;</code>.</p>
+            <p>Links: <a href="#overview">internal anchor</a>, <a href="mailto:lorem@example.com">mailto</a>, <a href="tel:+38970000000">tel</a>. Keyboard focus follows the same ring as every other control.</p>
+          </div>
+        </section>
+
+        <aside class="ds-panel">
+          <div class="ds-panelhead"><h2>Quote &amp; citation</h2><span>blockquote · cite</span></div>
+          <figure class="ds-quote">
+            <blockquote cite="https://example.com/lorem"><p>“Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.”</p></blockquote>
+            <figcaption>— Lorem Ipsum, <cite>De Finibus Bonorum et Malorum</cite></figcaption>
+          </figure>
+          <h3 style="margin-top: var(--s4);">Definition list</h3>
+          <dl class="ds-facts">
+            <div><dt>Lorem</dt><dd>ipsum dolor sit amet</dd></div>
+            <div><dt>Dolor</dt><dd>consectetur adipiscing</dd></div>
+            <div><dt>Sed do</dt><dd>eiusmod tempor</dd></div>
+            <div><dt>Labore</dt><dd>et dolore magna</dd></div>
+          </dl>
+          <h3 style="margin-top: var(--s4);">Address</h3>
+          <address>Lorem Ipsum<br>42 Consectetur Street<br>Dolor Sit, Amet 1000</address>
+          <hr>
+          <p class="ds-note">Lorem ipsum dolor sit amet — the definition list above is a real <code>&lt;dl&gt;</code>, not a table.</p>
+        </aside>
+      </div>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Lists</h2><span>ul · ol · menu</span></div>
+          <div class="ds-grid ds-grid-2">
+            <div>
+              <h3>Unordered</h3>
+              <ul>
+                <li>Lorem ipsum dolor</li>
+                <li>Consectetur adipiscing
+                  <ul><li>Sed do eiusmod</li><li>Tempor incididunt</li></ul>
+                </li>
+                <li>Ut labore et dolore</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Ordered</h3>
+              <ol start="3" reversed>
+                <li value="5">Magna aliqua</li>
+                <li>Ut enim ad minim</li>
+                <li>Quis nostrud</li>
+              </ol>
+            </div>
+          </div>
+          <h3 style="margin-top: var(--s4);">Menu</h3>
+          <menu class="ds-menu">
+            <li><button type="button" data-demo-toast="Lorem ipsum action.">Lorem ipsum</button></li>
+            <li><button type="button" data-demo-toast="Dolor sit action.">Dolor sit amet</button></li>
+            <li><button type="button" data-demo-toast="Consectetur action.">Consectetur adipiscing</button></li>
+          </menu>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Code &amp; keys</h2><span>pre · code · kbd</span></div>
+          <pre><code>function lorem(ipsum) {
+  const dolor = sit.amet({
+    consectetur: true,
+    adipiscing: "elit",
+  });
+  return dolor?.tempor ?? "incididunt";
+}
+
+// A deliberately long line to demonstrate horizontal overflow: lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</code></pre>
+          <p class="ds-note" style="margin-top: 10px;">Inline <code>dolor.sit()</code>, output <samp>lorem: ok</samp>, variable <var>ipsum</var>, keys <kbd>Ctrl</kbd> + <kbd>K</kbd>.</p>
+        </section>
+      </div>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>State text</h2><span>mark · del · ins</span></div>
+          <p style="line-height: 1.9;">Lorem <mark>ipsum dolor</mark> sit <del datetime="2026-10-20">amet</del> <ins datetime="2026-10-21">consectetur</ins> adipiscing elit. Water is H<sub>2</sub>O and the equation is E = mc<sup>2</sup>. <small>This is small print.</small> <s>Duis aute irure</s> dolor in reprehenderit.</p>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Math &amp; ruby</h2><span>math · ruby</span></div>
+          <math display="block" aria-label="E equals m c squared">
+            <mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup>
+          </math>
+          <p style="margin-top: var(--s3);">Japanese ruby: <ruby>漢<rp>(</rp><rt>kan</rt><rp>)</rp></ruby> <ruby>字<rp>(</rp><rt>ji</rt><rp>)</rp></ruby>. Bi-directional text: <bdi>مرحبا بالعالم</bdi>.</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         COMPONENTS
+         ============================================================ -->
+    <section class="ds-section" role="tabpanel" id="components" aria-labelledby="tab-components" tabindex="0" hidden>
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>Buttons</h2><span>variants · states</span></div>
+        <div class="ds-row">
+          <button class="ds-btn primary" type="button" data-demo-toast="Primary button.">Primary</button>
+          <button class="ds-btn" type="button" data-demo-toast="Secondary button.">Secondary</button>
+          <button class="ds-btn ghost" type="button" data-demo-toast="Ghost button.">Ghost</button>
+          <button class="ds-btn danger" type="button" data-demo-toast="Danger button.">Danger</button>
+          <button class="ds-btn small" type="button" data-demo-toast="Small button.">Small</button>
+          <button class="ds-btn" type="button" disabled>Disabled</button>
+          <button class="ds-btn" type="button" aria-busy="true"><span class="ds-spinner" aria-hidden="true"></span> Loading</button>
+          <button class="ds-btn icon" type="button" aria-label="Add lorem">
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2v12M2 8h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="ds-row" style="margin-top: var(--s3);">
+          <button type="button" data-demo-toast="Raw button.">Raw button</button>
+          <button type="button" disabled>Raw disabled</button>
+          <a class="ds-btn ghost" href="#overview">Link as button</a>
+          <span class="ds-note">Raw elements are styled by the same token layer.</span>
+        </div>
+      </section>
+
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>Tags &amp; status</h2><span>chips · badges · lamps</span></div>
+        <div class="ds-chips" role="group" aria-label="Filter chips">
+          <button class="ds-chip active" type="button" data-chip aria-pressed="true">Active</button>
+          <button class="ds-chip" type="button" data-chip aria-pressed="false">Open</button>
+          <button class="ds-chip" type="button" data-chip aria-pressed="false">Gated</button>
+          <button class="ds-chip" type="button" data-chip aria-pressed="false">Archived</button>
+        </div>
+        <div class="ds-row" style="margin-top: var(--s3);">
+          <span class="ds-badge">lorem</span>
+          <span class="ds-badge is-good">done</span>
+          <span class="ds-badge is-warn">blocked</span>
+          <span class="ds-badge is-bad">overdue</span>
+          <span class="ds-badge is-info">info</span>
+          <span class="ds-badge is-accent">accent</span>
+          <span class="ds-lamp">live</span>
+          <span class="ds-lamp is-warn">degraded</span>
+          <span class="ds-lamp is-bad">down</span>
+          <span class="ds-lamp is-idle">idle</span>
+        </div>
+        <div class="ds-row" style="margin-top: var(--s4);">
+          <div class="ds-avatars" aria-label="Participants">
+            <span class="ds-avatar" aria-hidden="true">LI</span>
+            <span class="ds-avatar" aria-hidden="true">DS</span>
+            <span class="ds-avatar" aria-hidden="true">AC</span>
+            <span class="ds-avatar" aria-hidden="true">+5</span>
+          </div>
+          <nav class="ds-breadcrumb" aria-label="Breadcrumb">
+            <a href="#overview">lorem</a><span aria-hidden="true">/</span>
+            <a href="#components">ipsum</a><span aria-hidden="true">/</span>
+            <span aria-current="page">dolor</span>
+          </nav>
+          <span class="ds-spacer"></span>
+          <nav class="ds-pagination" aria-label="Pagination example">
+            <button class="ds-btn" type="button" aria-label="Previous page">‹</button>
+            <button class="ds-btn" type="button" aria-current="page">1</button>
+            <button class="ds-btn" type="button">2</button>
+            <button class="ds-btn" type="button">3</button>
+            <button class="ds-btn" type="button" aria-label="Next page">›</button>
+          </nav>
+        </div>
+      </section>
+
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>Alerts</h2><span>info · good · warn · bad</span></div>
+        <div class="ds-grid ds-grid-2">
+          <div class="ds-alert"><div><strong>Lorem ipsum</strong>Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div></div>
+          <div class="ds-alert is-good"><div><strong>Consectetur adipiscing</strong>Ut enim ad minim veniam, quis nostrud exercitation ullamco.</div></div>
+          <div class="ds-alert is-warn"><div><strong>Sed do eiusmod</strong>Duis aute irure dolor in reprehenderit in voluptate velit.</div></div>
+          <div class="ds-alert is-bad"><div><strong>Tempor incididunt</strong>Excepteur sint occaecat cupidatat non proident, sunt in culpa.</div></div>
+        </div>
+      </section>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Accordion</h2><span>details · summary</span></div>
+          <div class="ds-accordion">
+            <details open>
+              <summary>Lorem ipsum dolor sit amet?</summary>
+              <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </details>
+            <details>
+              <summary>Ut enim ad minim veniam?</summary>
+              <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </details>
+            <details>
+              <summary>Duis aute irure dolor?</summary>
+              <p>In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Overlays</h2><span>dialog · toast · tooltip</span></div>
+          <div class="ds-actions" style="margin-top: 0;">
+            <button class="ds-btn primary" type="button" data-dialog-open="specimen-dialog">Open dialog</button>
+            <button class="ds-btn" type="button" data-demo-toast="Lorem ipsum toast — three seconds.">Show toast</button>
+          </div>
+          <p class="ds-note" style="margin-top: var(--s3);">Hover or focus <span class="ds-tip" tabindex="0" aria-describedby="tip-lorem" data-tip="Consectetur adipiscing elit.">dolor sit amet</span> for a CSS tooltip.</p>
+          <span class="ds-sr-only" id="tip-lorem">Consectetur adipiscing elit, sed do eiusmod tempor incididunt.</span>
+        </section>
+      </div>
+
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>Component states</h2><span>tabs · empty · loading</span></div>
+        <div class="ds-tabs" data-tabs>
+          <div class="ds-tablist" role="tablist" aria-label="Component states">
+            <button role="tab" id="tab-state-default" aria-controls="state-default" aria-selected="true" tabindex="0">Default</button>
+            <button role="tab" id="tab-state-empty" aria-controls="state-empty" aria-selected="false" tabindex="-1">Empty</button>
+            <button role="tab" id="tab-state-loading" aria-controls="state-loading" aria-selected="false" tabindex="-1">Loading</button>
+          </div>
+          <div role="tabpanel" id="state-default" aria-labelledby="tab-state-default">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+            <div class="ds-row" style="margin-top: var(--s3);">
+              <span class="ds-badge is-good">ready</span>
+              <span class="ds-badge">lorem</span>
+            </div>
+          </div>
+          <div role="tabpanel" id="state-empty" aria-labelledby="tab-state-empty" hidden>
+            <div class="ds-empty">
+              <strong>Lorem ipsum is empty</strong>
+              <p>Duis aute irure dolor in reprehenderit. Add a specimen to continue.</p>
+              <button class="ds-btn primary" type="button" data-demo-toast="Lorem ipsum created.">Create specimen</button>
+            </div>
+          </div>
+          <div role="tabpanel" id="state-loading" aria-labelledby="tab-state-loading" hidden>
+            <div class="ds-row" style="margin-bottom: var(--s3);">
+              <span class="ds-spinner" role="status" aria-label="Loading"></span>
+              <span class="ds-note">Lorem ipsum loading…</span>
+            </div>
+            <div class="ds-skeleton is-wide" style="margin-bottom: 8px;"></div>
+            <div class="ds-skeleton is-mid" style="margin-bottom: 8px;"></div>
+            <div class="ds-skeleton is-wide"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Search</h2><span>search element</span></div>
+          <search>
+            <form class="ds-search" id="search-form">
+              <label class="ds-sr-only" for="search-input">Search the specimen</label>
+              <input id="search-input" name="q" type="search" placeholder="Lorem ipsum…">
+              <button class="ds-btn primary" type="submit">Search</button>
+            </form>
+          </search>
+          <p class="ds-note" style="margin-top: 8px;">A real <code>&lt;search&gt;</code> landmark wrapping a form; submit is a demo.</p>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Actions menu</h2><span>menu element</span></div>
+          <menu class="ds-menu">
+            <li><button type="button" data-demo-toast="Lorem ipsum action.">Lorem ipsum</button></li>
+            <li><button type="button" data-demo-toast="Dolor sit action.">Dolor sit amet</button></li>
+            <li><button type="button" data-demo-toast="Consectetur action.">Consectetur adipiscing</button></li>
+          </menu>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FORMS
+         ============================================================ -->
+    <section class="ds-section" role="tabpanel" id="forms" aria-labelledby="tab-forms" tabindex="0" hidden>
+      <form class="ds-panel" id="demo-form" novalidate>
+        <div class="ds-formhead">
+          <h2>Lorem ipsum application</h2>
+          <p>Fields marked <span class="ds-req">*</span> are required. Submitting is a demo.</p>
+        </div>
+        <div class="ds-alert is-bad" id="form-status" role="alert" hidden></div>
+
+        <fieldset class="ds-fieldset">
+          <legend>Identity</legend>
+          <div class="ds-formgrid">
+            <div class="ds-field">
+              <label for="f-name">Full name <span class="ds-req">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Lorem Ipsum" required minlength="2" aria-describedby="f-name-help f-name-error">
+              <p class="ds-help" id="f-name-help">Ut enim ad minim veniam, quis nostrud.</p>
+              <p class="ds-error" id="f-name-error" hidden></p>
+            </div>
+            <div class="ds-field">
+              <label for="f-email">Email <span class="ds-req">*</span></label>
+              <input id="f-email" name="email" type="email" autocomplete="email" placeholder="lorem@example.com" required aria-describedby="f-email-error">
+              <p class="ds-error" id="f-email-error" hidden></p>
+            </div>
+            <div class="ds-field">
+              <label for="f-phone">Phone</label>
+              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+389 70 000 000" pattern="[+0-9 ()-]{6,}">
+            </div>
+            <div class="ds-field">
+              <label for="f-url">Website</label>
+              <input id="f-url" name="url" type="url" placeholder="https://example.com">
+            </div>
+            <div class="ds-field">
+              <label for="f-search">Search</label>
+              <input id="f-search" name="search" type="search" placeholder="Lorem ipsum…">
+            </div>
+            <div class="ds-field">
+              <label for="f-pass">Password</label>
+              <div class="ds-inputgroup">
+                <input id="f-pass" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="••••••••">
+                <button class="ds-btn small" type="button" id="toggle-pass" aria-controls="f-pass" aria-pressed="false">Show</button>
+              </div>
+            </div>
+            <div class="ds-field">
+              <label for="f-number">Number</label>
+              <input id="f-number" name="number" type="number" min="0" max="100" step="1" value="42">
+            </div>
+            <div class="ds-field">
+              <label for="f-date">Date</label>
+              <input id="f-date" name="date" type="date" value="2026-10-21">
+            </div>
+            <div class="ds-field">
+              <label for="f-time">Time</label>
+              <input id="f-time" name="time" type="time" value="09:30">
+            </div>
+            <div class="ds-field">
+              <label for="f-datetime">Date &amp; time</label>
+              <input id="f-datetime" name="datetime" type="datetime-local" value="2026-10-21T09:30">
+            </div>
+            <div class="ds-field">
+              <label for="f-month">Month</label>
+              <input id="f-month" name="month" type="month" value="2026-10">
+            </div>
+            <div class="ds-field">
+              <label for="f-week">Week</label>
+              <input id="f-week" name="week" type="week" value="2026-W43">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="ds-fieldset">
+          <legend>Details</legend>
+          <div class="ds-formgrid">
+            <div class="ds-field">
+              <label for="f-select">Select</label>
+              <select id="f-select" name="select">
+                <optgroup label="Lorem">
+                  <option>Dolor sit</option>
+                  <option>Amet consectetur</option>
+                </optgroup>
+                <optgroup label="Ipsum">
+                  <option>Adipiscing elit</option>
+                  <option>Sed do eiusmod</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="ds-field">
+              <label for="f-datalist">Datalist</label>
+              <input id="f-datalist" name="datalist" list="lorem-list" placeholder="Pick or type…">
+              <datalist id="lorem-list">
+                <option value="Lorem"></option>
+                <option value="Dolor"></option>
+                <option value="Consectetur"></option>
+                <option value="Adipiscing"></option>
+              </datalist>
+            </div>
+            <div class="ds-field wide">
+              <div class="ds-labelrow">
+                <label for="f-range">Range</label>
+                <span class="ds-meta"><output id="range-out" for="f-range">40</output></span>
+              </div>
+              <input id="f-range" name="range" type="range" min="0" max="100" value="40" style="--pct: 40%">
+            </div>
+            <div class="ds-field">
+              <div class="ds-labelrow">
+                <label for="f-color">Colour</label>
+                <span class="ds-meta"><output id="color-out" for="f-color">#3fd0e6</output></span>
+              </div>
+              <input id="f-color" name="color" type="color" value="#3fd0e6">
+            </div>
+            <div class="ds-field">
+              <label for="f-file">File</label>
+              <input id="f-file" name="file" type="file" multiple aria-describedby="file-out">
+              <p class="ds-help" id="file-out">No files selected.</p>
+            </div>
+            <div class="ds-field wide">
+              <div class="ds-labelrow">
+                <label for="f-message">Message <span class="ds-req">*</span></label>
+                <span class="ds-meta"><output id="msg-count" for="f-message">0</output>/280</span>
+              </div>
+              <textarea id="f-message" name="message" rows="4" maxlength="280" required placeholder="Lorem ipsum dolor sit amet…" aria-describedby="f-message-help f-message-error"></textarea>
+              <p class="ds-help" id="f-message-help">Ut enim ad minim veniam, quis nostrud exercitation.</p>
+              <p class="ds-error" id="f-message-error" hidden></p>
+            </div>
+          </div>
+
+          <div class="ds-checks">
+            <label class="ds-check"><input type="checkbox" name="updates" checked> Lorem ipsum updates</label>
+            <label class="ds-check"><input type="checkbox" name="terms" required aria-describedby="terms-error"> <span>I agree to the <a href="#overview">terms</a> <span class="ds-req">*</span></span></label>
+            <p class="ds-error" id="terms-error" hidden></p>
+          </div>
+
+          <fieldset class="ds-radios">
+            <legend>Notification</legend>
+            <label><input type="radio" name="notify" value="email" checked> Email</label>
+            <label><input type="radio" name="notify" value="sms"> SMS</label>
+            <label><input type="radio" name="notify" value="none"> None</label>
+          </fieldset>
+
+          <label class="ds-switch"><input type="checkbox" role="switch" name="digest" checked> <span>Lorem ipsum digest</span></label>
+          <input type="hidden" name="specimen" value="lorem-ipsum">
+        </fieldset>
+
+        <div class="ds-actions">
+          <button class="ds-btn primary" type="submit">Submit specimen</button>
+          <button class="ds-btn ghost" type="reset">Reset</button>
+        </div>
+        <output id="form-out" class="ds-output" for="f-name f-email" aria-live="polite">No submission yet.</output>
+      </form>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Native controls</h2><span>disabled · readonly · invalid</span></div>
+          <div class="ds-field">
+            <label for="state-disabled">Disabled</label>
+            <input id="state-disabled" type="text" value="Lorem ipsum" disabled>
+          </div>
+          <div class="ds-field">
+            <label for="state-readonly">Read-only</label>
+            <input id="state-readonly" type="text" value="Dolor sit amet" readonly>
+          </div>
+          <div class="ds-field is-invalid">
+            <label for="state-invalid">Invalid</label>
+            <input id="state-invalid" type="email" value="lorem@" aria-invalid="true" aria-describedby="state-invalid-error">
+            <p class="ds-error" id="state-invalid-error">Lorem ipsum dolor sit amet.</p>
+          </div>
+          <div class="ds-field">
+            <label for="state-select">Select</label>
+            <select id="state-select"><option>Lorem ipsum</option><option>Dolor sit</option></select>
+          </div>
+          <div class="ds-field">
+            <label for="state-textarea">Textarea</label>
+            <textarea id="state-textarea" rows="2">Lorem ipsum dolor sit amet.</textarea>
+          </div>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Meters &amp; groups</h2><span>progress · meter · fieldset</span></div>
+          <label class="ds-label" for="progress-1">Determinate progress</label>
+          <progress id="progress-1" value="68" max="100">68%</progress>
+          <label class="ds-label" for="progress-2" style="margin-top: 10px;">Indeterminate progress</label>
+          <progress id="progress-2" max="100">Loading…</progress>
+          <label class="ds-label" for="meter-1" style="margin-top: 10px;">Meter</label>
+          <meter id="meter-1" value="0.62" min="0" max="1" low="0.3" high="0.7" optimum="0.9">62%</meter>
+
+          <fieldset class="ds-fieldset" disabled style="margin-top: var(--s4);">
+            <legend>Disabled fieldset</legend>
+            <label class="ds-check"><input type="checkbox" checked> Lorem ipsum</label>
+            <div class="ds-field" style="margin-top: 8px;">
+              <label for="disabled-input">Lorem</label>
+              <input id="disabled-input" type="text" value="Dolor sit amet">
+            </div>
+          </fieldset>
+
+          <form class="ds-miniform" id="mini-form" novalidate style="margin-top: var(--s4);">
+            <div class="ds-field">
+              <label for="mini-search">Input buttons</label>
+              <input id="mini-search" type="search" value="Lorem ipsum">
+            </div>
+            <div class="ds-row">
+              <input class="ds-btn primary" type="submit" value="Submit">
+              <input class="ds-btn ghost" type="reset" value="Reset">
+              <input class="ds-btn ghost" type="button" value="Input button" data-demo-toast="Input button clicked.">
+              <input type="image" src="assets/favicon.svg" alt="Submit specimen" width="30" height="30">
+            </div>
+          </form>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DATA
+         ============================================================ -->
+    <section class="ds-section" role="tabpanel" id="data" aria-labelledby="tab-data" tabindex="0" hidden>
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>Table</h2><span>sortable · caption · tfoot</span></div>
+        <div class="ds-tablewrap">
+          <table class="ds-table" id="specimen-table">
+            <caption>Lorem ipsum dolor sit amet — specimen ledger</caption>
+            <colgroup>
+              <col style="width:12%">
+              <col style="width:36%">
+              <col>
+              <col>
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col" aria-sort="ascending"><button class="ds-sort" type="button" data-sort="0">ID <span class="ds-sort-ind" aria-hidden="true">▲</span></button></th>
+                <th scope="col" aria-sort="none"><button class="ds-sort" type="button" data-sort="1">Project <span class="ds-sort-ind" aria-hidden="true">↕</span></button></th>
+                <th scope="col" aria-sort="none"><button class="ds-sort" type="button" data-sort="2">Status <span class="ds-sort-ind" aria-hidden="true">↕</span></button></th>
+                <th scope="col" class="num" aria-sort="none"><button class="ds-sort" type="button" data-sort="3">Build <span class="ds-sort-ind" aria-hidden="true">↕</span></button></th>
+                <th scope="col" class="num" aria-sort="none"><button class="ds-sort" type="button" data-sort="4">Traction <span class="ds-sort-ind" aria-hidden="true">↕</span></button></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td data-sort-value="LP-01">LP-01</td><td>Lorem ipsum dolor</td><td><span class="ds-badge is-good">done</span></td><td class="num" data-sort-value="92">92%</td><td class="num" data-sort-value="14">14%</td></tr>
+              <tr><td data-sort-value="LP-02">LP-02</td><td>Consectetur adipiscing</td><td><span class="ds-badge is-info">doing</span></td><td class="num" data-sort-value="78">78%</td><td class="num" data-sort-value="9">9%</td></tr>
+              <tr><td data-sort-value="LP-03">LP-03</td><td>Sed do eiusmod tempor</td><td><span class="ds-badge">open</span></td><td class="num" data-sort-value="64">64%</td><td class="num" data-sort-value="0">0%</td></tr>
+              <tr><td data-sort-value="LP-04">LP-04</td><td>Incididunt ut labore</td><td><span class="ds-badge is-good">done</span></td><td class="num" data-sort-value="88">88%</td><td class="num" data-sort-value="21">21%</td></tr>
+              <tr><td data-sort-value="LP-05">LP-05</td><td>Et dolore magna aliqua</td><td><span class="ds-badge is-warn">blocked</span></td><td class="num" data-sort-value="41">41%</td><td class="num" data-sort-value="3">3%</td></tr>
+              <tr><td data-sort-value="LP-06">LP-06</td><td>Ut enim ad minim veniam</td><td><span class="ds-badge">open</span></td><td class="num" data-sort-value="57">57%</td><td class="num" data-sort-value="0">0%</td></tr>
+              <tr><td data-sort-value="LP-07">LP-07</td><td>Quis nostrud exercitation</td><td><span class="ds-badge is-info">doing</span></td><td class="num" data-sort-value="73">73%</td><td class="num" data-sort-value="12">12%</td></tr>
+              <tr><td data-sort-value="LP-08">LP-08</td><td>Ullamco laboris nisi</td><td><span class="ds-badge is-good">done</span></td><td class="num" data-sort-value="96">96%</td><td class="num" data-sort-value="27">27%</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><th scope="row">Total</th><td>8 specimens</td><td>4 states</td><td class="num">74% avg</td><td class="num">11% avg</td></tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="ds-row" style="margin-top: var(--s3);">
+          <span class="ds-meta" id="table-status" aria-live="polite">Sorted by ID, ascending.</span>
+          <span class="ds-spacer"></span>
+          <nav class="ds-pagination" aria-label="Table pages">
+            <button class="ds-btn" type="button" aria-label="Previous page">‹</button>
+            <button class="ds-btn" type="button" aria-current="page">1</button>
+            <button class="ds-btn" type="button">2</button>
+            <button class="ds-btn" type="button">3</button>
+            <button class="ds-btn" type="button" aria-label="Next page">›</button>
+          </nav>
+        </div>
+      </section>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Bar chart</h2><span>css</span></div>
+          <div class="ds-bars" role="img" aria-label="Bar chart of eight values: 42, 58, 51, 74, 66, 81, 72, 90">
+            <div class="ds-barcol" title="Jan: 42"><span class="ds-barplot"><span class="ds-barfill" style="--v:42%"></span></span><span class="ds-barlabel">Jan</span></div>
+            <div class="ds-barcol" title="Feb: 58"><span class="ds-barplot"><span class="ds-barfill" style="--v:58%"></span></span><span class="ds-barlabel">Feb</span></div>
+            <div class="ds-barcol" title="Mar: 51"><span class="ds-barplot"><span class="ds-barfill" style="--v:51%"></span></span><span class="ds-barlabel">Mar</span></div>
+            <div class="ds-barcol" title="Apr: 74"><span class="ds-barplot"><span class="ds-barfill" style="--v:74%"></span></span><span class="ds-barlabel">Apr</span></div>
+            <div class="ds-barcol" title="May: 66"><span class="ds-barplot"><span class="ds-barfill" style="--v:66%"></span></span><span class="ds-barlabel">May</span></div>
+            <div class="ds-barcol" title="Jun: 81"><span class="ds-barplot"><span class="ds-barfill" style="--v:81%"></span></span><span class="ds-barlabel">Jun</span></div>
+            <div class="ds-barcol" title="Jul: 72"><span class="ds-barplot"><span class="ds-barfill" style="--v:72%"></span></span><span class="ds-barlabel">Jul</span></div>
+            <div class="ds-barcol" title="Aug: 90"><span class="ds-barplot"><span class="ds-barfill" style="--v:90%"></span></span><span class="ds-barlabel">Aug</span></div>
+          </div>
+          <div class="ds-chart-legend"><span><i></i>Lorem ipsum</span><span><i style="opacity: .35"></i>Dolor sit amet</span></div>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Line chart</h2><span>inline svg</span></div>
+          <svg class="ds-linechart" viewBox="0 0 520 200" role="img" aria-labelledby="line-title line-desc">
+            <title id="line-title">Lorem ipsum trend</title>
+            <desc id="line-desc">A rising line across twelve intervals.</desc>
+            <g class="ds-gridlines" aria-hidden="true">
+              <line x1="0" y1="50" x2="520" y2="50"/>
+              <line x1="0" y1="100" x2="520" y2="100"/>
+              <line x1="0" y1="150" x2="520" y2="150"/>
+            </g>
+            <path class="ds-area" d="M0 150 L47 142 L95 146 L142 126 L189 132 L236 112 L283 118 L331 96 L378 102 L425 74 L472 82 L520 54 L520 190 L0 190 Z"/>
+            <path class="ds-line" d="M0 150 L47 142 L95 146 L142 126 L189 132 L236 112 L283 118 L331 96 L378 102 L425 74 L472 82 L520 54"/>
+            <g class="ds-dots" aria-hidden="true">
+              <circle cx="0" cy="150" r="3"/><circle cx="95" cy="146" r="3"/><circle cx="189" cy="132" r="3"/><circle cx="283" cy="118" r="3"/><circle cx="378" cy="102" r="3"/><circle cx="472" cy="82" r="3"/>
+            </g>
+          </svg>
+        </section>
+      </div>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Canvas sparkline</h2><span>canvas</span></div>
+          <canvas id="spark" width="600" height="150" role="img" aria-label="Canvas sparkline of lorem values"></canvas>
+          <p class="ds-note" style="margin-top: 8px;">Redrawn when the style changes — it reads the active accent and line colours from the computed tokens.</p>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Log</h2><span>pre</span></div>
+          <pre class="ds-log" tabindex="0" aria-label="Sample build log"><code><span class="is-good">09:14:02 ok</span>   lorem ipsum dolor sit amet
+<span class="is-good">09:14:03 ok</span>   consectetur adipiscing elit
+<span class="is-warn">09:14:04 warn</span> sed do eiusmod tempor
+<span class="is-good">09:14:05 ok</span>   incididunt ut labore et dolore
+<span class="is-bad">09:14:06 fail</span> magna aliqua ut enim ad minim
+<span class="is-good">09:14:07 ok</span>   veniam quis nostrud exercitation</code></pre>
+        </section>
+      </div>
+
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>Timeline</h2><span>ol · time</span></div>
+        <ol class="ds-timeline">
+          <li><strong>Lorem ipsum dolor sit amet</strong><p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p><time datetime="2026-10-21T09:14:00Z">21 Oct 2026 · 09:14</time></li>
+          <li><strong>Ut enim ad minim veniam</strong><p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p><time datetime="2026-10-20T17:40:00Z">20 Oct 2026 · 17:40</time></li>
+          <li><strong>Duis aute irure dolor</strong><p>In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p><time datetime="2026-10-19T11:02:00Z">19 Oct 2026 · 11:02</time></li>
+        </ol>
+      </section>
+    </section>
+
+    <!-- ============================================================
+         MEDIA & LAYOUT
+         ============================================================ -->
+    <section class="ds-section" role="tabpanel" id="media" aria-labelledby="tab-media" tabindex="0" hidden>
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Landmarks</h2><span>semantic layout</span></div>
+          <div class="ds-landmarks" role="img" aria-label="Layout diagram: header, navigation, main section, aside and footer">
+            <header>header</header>
+            <nav>nav</nav>
+            <section>section</section>
+            <aside>aside</aside>
+            <footer>footer</footer>
+          </div>
+          <p class="ds-note" style="margin-top: 8px;">The page itself uses the same landmarks around this specimen: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>.</p>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Figure</h2><span>picture · source · img</span></div>
+          <figure class="ds-figure">
+            <picture>
+              <source media="(min-width: 760px)" srcset="assets/art-wide.svg" width="1200" height="500">
+              <img src="assets/art-1.svg" alt="Abstract lorem specimen" width="800" height="500" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>Lorem ipsum dolor sit amet — <cite>Specimen 01</cite>. The <code>&lt;source&gt;</code> swaps to a wider composition above 760 px.</figcaption>
+          </figure>
+        </section>
+      </div>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Image map</h2><span>map · area</span></div>
+          <figure class="ds-figure">
+            <img src="assets/map.svg" alt="Diagram with two selectable regions" usemap="#specimen-map" width="640" height="360" loading="lazy">
+            <map name="specimen-map">
+              <area shape="rect" coords="40,60,280,300" href="#overview" alt="Go to overview">
+              <area shape="rect" coords="360,60,600,300" href="#tokens" alt="Go to tokens">
+            </map>
+            <figcaption>Lorem ipsum — click a panel to jump to that section.</figcaption>
+          </figure>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Video</h2><span>video · track</span></div>
+          <figure class="ds-figure">
+            <video controls preload="none" poster="assets/video-poster.svg" width="640" height="360">
+              <track kind="captions" src="assets/captions.vtt" srclang="en" label="English" default>
+              <p>Lorem ipsum — your browser does not support video.</p>
+            </video>
+            <figcaption>Lorem ipsum motion specimen — poster only; no media file is bundled.</figcaption>
+          </figure>
+        </section>
+      </div>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Audio</h2><span>audio</span></div>
+          <audio class="ds-audio" controls preload="none" src="data:audio/wav;base64,UklGRvQCAABXQVZFZm10IBAAAAABAAEAoA8AAKAPAAABAAgAZGF0YdACAACAgIGAfHt/hYaAeHZ+iYyCdHF8jZGEcWt6kJeGbmV3kp2Ka19zlaKOalpvlqiSaVRqlqyWalNolKyYbVNlkaybb1Rjj6udclRhjKufdFVfiaqhd1ZdhqmjeldchKikfVhagaamgFlZfqWngltXe6OohVxWeaKpiF5VdqCqi2BUc56rjWJUcJyrkGRTbpqskmdTa5eslWlTaZWsl2tTZ5Ksmm5TZJCrnHBUYo2rnnNUYIuqoHZVXoiponlWXIWoo3tXW4KnpX5ZWX+mpoFaWH2kqIRcV3qjqYZdVnehqolfVXSfq4xhVHKdq49jVG+brJFlU22YrJRoU2qWrJZqU2iUrJhtU2WRrJtvVGOPq51yVGGMq590VV+JqqF3Vl2GqaN6V1yEqKR9WFqBpqaAWVl+paeCW1d7o6iFXFZ5oqmIXlV2oKqLYFRznquNYlRwnKuQZFNumqySZ1Nrl6yVaVNplayXa1NnkqyablNkkKuccFRijauec1Rgi6qgdlVeiKmieVZchaije1dbgqelfllZf6amgVpYfaSohFxXeqOphl1Wd6GqiV9VdJ+rjGFUcp2rj2NUb5uskWVTbZislGhTapaslmpTaJSsmG1TZZGsm29UY4+rnXJUYYyrn3RVX4mqoXdWXYapo3pXXISopH1YWoGmpoBZWX6lp4JbV3ujqIVcVnmiqYheVXagqophVnSdqY1kVnGaqI9nV3CXp5BpWG6UppJsWmyRpZNvW2uPo5RxXWqMopV0XmmKoJZ2YGmHnpd5YmiFnJd7ZGiDmpd9ZmiBmJd/aGh/lpaAaml+lJaCbGl8kpWDbmp7kJWEcGt6jpSFcmx5jZOGc215i5KHdW54iZCHd294iI+HeHF4ho6HenJ4hYyHe3N4g4uHfHV4gomHfXZ5gYiGfnh5gYeFf3l6gIWEf3t7gISEgHx8f4OCgH19f4GBgH5+f4CAgH8=">
+            <p>Lorem ipsum — your browser does not support audio.</p>
+          </audio>
+          <p class="ds-note" style="margin-top: 8px;">A short generated tone, embedded as a data URI so the folder stays free of binaries.</p>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Iframe</h2><span>iframe · srcdoc</span></div>
+          <iframe class="ds-iframe" title="Embedded lorem document" sandbox srcdoc="<!doctype html><html><head><meta charset='utf-8'><style>body{font:13px/1.6 system-ui,sans-serif;color:#1a2028;background:#f4f6f8;padding:14px;margin:0}h1{font-size:16px;margin:0 0 6px;letter-spacing:-.01em}p{margin:0 0 4px;color:#46525e}</style></head><body><h1>Lorem ipsum dolor</h1><p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p></body></html>" loading="lazy"></iframe>
+          <p class="ds-note" style="margin-top: 8px;">Sandboxed <code>srcdoc</code> document; styles do not inherit by design.</p>
+        </section>
+      </div>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Object &amp; embed</h2><span>object · embed</span></div>
+          <div class="ds-media-grid">
+            <figure class="ds-figure">
+              <object class="ds-object" data="assets/art-2.svg" type="image/svg+xml" title="Object specimen"><p>Lorem ipsum fallback.</p></object>
+              <figcaption><code>&lt;object&gt;</code></figcaption>
+            </figure>
+            <figure class="ds-figure">
+              <embed class="ds-embed" src="assets/art-3.svg" type="image/svg+xml" title="Embed specimen">
+              <figcaption><code>&lt;embed&gt;</code></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>SVG &amp; MathML</h2><span>svg · math</span></div>
+          <svg class="ds-inline-svg" viewBox="0 0 320 120" role="img" aria-label="Decorative lorem waveform">
+            <path d="M0 90 L40 74 L80 82 L120 52 L160 64 L200 34 L240 46 L280 22 L320 30" fill="none" stroke="var(--acc)" stroke-width="2"/>
+            <path d="M0 90 L40 74 L80 82 L120 52 L160 64 L200 34 L240 46 L280 22 L320 30 L320 120 L0 120Z" fill="var(--acc)" opacity=".1"/>
+            <g fill="var(--mut)"><circle cx="120" cy="52" r="3"/><circle cx="200" cy="34" r="3"/><circle cx="280" cy="22" r="3"/></g>
+          </svg>
+          <math display="block" aria-label="E equals m c squared" style="margin-top: var(--s3);">
+            <mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup>
+          </math>
+        </section>
+      </div>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Custom element</h2><span>template · slot</span></div>
+          <x-specimen>
+            <span slot="kicker">Template + slot</span>
+            <span slot="title">Lorem ipsum custom element</span>
+            <p>Light-DOM content projected into an open shadow root. Styles inside the shadow tree read the active theme's custom properties.</p>
+          </x-specimen>
+          <p class="ds-note" style="margin-top: 8px;">The <code>&lt;template&gt;</code> lives at the end of the document; <code>&lt;slot&gt;</code> projects the light DOM.</p>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Element notes</h2><span>coverage</span></div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. The Token tab carries a live checklist of all 113 elements this page contains, verified against the DOM.</p>
+          <ul style="margin-top: var(--s3); padding-left: 1.2em; color: var(--ink-2); font-size: 13px; line-height: 1.8;">
+            <li>Obsolete elements are deliberately not used.</li>
+            <li>Media files stay local: SVG artwork, a generated WAV data URI, and a poster.</li>
+            <li>Everything else is text and inline SVG.</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TOKENS
+         ============================================================ -->
+    <section class="ds-section" role="tabpanel" id="tokens" aria-labelledby="tab-tokens" tabindex="0" hidden>
+      <div class="ds-tokenhead">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Active style</h2><span>live</span></div>
+          <h2 id="tokens-style-name" style="font-size: 1.6rem;">neon-hud</h2>
+          <p id="tokens-style-desc" style="color: var(--ink-2); font-size: 13px; line-height: 1.65; margin-top: 6px;">Deep space-blue neutrals, one cyan chrome, clipped 45° corners, scanline texture and reticle ornaments.</p>
+          <dl class="ds-facts" style="margin-top: var(--s3);">
+            <div><dt>Theme</dt><dd id="tokens-theme">neon-hud</dd></div>
+            <div><dt>Mode</dt><dd id="tokens-mode">dark</dd></div>
+            <div><dt>Choice</dt><dd id="tokens-choice">—</dd></div>
+            <div><dt>Ornaments</dt><dd id="tokens-orn">css</dd></div>
+          </dl>
+        </section>
+
+        <section class="ds-snippet">
+          <div class="ds-snippet-head"><span>Usage</span><button class="ds-btn small" type="button" id="copy-snippet">Copy</button></div>
+          <pre><code id="snippet">&lt;html data-theme="neon-hud" data-mode="dark" data-orn="css"&gt;
+&lt;link rel="stylesheet" href="../styles/neon-hud/theme.css"&gt;</code></pre>
+        </section>
+      </div>
+
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>Palette</h2><span>computed live from the active theme</span></div>
+        <div class="ds-swatchgrid" id="swatches"></div>
+      </section>
+
+      <div class="ds-grid ds-grid-2">
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Contrast</h2><span>WCAG 2.1 ratios</span></div>
+          <div class="ds-contrast" id="contrast"></div>
+          <p class="ds-note" style="margin-top: 10px;">Computed from the browser's resolved colours. AA is 4.5:1 for normal text and 3:1 for large text.</p>
+        </section>
+
+        <section class="ds-panel">
+          <div class="ds-panelhead"><h2>Type &amp; shape</h2><span>tokens</span></div>
+          <div class="ds-scales" id="scales"></div>
+        </section>
+      </div>
+
+      <section class="ds-panel">
+        <div class="ds-panelhead"><h2>Element coverage</h2><span id="coverage-count">checking…</span></div>
+        <p class="ds-note">Every standard content element used by this specimen, checked against the live DOM. The chip turns red if an element is missing.</p>
+        <div class="ds-coverage" id="coverage" style="margin-top: var(--s4);"></div>
+        <p class="ds-note" style="margin-top: var(--s4);">Obsolete or removed elements intentionally omitted: <code>acronym</code>, <code>applet</code>, <code>basefont</code>, <code>bgsound</code>, <code>big</code>, <code>blink</code>, <code>center</code>, <code>dir</code>, <code>font</code>, <code>frame</code>, <code>frameset</code>, <code>isindex</code>, <code>keygen</code>, <code>marquee</code>, <code>menuitem</code>, <code>noframes</code>, <code>param</code>, <code>plaintext</code>, <code>rb</code>, <code>rtc</code>, <code>spacer</code>, <code>strike</code>, <code>tt</code>, <code>xmp</code>.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="ds-footer">
+    <div class="ds-footer-inner">
+      <span>designs / example-page — four styles, one specimen, zero build steps.</span>
+      <span><a href="../styles/README.md">style index</a> · <a href="../SPEC.md">library spec</a> · lorem ipsum content</span>
+    </div>
+  </footer>
+</div>
+
+<div class="ds-toast" id="toast" role="status" aria-live="polite"></div>
+
+<dialog class="ds-dialog" id="specimen-dialog" aria-labelledby="dialog-title">
+  <div class="ds-dialoghead">
+    <div>
+      <span class="ds-kicker">Dialog element</span>
+      <h2 id="dialog-title">Lorem ipsum dolor sit amet</h2>
+    </div>
+    <button class="ds-btn small" type="button" data-dialog-close aria-label="Close dialog">Close</button>
+  </div>
+  <div class="ds-dialogbody">
+    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+    <div class="ds-field">
+      <label for="dialog-note">Note</label>
+      <input id="dialog-note" type="text" placeholder="Lorem ipsum…">
+    </div>
+  </div>
+  <div class="ds-dialogfoot">
+    <button class="ds-btn ghost" type="button" data-dialog-close>Cancel</button>
+    <button class="ds-btn primary" type="button" data-dialog-close data-demo-toast="Lorem ipsum saved.">Confirm</button>
+  </div>
+</dialog>
+
+<template id="specimen-template">
+  <style>
+    :host {
+      display: block;
+      padding: var(--s4);
+      border: 1px solid var(--line-2);
+      border-radius: var(--r-md);
+      background: var(--surface-2);
+      color: var(--ink);
+    }
+    .kicker {
+      font: 600 9px/1.2 var(--f-mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mut);
+    }
+    h3 {
+      margin: 4px 0 6px;
+      font-family: var(--f-display);
+      font-size: 20px;
+      line-height: 1.15;
+      color: var(--acc);
+    }
+    .body {
+      color: var(--ink-2);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .body p {
+      margin: 0;
+      max-width: 60ch;
+    }
+  </style>
+  <div class="kicker"><slot name="kicker">Fallback kicker</slot></div>
+  <h3><slot name="title">Fallback title</slot></h3>
+  <div class="body"><slot>Fallback body lorem ipsum.</slot></div>
+</template>
+</body>
+</html>

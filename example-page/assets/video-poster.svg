@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Dark video poster with a cyan play glyph">
+  <rect width="640" height="360" fill="#080c0f"/>
+  <g stroke="#1d2c40" stroke-width="1">
+    <path d="M0 45H640M0 90H640M0 135H640M0 180H640M0 225H640M0 270H640M0 315H640"/>
+    <path d="M45 0V360M90 0V360M135 0V360M180 0V360M225 0V360M270 0V360M315 0V360M360 0V360M405 0V360M450 0V360M495 0V360M540 0V360M585 0V360"/>
+  </g>
+  <circle cx="320" cy="170" r="46" fill="none" stroke="#3fd0e6" stroke-width="2"/>
+  <path d="M305 146 L350 170 L305 194Z" fill="#3fd0e6"/>
+  <text x="320" y="268" text-anchor="middle" fill="#dbeaf5" font-family="system-ui, sans-serif" font-size="16" letter-spacing="4">LOREM / MOTION</text>
+  <text x="320" y="294" text-anchor="middle" fill="#6b8299" font-family="monospace" font-size="11" letter-spacing="1">SPECIMEN 01 · NO MEDIA BUNDLED</text>
+</svg>
