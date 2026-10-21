@@ -1,15 +1,16 @@
 # systemcraft-hud
 
 **A hybrid systems HUD: Mechcraft type and card geometry, Moderncraft texture
-and restraint, on a darker black. Amber, cyan and lime rotate through prime,
-secondary and tertiary roles. Dark and light. Sahara or grid background.**
+and restraint, on a darker black. Amber, cyan and lime are assigned independently to prime,
+secondary and tertiary roles. All 27 combinations are valid, including
+monochrome combinations such as amber/amber/amber. Dark and light. Sahara or grid background.**
 
 - **Theme:** `systemcraft-hud`
 - **Modes:** `dark` (default) · `light`
-- **Role orders:** all six permutations of amber / cyan / lime
+- **Role assignment:** any of amber / cyan / lime in each role (27 combinations)
 - **Backgrounds:** `sahara` (default) · `grid`
 - **Type:** Saira Condensed (OFL, bundled) + system sans + system mono
-- **Shape:** 3 px cards and controls, 1 px secondary borders, inset highlight, 1 px prime bottom rail
+- **Shape:** 3 px cards and controls, 1 px secondary borders, inset highlight, 1 px secondary bottom rail
 - **Texture:** 45° Sahara hatch, or a 47/48 px technical grid
 - **Motion:** 160 ms, border and hue transitions, reduced-motion guard
 - **Dependencies:** `color-mix()` only; no JS framework
@@ -17,7 +18,7 @@ secondary and tertiary roles. Dark and light. Sahara or grid background.**
 ```
 <html data-theme="systemcraft-hud"
       data-mode="dark"
-      data-roles="amber-cyan-lime"
+      data-prime="amber" data-secondary="cyan" data-tertiary="lime"
       data-bg="sahara">
 <link rel="stylesheet" href="theme.css">
 ```
@@ -52,16 +53,17 @@ The three primitives are fixed:
 | Cyan | `#63d4e4` | `#2a9dac` | `#0e6672` | `#2a9dac` |
 | Lime | `#b6f34a` | `#84cc16` | `#3f6212` | `#84cc16` |
 
-All six orders are valid:
+The three roles are independent. Each can be amber, cyan or lime, giving
+**27 combinations**, including repeats:
 
-| `data-roles` | Prime | Secondary | Tertiary |
-|---|---|---|---|
-| `amber-cyan-lime` | Amber | Cyan | Lime |
-| `amber-lime-cyan` | Amber | Lime | Cyan |
-| `cyan-amber-lime` | Cyan | Amber | Lime |
-| `cyan-lime-amber` | Cyan | Lime | Amber |
-| `lime-amber-cyan` | Lime | Amber | Cyan |
-| `lime-cyan-amber` | Lime | Cyan | Amber |
+```
+data-prime="amber" data-secondary="cyan" data-tertiary="lime"   (default)
+data-prime="amber" data-secondary="amber" data-tertiary="amber" (monochrome)
+data-prime="lime"  data-secondary="cyan"  data-tertiary="amber"
+```
+
+The storage value remains the compact triplet, e.g.
+`amber-amber-amber` or `lime-cyan-amber`.
 
 Role semantics:
 
@@ -72,7 +74,7 @@ Role semantics:
 - **Tertiary** — pips, small status marks, sparse state decoration. It is the
   quietest role.
 
-Do not use all three at equal strength in one local region. The role order
+Do not use all three at equal strength in one local region. The role assignment
 changes the hue, not the hierarchy.
 
 ---
@@ -110,7 +112,7 @@ of cards or compete with text. Switch with `data-bg="sahara|grid"`.
 ## Shape and surface
 
 - **Cards:** 3 px radius, 1 px **secondary** border, near-black screen, inset
-  top highlight, and a 1 px **prime** rail across the bottom edge. Hover keeps
+  top highlight, and a 1 px **secondary** rail across the bottom edge. Hover keeps
   the secondary border and adds a 1 px secondary ring; the background does not
   lighten and the card does not move.
 - **KPI / stat cards:** a 3 px prime top border instead of a bottom rail, so
@@ -153,7 +155,7 @@ Mechcraft keep their existing two-row header.
 - `sy-masthead` — combined brand / nav / action row with bottom delimiter.
 - `sy-brand` + `sy-mark` — identity block.
 - `sy-nav` — page tabs with a single active underline.
-- `sy-card`, `sy-panel` — dark screen, 3 px corners, secondary border, prime bottom rail.
+- `sy-card`, `sy-panel` — dark screen, 3 px corners, secondary border, secondary bottom rail.
 - `sy-kpi` — 3 px prime top border, no bottom rail.
 - `sy-title` — accent section label with a 2 px left rule.
 - `sy-btn` — primary / secondary / ghost.
@@ -184,10 +186,10 @@ Mechcraft keep their existing two-row header.
 **Do**
 
 - let one role dominate each local region;
-- use the role order control to re-key the whole surface, not patchwork
+- use the role controls to re-key the whole surface, not patchwork
   colours;
 - keep the masthead as one row on desktop;
-- keep cards near-black / near-white with secondary borders and a prime bottom rail;
+- keep cards near-black / near-white with secondary borders and a secondary bottom rail;
 - use the grid when the page is data-dense and Sahara when it is editorial.
 
 **Do not**
@@ -216,8 +218,8 @@ Mechcraft keep their existing two-row header.
 ```
 DESIGN.md          this specification
 theme.css          drop-in tokens, masthead, cards, controls
-tokens.json        DTCG tokens and role orders
-demo.html          combined-header specimen with 6 roles + 2 backgrounds
+tokens.json        DTCG tokens and role assignment
+demo.html          combined-header specimen with 27 role combos + 2 backgrounds
 preview.png        screenshot of the dark Sahara specimen
 PROVENANCE.md      origin, licensing, no-game-art statement
 fonts/             Saira Condensed 600/700 + OFL

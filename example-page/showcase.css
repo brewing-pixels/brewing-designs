@@ -3475,24 +3475,52 @@ x-specimen {
 [data-theme="systemcraft-hud"] .ds-panel::before {
   content: "";
   position: absolute;
-  left: 8px;
-  right: 8px;
-  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 1px;
-  background: var(--acc);
-  opacity: 0.6;
+  border-radius: 0 0 var(--r-sm) var(--r-sm);
+  background: var(--sec);
+  opacity: 1;
   pointer-events: none;
 }
 
 [data-theme="systemcraft-hud"] .ds-card:hover,
 [data-theme="systemcraft-hud"] .ds-panel:hover,
 [data-theme="systemcraft-hud"] .ds-stat:hover {
-  border-color: var(--acc);
-  box-shadow: var(--card-shadow-hot);
+  border-color: var(--sec);
+  box-shadow:
+    0 0 0 1px var(--sec),
+    0 12px 24px color-mix(in srgb, var(--sec) 14%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--ink) 7%, transparent);
 }
 
 [data-theme="systemcraft-hud"] .ds-stat {
-  border-top: 1px solid var(--acc-line);
+  border-top: 3px solid var(--acc);
+}
+
+[data-theme="systemcraft-hud"] .ds-kicker,
+[data-theme="systemcraft-hud"] .ds-meta,
+[data-theme="systemcraft-hud"] .ds-note,
+[data-theme="systemcraft-hud"] .ds-hero-note,
+[data-theme="systemcraft-hud"] .ds-stat-label,
+[data-theme="systemcraft-hud"] .ds-stat-sub,
+[data-theme="systemcraft-hud"] .ds-label,
+[data-theme="systemcraft-hud"] .ds-barlabel {
+  color: var(--ter);
+}
+
+[data-theme="systemcraft-hud"] .ds-inputgroup input {
+  background: var(--surface-2);
+  border-color: color-mix(in srgb, var(--sec) 45%, var(--line));
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 5%, transparent);
+}
+
+[data-theme="systemcraft-hud"] .ds-inputgroup input:focus {
+  border-color: var(--acc);
+  box-shadow: 0 0 0 1px var(--acc);
 }
 
 [data-theme="systemcraft-hud"] .ds-stat-value {

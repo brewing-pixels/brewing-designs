@@ -1,14 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="systemcraft-hud" data-mode="dark" data-roles="amber-cyan-lime" data-bg="sahara">
+<html lang="en" data-theme="systemcraft-hud" data-mode="dark" data-prime="amber" data-secondary="cyan" data-tertiary="lime" data-bg="sahara">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
 (() => {
-  const roles = new Set([
-    "amber-cyan-lime", "amber-lime-cyan", "cyan-amber-lime",
-    "cyan-lime-amber", "lime-amber-cyan", "lime-cyan-amber",
-  ]);
+  const colors = new Set(["amber", "cyan", "lime"]);
+  const defaults = ["amber", "cyan", "lime"];
   const backgrounds = new Set(["sahara", "grid"]);
   const modes = new Set(["dark", "light"]);
   let roleOrder = "amber-cyan-lime";
@@ -19,8 +17,15 @@
     bg = localStorage.getItem("systemcraft.bg") || bg;
     mode = localStorage.getItem("systemcraft.mode") || mode;
   } catch (e) {}
+  const parts = String(roleOrder).split("-");
+  const values = parts.length === 3 && parts.every((part) => colors.has(part))
+    ? parts
+    : defaults;
   const root = document.documentElement;
-  root.dataset.roles = roles.has(roleOrder) ? roleOrder : "amber-cyan-lime";
+  root.dataset.roles = values.join("-");
+  root.dataset.prime = values[0];
+  root.dataset.secondary = values[1];
+  root.dataset.tertiary = values[2];
   root.dataset.bg = backgrounds.has(bg) ? bg : "sahara";
   root.dataset.mode = modes.has(mode) ? mode : "dark";
 })();
@@ -91,8 +96,24 @@
     gap: 7px;
   }
   .sy-role-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(170px, 1fr));
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sy-role-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sy-role-name {
+    flex: 0 0 66px;
+    color: var(--mut);
+    font: 600 9px/1 var(--f-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .sy-role-options {
+    display: flex;
     gap: 4px;
   }
   .sy-role-btn,
@@ -123,18 +144,19 @@
     border-color: var(--acc);
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--acc) 25%, transparent);
   }
-  .sy-role-swatches {
-    display: inline-flex;
-    gap: 2px;
-    flex: 0 0 auto;
+  .sy-role-color {
+    width: 30px;
+    min-height: 26px;
+    justify-content: center;
+    padding: 0;
   }
-  .sy-role-swatches i {
+  .sy-role-color i {
     display: block;
-    width: 8px;
-    height: 8px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     background: var(--sw);
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
   }
   .sy-seg {
     display: flex;
@@ -271,7 +293,7 @@
     .sy-hero { align-items: flex-start; flex-direction: column; }
   }
   @media (max-width: 620px) {
-    .sy-role-grid { grid-template-columns: 1fr; }
+    .sy-role-name { flex-basis: 58px; }
     .sy-kpis { grid-template-columns: 1fr; }
     .demo-footer { display: block; }
   }
@@ -303,31 +325,31 @@
   <div class="sy-specimen-controls">
     <div class="sy-control-group">
       <span class="sy-label">Color roles</span>
-      <div class="sy-role-grid" id="role-options" role="group" aria-label="Color role order">
-        <button class="sy-role-btn" type="button" data-role-choice="amber-cyan-lime" aria-pressed="true">
-          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#f2a23b"></i><i style="--sw:#63d4e4"></i><i style="--sw:#b6f34a"></i></span>
-          Amber · Cyan · Lime
-        </button>
-        <button class="sy-role-btn" type="button" data-role-choice="amber-lime-cyan" aria-pressed="false">
-          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#f2a23b"></i><i style="--sw:#b6f34a"></i><i style="--sw:#63d4e4"></i></span>
-          Amber · Lime · Cyan
-        </button>
-        <button class="sy-role-btn" type="button" data-role-choice="cyan-amber-lime" aria-pressed="false">
-          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#63d4e4"></i><i style="--sw:#f2a23b"></i><i style="--sw:#b6f34a"></i></span>
-          Cyan · Amber · Lime
-        </button>
-        <button class="sy-role-btn" type="button" data-role-choice="cyan-lime-amber" aria-pressed="false">
-          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#63d4e4"></i><i style="--sw:#b6f34a"></i><i style="--sw:#f2a23b"></i></span>
-          Cyan · Lime · Amber
-        </button>
-        <button class="sy-role-btn" type="button" data-role-choice="lime-amber-cyan" aria-pressed="false">
-          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#b6f34a"></i><i style="--sw:#f2a23b"></i><i style="--sw:#63d4e4"></i></span>
-          Lime · Amber · Cyan
-        </button>
-        <button class="sy-role-btn" type="button" data-role-choice="lime-cyan-amber" aria-pressed="false">
-          <span class="sy-role-swatches" aria-hidden="true"><i style="--sw:#b6f34a"></i><i style="--sw:#63d4e4"></i><i style="--sw:#f2a23b"></i></span>
-          Lime · Cyan · Amber
-        </button>
+      <div class="sy-role-grid" id="role-options" role="group" aria-label="Color roles">
+      <div class="sy-role-row">
+        <span class="sy-role-name">Prime</span>
+        <div class="sy-role-options">
+          <button class="sy-role-btn sy-role-color" type="button" data-role-part="prime" data-role-color="amber" aria-label="Prime: Amber" title="Prime: Amber" aria-pressed="false"><i style="--sw:#f2a23b"></i></button>
+          <button class="sy-role-btn sy-role-color" type="button" data-role-part="prime" data-role-color="cyan" aria-label="Prime: Cyan" title="Prime: Cyan" aria-pressed="false"><i style="--sw:#63d4e4"></i></button>
+          <button class="sy-role-btn sy-role-color" type="button" data-role-part="prime" data-role-color="lime" aria-label="Prime: Lime" title="Prime: Lime" aria-pressed="false"><i style="--sw:#b6f34a"></i></button>
+        </div>
+      </div>
+      <div class="sy-role-row">
+        <span class="sy-role-name">Secondary</span>
+        <div class="sy-role-options">
+          <button class="sy-role-btn sy-role-color" type="button" data-role-part="secondary" data-role-color="amber" aria-label="Secondary: Amber" title="Secondary: Amber" aria-pressed="false"><i style="--sw:#f2a23b"></i></button>
+          <button class="sy-role-btn sy-role-color" type="button" data-role-part="secondary" data-role-color="cyan" aria-label="Secondary: Cyan" title="Secondary: Cyan" aria-pressed="false"><i style="--sw:#63d4e4"></i></button>
+          <button class="sy-role-btn sy-role-color" type="button" data-role-part="secondary" data-role-color="lime" aria-label="Secondary: Lime" title="Secondary: Lime" aria-pressed="false"><i style="--sw:#b6f34a"></i></button>
+        </div>
+      </div>
+      <div class="sy-role-row">
+        <span class="sy-role-name">Tertiary</span>
+        <div class="sy-role-options">
+          <button class="sy-role-btn sy-role-color" type="button" data-role-part="tertiary" data-role-color="amber" aria-label="Tertiary: Amber" title="Tertiary: Amber" aria-pressed="false"><i style="--sw:#f2a23b"></i></button>
+          <button class="sy-role-btn sy-role-color" type="button" data-role-part="tertiary" data-role-color="cyan" aria-label="Tertiary: Cyan" title="Tertiary: Cyan" aria-pressed="false"><i style="--sw:#63d4e4"></i></button>
+          <button class="sy-role-btn sy-role-color" type="button" data-role-part="tertiary" data-role-color="lime" aria-label="Tertiary: Lime" title="Tertiary: Lime" aria-pressed="false"><i style="--sw:#b6f34a"></i></button>
+        </div>
+      </div>
       </div>
     </div>
     <div class="sy-control-group">
@@ -357,7 +379,7 @@
         <span><i style="--sw:#b6f34a" data-swatch="tertiary"></i>tertiary <b data-role-label="tertiary">Lime</b></span>
       </div>
     </div>
-    <div class="sy-pip">6 role orders · 2 backgrounds</div>
+    <div class="sy-pip">27 role combos · 2 backgrounds</div>
   </section>
 
   <section class="sy-kpis" aria-label="Key metrics">
@@ -465,29 +487,41 @@
 
   <footer class="demo-footer">
     <span>systemcraft-hud · MIT code · Saira Condensed under OFL · no game assets or logos</span>
-    <span>six role orders · sahara / grid · dark + light</span>
+    <span>27 role combos · sahara / grid · dark + light</span>
   </footer>
 </div>
 
 <script>
 (() => {
-  const roleOrders = {
-    "amber-cyan-lime": { prime: "Amber", secondary: "Cyan", tertiary: "Lime", colors: ["#f2a23b", "#63d4e4", "#b6f34a"] },
-    "amber-lime-cyan": { prime: "Amber", secondary: "Lime", tertiary: "Cyan", colors: ["#f2a23b", "#b6f34a", "#63d4e4"] },
-    "cyan-amber-lime": { prime: "Cyan", secondary: "Amber", tertiary: "Lime", colors: ["#63d4e4", "#f2a23b", "#b6f34a"] },
-    "cyan-lime-amber": { prime: "Cyan", secondary: "Lime", tertiary: "Amber", colors: ["#63d4e4", "#b6f34a", "#f2a23b"] },
-    "lime-amber-cyan": { prime: "Lime", secondary: "Amber", tertiary: "Cyan", colors: ["#b6f34a", "#f2a23b", "#63d4e4"] },
-    "lime-cyan-amber": { prime: "Lime", secondary: "Cyan", tertiary: "Amber", colors: ["#b6f34a", "#63d4e4", "#f2a23b"] },
+  const colorInfo = {
+    amber: { label: "Amber", hex: "#f2a23b" },
+    cyan: { label: "Cyan", hex: "#63d4e4" },
+    lime: { label: "Lime", hex: "#b6f34a" },
   };
+  const roleParts = ["prime", "secondary", "tertiary"];
+  const defaults = ["amber", "cyan", "lime"];
   const backgrounds = new Set(["sahara", "grid"]);
   const modes = new Set(["dark", "light"]);
   const root = document.documentElement;
 
+  const currentValues = () =>
+    roleParts.map((part, index) => {
+      const value = root.dataset[part];
+      return colorInfo[value] ? value : defaults[index];
+    });
+
   const sync = () => {
-    const order = root.dataset.roles;
-    const cfg = roleOrders[order] || roleOrders["amber-cyan-lime"];
-    document.querySelectorAll("[data-role-choice]").forEach((button) => {
-      button.setAttribute("aria-pressed", String(button.dataset.roleChoice === order));
+    const values = currentValues();
+    roleParts.forEach((part, index) => {
+      document.querySelectorAll(`[data-role-part="${part}"]`).forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.roleColor === values[index]));
+      });
+      document.querySelectorAll(`[data-role-label="${part}"]`).forEach((node) => {
+        node.textContent = colorInfo[values[index]].label;
+      });
+      document.querySelectorAll(`[data-swatch="${part}"]`).forEach((node) => {
+        node.style.setProperty("--sw", colorInfo[values[index]].hex);
+      });
     });
     document.querySelectorAll("[data-bg-choice]").forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.bgChoice === root.dataset.bg));
@@ -495,19 +529,13 @@
     document.querySelectorAll("[data-mode-choice]").forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.modeChoice === root.dataset.mode));
     });
-    const roleNames = ["prime", "secondary", "tertiary"];
-    roleNames.forEach((role, index) => {
-      document.querySelectorAll(`[data-role-label="${role}"]`).forEach((node) => {
-        node.textContent = cfg[role];
-      });
-      document.querySelectorAll(`[data-swatch="${role}"]`).forEach((node) => {
-        node.style.setProperty("--sw", cfg.colors[index]);
-      });
-    });
   };
 
-  const apply = (roles, bg, mode) => {
-    root.dataset.roles = roleOrders[roles] ? roles : root.dataset.roles;
+  const apply = (values, bg, mode) => {
+    roleParts.forEach((part, index) => {
+      root.dataset[part] = colorInfo[values[index]] ? values[index] : defaults[index];
+    });
+    root.dataset.roles = currentValues().join("-");
     root.dataset.bg = backgrounds.has(bg) ? bg : root.dataset.bg;
     root.dataset.mode = modes.has(mode) ? mode : root.dataset.mode;
     try {
@@ -518,14 +546,20 @@
     sync();
   };
 
-  document.querySelectorAll("[data-role-choice]").forEach((button) => {
-    button.addEventListener("click", () => apply(button.dataset.roleChoice, root.dataset.bg, root.dataset.mode));
+  document.querySelectorAll("[data-role-color]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const values = currentValues();
+      const index = roleParts.indexOf(button.dataset.rolePart);
+      if (index < 0) return;
+      values[index] = button.dataset.roleColor;
+      apply(values, root.dataset.bg, root.dataset.mode);
+    });
   });
   document.querySelectorAll("[data-bg-choice]").forEach((button) => {
-    button.addEventListener("click", () => apply(root.dataset.roles, button.dataset.bgChoice, root.dataset.mode));
+    button.addEventListener("click", () => apply(currentValues(), button.dataset.bgChoice, root.dataset.mode));
   });
   document.querySelectorAll("[data-mode-choice]").forEach((button) => {
-    button.addEventListener("click", () => apply(root.dataset.roles, root.dataset.bg, button.dataset.modeChoice));
+    button.addEventListener("click", () => apply(currentValues(), root.dataset.bg, button.dataset.modeChoice));
   });
   sync();
 })();

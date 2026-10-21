@@ -42,7 +42,7 @@ https://<user>.github.io/<repo>/designs/example-page/
 | `construct-poster` | light | `data-accent`: `orange`, `violet` |
 | `moderncraft-hud` | dark + light | `data-accent`: six presets |
 | `mechcraft-hud` | dark + light | single amber/cyan console palette |
-| `systemcraft-hud` | dark + light | `data-roles`: six orders · `data-bg`: `sahara`, `grid` |
+| `systemcraft-hud` | dark + light | `data-prime` / `data-secondary` / `data-tertiary`: 27 assignments · `data-bg`: `sahara`, `grid` |
 
 Each style's `preview.png` is a 1440×900 screenshot of this example page in that
 style (Overview tab, canonical state). The style card and gallery on the page
@@ -53,8 +53,8 @@ use those images.
 - **Design tabs** (header and gallery) switch the active stylesheet.
 - **Mode** is remembered where supported; `construct-poster` is light-only.
 - **Accent** appears for styles that declare an accent choice.
-- **Roles / background** appear for `systemcraft-hud`: six amber/cyan/lime role
-  permutations and the Sahara/Grid page texture.
+- **Roles / background** appear for `systemcraft-hud`: three independent amber/cyan/lime role
+  assignments (27 combinations) and the Sahara/Grid page texture.
 - **Ornaments** appears only for `neon-hud`.
 - State persists in `localStorage` and in the query string. **Copy link** copies
   the full state; the section tab is kept in the hash.
@@ -66,7 +66,7 @@ Examples:
 ?style=construct-poster&mode=light&accent=violet
 ?style=moderncraft-hud&mode=light&accent=protoss
 ?style=mechcraft-hud&mode=dark
-?style=systemcraft-hud&mode=dark&roles=cyan-lime-amber&bg=grid
+?style=systemcraft-hud&mode=dark&prime=cyan&secondary=lime&tertiary=amber&bg=grid
 ```
 
 Section hashes: `#overview`, `#typography`, `#components`, `#forms`, `#data`,
@@ -76,7 +76,7 @@ Section hashes: `#overview`, `#typography`, `#components`, `#forms`, `#data`,
 
 - `showcase-config.js` is loaded synchronously in `<head>`. It validates URL
   parameters and localStorage, sets `data-theme` / `data-mode`, plus every
-  style choice (`data-accent`, `data-roles`, `data-bg`), sets `data-orn`, and
+  style choice (`data-accent`, `data-prime`, `data-secondary`, `data-tertiary`, `data-bg`), sets `data-orn`, and
   switches exactly one theme `<link>` from `media="not all"` to `media="all"`.
   This happens before first paint, so a direct link to another style does not
   flash the default.

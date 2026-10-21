@@ -5,7 +5,8 @@
 
    Usage:
      <html data-theme="systemcraft-hud" data-mode="dark"
-           data-roles="amber-cyan-lime" data-bg="sahara">
+           data-prime="amber" data-secondary="cyan" data-tertiary="lime"
+           data-bg="sahara">
      <link rel="stylesheet" href="theme.css">
 
    Roles: amber / cyan / lime, in six permutations. Each colour
@@ -103,7 +104,7 @@
   --lime-line: #6f9b2e;
   --lime-ink: #0d1605;
 
-  /* default role order: amber prime · cyan secondary · lime tertiary */
+  /* default role assignment: amber prime · cyan secondary · lime tertiary */
   --acc: var(--amber);
   --acc-tone: var(--amber-fill);
   --acc-soft: var(--amber-soft);
@@ -181,72 +182,56 @@
   --lime-ink: #0d1605;
 }
 
-/* ------------------------------------------------------------ role orders */
-[data-theme="systemcraft-hud"][data-roles="amber-cyan-lime"] {
+/* ------------------------------------------------------------ roles */
+[data-theme="systemcraft-hud"][data-prime="amber"] {
   --acc: var(--amber);
   --acc-tone: var(--amber-fill);
   --acc-soft: var(--amber-soft);
   --acc-line: var(--amber-line);
   --acc-ink: var(--amber-ink);
-  --sec: var(--cyan);
-  --sec-tone: var(--cyan-fill);
-  --sec-soft: var(--cyan-soft);
-  --sec-line: var(--cyan-line);
-  --sec-ink: var(--cyan-ink);
-  --ter: var(--lime);
-  --ter-tone: var(--lime-fill);
-  --ter-soft: var(--lime-soft);
-  --ter-line: var(--lime-line);
-  --ter-ink: var(--lime-ink);
 }
 
-[data-theme="systemcraft-hud"][data-roles="amber-lime-cyan"] {
-  --acc: var(--amber);
-  --acc-tone: var(--amber-fill);
-  --acc-soft: var(--amber-soft);
-  --acc-line: var(--amber-line);
-  --acc-ink: var(--amber-ink);
-  --sec: var(--lime);
-  --sec-tone: var(--lime-fill);
-  --sec-soft: var(--lime-soft);
-  --sec-line: var(--lime-line);
-  --sec-ink: var(--lime-ink);
-  --ter: var(--cyan);
-  --ter-tone: var(--cyan-fill);
-  --ter-soft: var(--cyan-soft);
-  --ter-line: var(--cyan-line);
-  --ter-ink: var(--cyan-ink);
-}
-
-[data-theme="systemcraft-hud"][data-roles="cyan-amber-lime"] {
+[data-theme="systemcraft-hud"][data-prime="cyan"] {
   --acc: var(--cyan);
   --acc-tone: var(--cyan-fill);
   --acc-soft: var(--cyan-soft);
   --acc-line: var(--cyan-line);
   --acc-ink: var(--cyan-ink);
+}
+
+[data-theme="systemcraft-hud"][data-prime="lime"] {
+  --acc: var(--lime);
+  --acc-tone: var(--lime-fill);
+  --acc-soft: var(--lime-soft);
+  --acc-line: var(--lime-line);
+  --acc-ink: var(--lime-ink);
+}
+
+[data-theme="systemcraft-hud"][data-secondary="amber"] {
   --sec: var(--amber);
   --sec-tone: var(--amber-fill);
   --sec-soft: var(--amber-soft);
   --sec-line: var(--amber-line);
   --sec-ink: var(--amber-ink);
-  --ter: var(--lime);
-  --ter-tone: var(--lime-fill);
-  --ter-soft: var(--lime-soft);
-  --ter-line: var(--lime-line);
-  --ter-ink: var(--lime-ink);
 }
 
-[data-theme="systemcraft-hud"][data-roles="cyan-lime-amber"] {
-  --acc: var(--cyan);
-  --acc-tone: var(--cyan-fill);
-  --acc-soft: var(--cyan-soft);
-  --acc-line: var(--cyan-line);
-  --acc-ink: var(--cyan-ink);
+[data-theme="systemcraft-hud"][data-secondary="cyan"] {
+  --sec: var(--cyan);
+  --sec-tone: var(--cyan-fill);
+  --sec-soft: var(--cyan-soft);
+  --sec-line: var(--cyan-line);
+  --sec-ink: var(--cyan-ink);
+}
+
+[data-theme="systemcraft-hud"][data-secondary="lime"] {
   --sec: var(--lime);
   --sec-tone: var(--lime-fill);
   --sec-soft: var(--lime-soft);
   --sec-line: var(--lime-line);
   --sec-ink: var(--lime-ink);
+}
+
+[data-theme="systemcraft-hud"][data-tertiary="amber"] {
   --ter: var(--amber);
   --ter-tone: var(--amber-fill);
   --ter-soft: var(--amber-soft);
@@ -254,17 +239,7 @@
   --ter-ink: var(--amber-ink);
 }
 
-[data-theme="systemcraft-hud"][data-roles="lime-amber-cyan"] {
-  --acc: var(--lime);
-  --acc-tone: var(--lime-fill);
-  --acc-soft: var(--lime-soft);
-  --acc-line: var(--lime-line);
-  --acc-ink: var(--lime-ink);
-  --sec: var(--amber);
-  --sec-tone: var(--amber-fill);
-  --sec-soft: var(--amber-soft);
-  --sec-line: var(--amber-line);
-  --sec-ink: var(--amber-ink);
+[data-theme="systemcraft-hud"][data-tertiary="cyan"] {
   --ter: var(--cyan);
   --ter-tone: var(--cyan-fill);
   --ter-soft: var(--cyan-soft);
@@ -272,22 +247,12 @@
   --ter-ink: var(--cyan-ink);
 }
 
-[data-theme="systemcraft-hud"][data-roles="lime-cyan-amber"] {
-  --acc: var(--lime);
-  --acc-tone: var(--lime-fill);
-  --acc-soft: var(--lime-soft);
-  --acc-line: var(--lime-line);
-  --acc-ink: var(--lime-ink);
-  --sec: var(--cyan);
-  --sec-tone: var(--cyan-fill);
-  --sec-soft: var(--cyan-soft);
-  --sec-line: var(--cyan-line);
-  --sec-ink: var(--cyan-ink);
-  --ter: var(--amber);
-  --ter-tone: var(--amber-fill);
-  --ter-soft: var(--amber-soft);
-  --ter-line: var(--amber-line);
-  --ter-ink: var(--amber-ink);
+[data-theme="systemcraft-hud"][data-tertiary="lime"] {
+  --ter: var(--lime);
+  --ter-tone: var(--lime-fill);
+  --ter-soft: var(--lime-soft);
+  --ter-line: var(--lime-line);
+  --ter-ink: var(--lime-ink);
 }
 
 /* ------------------------------------------------------------ base */
@@ -519,8 +484,8 @@
   bottom: 0;
   height: 1px;
   border-radius: 0 0 var(--r-sm) var(--r-sm);
-  background: var(--acc);
-  opacity: 0.9;
+  background: var(--sec);
+  opacity: 1;
   pointer-events: none;
 }
 

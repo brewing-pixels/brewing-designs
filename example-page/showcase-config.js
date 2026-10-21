@@ -103,22 +103,38 @@
       name: "systemcraft-hud",
       tagline: "Hybrid systems HUD",
       description:
-        "Mechcraft type and card geometry, Moderncraft texture and restraint, on a darker black. Amber, cyan and lime rotate through prime, secondary and tertiary roles. Sahara or grid background.",
+        "Mechcraft type and card geometry, Moderncraft texture and restraint, on a darker black. Assign amber, cyan and lime independently to prime, secondary and tertiary — 27 combinations. Sahara or grid background.",
       modes: ["dark", "light"],
       defaultMode: "dark",
       choices: [
         {
-          attr: "roles",
-          label: "Roles",
-          type: "roles",
-          default: "amber-cyan-lime",
+          attr: "prime",
+          label: "Prime",
+          default: "amber",
           options: [
-            { id: "amber-cyan-lime", label: "Amber prime · cyan secondary · lime tertiary", colors: ["#f2a23b", "#63d4e4", "#b6f34a"] },
-            { id: "amber-lime-cyan", label: "Amber prime · lime secondary · cyan tertiary", colors: ["#f2a23b", "#b6f34a", "#63d4e4"] },
-            { id: "cyan-amber-lime", label: "Cyan prime · amber secondary · lime tertiary", colors: ["#63d4e4", "#f2a23b", "#b6f34a"] },
-            { id: "cyan-lime-amber", label: "Cyan prime · lime secondary · amber tertiary", colors: ["#63d4e4", "#b6f34a", "#f2a23b"] },
-            { id: "lime-amber-cyan", label: "Lime prime · amber secondary · cyan tertiary", colors: ["#b6f34a", "#f2a23b", "#63d4e4"] },
-            { id: "lime-cyan-amber", label: "Lime prime · cyan secondary · amber tertiary", colors: ["#b6f34a", "#63d4e4", "#f2a23b"] },
+            { id: "amber", label: "Amber", hex: "#f2a23b" },
+            { id: "cyan", label: "Cyan", hex: "#63d4e4" },
+            { id: "lime", label: "Lime", hex: "#b6f34a" },
+          ],
+        },
+        {
+          attr: "secondary",
+          label: "Secondary",
+          default: "cyan",
+          options: [
+            { id: "amber", label: "Amber", hex: "#f2a23b" },
+            { id: "cyan", label: "Cyan", hex: "#63d4e4" },
+            { id: "lime", label: "Lime", hex: "#b6f34a" },
+          ],
+        },
+        {
+          attr: "tertiary",
+          label: "Tertiary",
+          default: "lime",
+          options: [
+            { id: "amber", label: "Amber", hex: "#f2a23b" },
+            { id: "cyan", label: "Cyan", hex: "#63d4e4" },
+            { id: "lime", label: "Lime", hex: "#b6f34a" },
           ],
         },
         {
@@ -133,7 +149,7 @@
         },
       ],
       ornaments: null,
-      extras: "6 role orders · 2 backgrounds",
+      extras: "27 role combos · 2 backgrounds",
       preview: "../styles/systemcraft-hud/preview.png",
       design: "../styles/systemcraft-hud/DESIGN.md",
       demo: "../styles/systemcraft-hud/demo.html",
@@ -144,7 +160,7 @@
   const ORDER = ["neon-hud", "construct-poster", "moderncraft-hud", "mechcraft-hud", "systemcraft-hud"];
   const STORAGE_KEY = "designs.showcase.v3";
   const ORN_VALUES = ["css", "art", "minimal"];
-  const CHOICE_ATTRS = ["accent", "variant", "roles", "bg"];
+  const CHOICE_ATTRS = ["accent", "variant", "roles", "prime", "secondary", "tertiary", "bg"];
 
   function defaults() {
     const choices = {};

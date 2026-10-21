@@ -17,7 +17,7 @@ library:
   highlights, technical labels, compact numeric/data treatment.
 
 The combination, the darker neutral ramp, the three-colour role system, the
-six role orders, the combined masthead, the Sahara/grid background switch and
+27 role assignments, the combined masthead, the Sahara/grid background switch and
 the new component recipes are original work for this style.
 
 No third-party component library, template, theme file, screenshot, logo,
