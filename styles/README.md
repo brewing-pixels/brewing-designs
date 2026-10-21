@@ -10,6 +10,7 @@ design direction: tokens + CSS + spec + preview, decoupled from any one project.
 | [`neon-hud/`](neon-hud/) | sci-fi / tactical HUD — cyan chrome, clipped corners, scanlines | dark + light | ready |
 | [`soviet-poster/`](soviet-poster/) | flat cell-shaded propaganda poster — hard borders, sharp offset cell-shadows, orange / violet chrome | light (2 accents) | ready |
 | [`systemcraft-hud/`](systemcraft-hud/) | industrial metallic HUD — graphite panels, near-black cards, one accent, 45° accent hatch, six presets | dark + light (6 accents) | ready |
+| [`centercraft-hud/`](centercraft-hud/) | command-console HUD — layered metal, black screens, amber or lime + cyan, reskin/briefing layouts | dark + light (2 variants) | ready |
 
 ## Anatomy of a style
 

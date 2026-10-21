@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en" data-theme="centercraft-hud" data-variant="amber" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<script>
+(() => {
+  const variants = new Set(["amber", "lime"]);
+  const modes = new Set(["dark", "light"]);
+  let variant = "amber";
+  let mode = "dark";
+  try {
+    variant = localStorage.getItem("centercraft.variant") || variant;
+    mode = localStorage.getItem("centercraft.mode") || mode;
+  } catch (e) {}
+  const root = document.documentElement;
+  root.dataset.variant = variants.has(variant) ? variant : "amber";
+  root.dataset.mode = modes.has(mode) ? mode : "dark";
+})();
+</script>
+<title>centercraft-hud — command console specimen</title>
+<link rel="stylesheet" href="theme.css">
+<style>
+  .demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .demo-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+  .demo-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .demo-footer { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--cc-bezel-2); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .demo-note { color: var(--mut); font: 10px/1.5 var(--f-mono); }
+  /* The live app keeps this sticky; the full-page specimen should not cover the cards. */
+  .cc-command-bar { position: static; }
+  @media (max-width: 760px) { .demo-grid, .demo-cards { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="cc-shell">
+  <header class="cc-top">
+    <div class="cc-brand">
+      <span class="cc-mark" aria-hidden="true">CC</span>
+      <div>
+        <h1>CENTER<b>CRAFT</b></h1>
+        <div class="cc-kicker">command HUD · specimen</div>
+      </div>
+      <span class="cc-tag">v1</span>
+    </div>
+    <div class="cc-theme" aria-label="Theme controls">
+      <div class="cc-theme-group">
+        <span class="cc-theme-label">Variant</span>
+        <div class="cc-theme-row">
+          <button class="cc-swatch-btn" type="button" data-variant-choice="amber" aria-label="Amber and cyan" aria-pressed="true" title="Amber / Cyan"><span class="cc-swatch" style="--sw:#f2a23b"></span></button>
+          <button class="cc-swatch-btn" type="button" data-variant-choice="lime" aria-label="Lime and cyan" aria-pressed="false" title="Lime / Cyan"><span class="cc-swatch" style="--sw:#b6f34a"></span></button>
+        </div>
+      </div>
+      <div class="cc-theme-group">
+        <span class="cc-theme-label">Mode</span>
+        <div class="cc-theme-row">
+          <button class="cc-mode-btn" type="button" data-mode-choice="dark" aria-pressed="true">Dark</button>
+          <button class="cc-mode-btn" type="button" data-mode-choice="light" aria-pressed="false">Light</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="cc-resource" aria-label="Resource strip">
+    <nav class="cc-nav" aria-label="Sections">
+      <button type="button" class="active">Command</button>
+      <button type="button">Directives</button>
+      <button type="button">Spec</button>
+    </nav>
+    <span class="cc-resource-spacer"></span>
+    <div class="cc-resource-pips">
+      <span class="cc-pip">OPEN <b>20</b></span>
+      <span class="cc-pip">SERVICES <b>2/3</b></span>
+      <span class="cc-pip">REVENUE <b>€0</b></span>
+      <span class="cc-pip">SYNC <b>NOW</b></span>
+    </div>
+  </section>
+
+  <div class="cc-layout">
+    <aside class="cc-rail left">
+      <section class="cc-panel">
+        <div class="cc-panel-head">
+          <span class="cc-title">Directives</span>
+          <span class="cc-meta">2 active</span>
+        </div>
+        <div class="cc-directives">
+          <article class="cc-objective">
+            <div class="cc-objective-head">
+              <h3>Ship v1</h3>
+              <span class="cc-progress">2/4</span>
+            </div>
+            <div class="cc-task">
+              <input class="cc-check" type="checkbox" checked aria-label="Write the brief">
+              <div class="cc-task-body">
+                <div class="cc-check-label done">Write the brief</div>
+                <div class="cc-task-meta">done · today</div>
+              </div>
+            </div>
+            <div class="cc-task">
+              <input class="cc-check" type="checkbox" checked aria-label="Build the console">
+              <div class="cc-task-body">
+                <div class="cc-check-label done">Build the console</div>
+                <div class="cc-task-meta">done · yesterday</div>
+              </div>
+            </div>
+            <div class="cc-task">
+              <input class="cc-check" type="checkbox" aria-label="Run the first playtest">
+              <div class="cc-task-body">
+                <div class="cc-check-label">Run the first playtest</div>
+                <div class="cc-task-meta">open · high · tomorrow</div>
+              </div>
+            </div>
+            <div class="cc-task">
+              <input class="cc-check" type="checkbox" aria-label="Pick the launch channel">
+              <div class="cc-task-body">
+                <div class="cc-check-label">Pick the launch channel</div>
+                <div class="cc-task-meta">open · normal</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="cc-objective">
+            <div class="cc-objective-head">
+              <h3>Validate demand</h3>
+              <span class="cc-progress">0/2</span>
+            </div>
+            <div class="cc-task">
+              <input class="cc-check" type="checkbox" aria-label="Call five potential users">
+              <div class="cc-task-body">
+                <div class="cc-check-label">Call five potential users</div>
+                <div class="cc-task-meta">open · urgent</div>
+              </div>
+            </div>
+            <div class="cc-task">
+              <input class="cc-check" type="checkbox" aria-label="Write the offer page">
+              <div class="cc-task-body">
+                <div class="cc-check-label">Write the offer page</div>
+                <div class="cc-task-meta">open · normal</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </aside>
+
+    <main class="cc-center">
+      <section class="cc-panel cc-briefing">
+        <div class="cc-panel-head">
+          <span class="cc-title">Briefing</span>
+          <span class="cc-lamp live">active</span>
+        </div>
+        <p class="cc-summary">A deliberately small operations board: one central command stage, two instrument pods, and a spec that reads like a document instead of a settings form.</p>
+        <div class="cc-bars">
+          <div class="cc-bar"><span>Build</span><span class="track"><span class="fill" style="width:82%"></span></span><span>82%</span></div>
+          <div class="cc-bar traction"><span>Traction</span><span class="track"><span class="fill" style="width:8%"></span></span><span>8%</span></div>
+        </div>
+        <div class="cc-facts">
+          <div><b>Next:</b> run the first playtest</div>
+          <div class="gate"><b>Gate:</b> the first external user completes a run</div>
+          <div class="cc-meta">updated 2h ago</div>
+        </div>
+      </section>
+
+      <section class="cc-panel">
+        <div class="cc-panel-head">
+          <span class="cc-title">Specification</span>
+          <div class="cc-meta-row">
+            <span class="cc-readonly">read-only</span>
+            <span>SPEC.md · 2h ago</span>
+            <button class="cc-btn ghost" type="button">Expand</button>
+          </div>
+        </div>
+        <div class="cc-spec-doc">
+          <h2>Orbital Foundry — Specification</h2>
+          <h3>What this is</h3>
+          <p>A compact command console for a one-person studio. The board is the tactical table; the project page is the briefing; the spec is the data slate.</p>
+          <h3>Definition of done</h3>
+          <ul>
+            <li>A project can be read, edited, and archived from one console.</li>
+            <li>Objectives and tasks are visible without leaving the briefing.</li>
+            <li>The spec reads cleanly, and the full editor opens only on demand.</li>
+          </ul>
+          <table>
+            <thead><tr><th>Surface</th><th>Role</th><th>Rule</th></tr></thead>
+            <tbody>
+              <tr><td>Card</td><td>command module</td><td>black inset + metal bezel</td></tr>
+              <tr><td>Title</td><td>command label</td><td>accent, condensed uppercase</td></tr>
+              <tr><td>Hover</td><td>attention</td><td>accent ring + hue shadow</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="demo-cards">
+        <article class="cc-card">
+          <div class="cc-kicker">Content pipeline</div>
+          <h3>Orbital Foundry</h3>
+          <p class="cc-desc">Batch generation from research to published asset. The machine works; distribution is the open edge.</p>
+          <div class="cc-meta-row"><span class="cc-lamp live">live</span><span class="cc-lamp warn">gated</span></div>
+          <div class="cc-foot"><div><b>Next:</b> package the offer</div><div><b>Gate:</b> first paid order</div></div>
+        </article>
+        <article class="cc-card">
+          <div class="cc-kicker">Field notes</div>
+          <h3>Signal Archive</h3>
+          <p class="cc-desc">A local-first reference shelf with no account, no sync, and a strong bias toward reading.</p>
+          <div class="cc-meta-row"><span class="cc-lamp">parked</span></div>
+          <div class="cc-foot"><div><b>Next:</b> none this month</div><div><b>Gate:</b> attention budget</div></div>
+        </article>
+      </div>
+    </main>
+
+    <aside class="cc-rail right">
+      <section class="cc-panel">
+        <div class="cc-panel-head"><span class="cc-title">Telemetry</span></div>
+        <div class="cc-meta-row" style="display:flex;flex-direction:column;align-items:flex-start;gap:7px;">
+          <span><b style="color:var(--ink)">Repo</b> main · 42e7e4b</span>
+          <span><b style="color:var(--ink)">Worktree</b> 1 dirty</span>
+          <span><b style="color:var(--ink)">AGENTS</b> 2d ago</span>
+          <span><b style="color:var(--ink)">Tasks</b> 20 open · 7 done</span>
+          <span class="cc-lamp live">service up</span>
+        </div>
+      </section>
+      <section class="cc-panel">
+        <div class="cc-panel-head"><span class="cc-title">Links</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <span class="cc-meta">PATH <code>/studio/foundry</code></span>
+          <span class="cc-meta">SPEC <code>/studio/foundry/SPEC.md</code></span>
+          <a href="#" onclick="return false">AGENTS.md ↗</a>
+          <a href="#" onclick="return false">README.md ↗</a>
+        </div>
+      </section>
+      <section class="cc-panel">
+        <div class="cc-panel-head"><span class="cc-title">Controls</span></div>
+        <div class="demo-actions">
+          <button class="cc-btn primary" type="button">Primary</button>
+          <button class="cc-btn" type="button">Secondary</button>
+          <button class="cc-btn ghost" type="button">Ghost</button>
+          <button class="cc-btn danger" type="button">Danger</button>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <div class="cc-command-bar">
+    <span class="cc-command-label">Command</span>
+    <button class="cc-btn primary" type="button">+ Objective</button>
+    <button class="cc-btn ghost" type="button">Spec</button>
+    <button class="cc-btn ghost" type="button">Fields</button>
+    <button class="cc-btn ghost" type="button">Flags</button>
+    <span class="cc-command-spacer"></span>
+    <span class="cc-meta">1 open · 2 directives</span>
+  </div>
+
+  <footer class="demo-footer">
+    <span class="demo-note">centercraft-hud · MIT code · no game assets, logos or portraits bundled</span>
+    <span class="demo-note">amber/cyan · lime/cyan · dark + light</span>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const variants = new Set(["amber", "lime"]);
+  const modes = new Set(["dark", "light"]);
+  const root = document.documentElement;
+  const sync = () => {
+    document.querySelectorAll("[data-variant-choice]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.variantChoice === root.dataset.variant));
+    });
+    document.querySelectorAll("[data-mode-choice]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.modeChoice === root.dataset.mode));
+    });
+  };
+  const apply = (variant, mode) => {
+    root.dataset.variant = variants.has(variant) ? variant : "amber";
+    root.dataset.mode = modes.has(mode) ? mode : "dark";
+    try {
+      localStorage.setItem("centercraft.variant", root.dataset.variant);
+      localStorage.setItem("centercraft.mode", root.dataset.mode);
+    } catch (e) {}
+    sync();
+  };
+  document.querySelectorAll("[data-variant-choice]").forEach((button) => {
+    button.addEventListener("click", () => apply(button.dataset.variantChoice, root.dataset.mode));
+  });
+  document.querySelectorAll("[data-mode-choice]").forEach((button) => {
+    button.addEventListener("click", () => apply(root.dataset.variant, button.dataset.modeChoice));
+  });
+  sync();
+})();
+</script>
+</body>
+</html>
