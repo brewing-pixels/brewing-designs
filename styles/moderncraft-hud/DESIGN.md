@@ -204,6 +204,8 @@ No scanlines, no glow, no grain, no vignette.
 
 ---
 
+Scrollbars: thin, 10 px, rounded accent-mixed thumb on the page ground; full accent on hover.
+
 ## Accessibility
 
 - **Text accent = `--acc`, fill accent = `--acc-tone`.** This is the central

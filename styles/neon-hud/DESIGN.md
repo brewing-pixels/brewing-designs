@@ -92,6 +92,8 @@ from tokens, so re-pointing the tokens restyles everything.
 - **Don't** round the corners; the clips are the identity.
 - **Don't** use chrome as a large fill — it's an edge/line colour, not a surface.
 
+Scrollbars: thin, 9 px chrome-mixed thumb on the `--bg-2` track; chromed on hover.
+
 ## Accessibility
 
 - Chrome-on-surface and ink-on-surface are chosen for dark UIs; verify contrast

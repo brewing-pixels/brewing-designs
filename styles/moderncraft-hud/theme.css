@@ -916,3 +916,37 @@ textarea {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ------------------------------------------------------------ scrollbars */
+[data-theme="moderncraft-hud"] {
+  scrollbar-color: color-mix(in srgb, var(--acc) 55%, var(--surface-2)) var(--bg-2);
+  scrollbar-width: thin;
+}
+
+[data-theme="moderncraft-hud"]::-webkit-scrollbar,
+[data-theme="moderncraft-hud"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="moderncraft-hud"]::-webkit-scrollbar-track,
+[data-theme="moderncraft-hud"] ::-webkit-scrollbar-track {
+  background: var(--bg-2);
+}
+
+[data-theme="moderncraft-hud"]::-webkit-scrollbar-thumb,
+[data-theme="moderncraft-hud"] ::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--acc) 55%, var(--surface-2));
+  border: 2px solid var(--bg-2);
+  border-radius: var(--r-full);
+}
+
+[data-theme="moderncraft-hud"]::-webkit-scrollbar-thumb:hover,
+[data-theme="moderncraft-hud"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--acc);
+}
+
+[data-theme="moderncraft-hud"]::-webkit-scrollbar-corner,
+[data-theme="moderncraft-hud"] ::-webkit-scrollbar-corner {
+  background: var(--bg-2);
+}

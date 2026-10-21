@@ -1077,3 +1077,37 @@ code {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* ------------------------------------------------------------ scrollbars */
+[data-theme="mechcraft-hud"] {
+  scrollbar-color: color-mix(in srgb, var(--acc) 55%, var(--cc-bezel)) var(--surface-card);
+  scrollbar-width: thin;
+}
+
+[data-theme="mechcraft-hud"]::-webkit-scrollbar,
+[data-theme="mechcraft-hud"] ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+[data-theme="mechcraft-hud"]::-webkit-scrollbar-track,
+[data-theme="mechcraft-hud"] ::-webkit-scrollbar-track {
+  background: var(--surface-card);
+}
+
+[data-theme="mechcraft-hud"]::-webkit-scrollbar-thumb,
+[data-theme="mechcraft-hud"] ::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--acc) 55%, var(--cc-bezel));
+  border: 2px solid var(--surface-card);
+  border-radius: 2px;
+}
+
+[data-theme="mechcraft-hud"]::-webkit-scrollbar-thumb:hover,
+[data-theme="mechcraft-hud"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--acc);
+}
+
+[data-theme="mechcraft-hud"]::-webkit-scrollbar-corner,
+[data-theme="mechcraft-hud"] ::-webkit-scrollbar-corner {
+  background: var(--surface-card);
+}

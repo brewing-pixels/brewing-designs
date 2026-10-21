@@ -226,3 +226,37 @@ code, .kbd {
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0ms !important; animation-duration: 0ms !important; }
 }
+
+/* ------------------------------------------------------------ scrollbars */
+[data-theme="neon-hud"] {
+  scrollbar-color: color-mix(in srgb, var(--chrome) 55%, var(--surface-2)) var(--bg-2);
+  scrollbar-width: thin;
+}
+
+[data-theme="neon-hud"]::-webkit-scrollbar,
+[data-theme="neon-hud"] ::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+[data-theme="neon-hud"]::-webkit-scrollbar-track,
+[data-theme="neon-hud"] ::-webkit-scrollbar-track {
+  background: var(--bg-2);
+}
+
+[data-theme="neon-hud"]::-webkit-scrollbar-thumb,
+[data-theme="neon-hud"] ::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--chrome) 55%, var(--surface-2));
+  border: 2px solid var(--bg-2);
+  border-radius: 2px;
+}
+
+[data-theme="neon-hud"]::-webkit-scrollbar-thumb:hover,
+[data-theme="neon-hud"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--chrome);
+}
+
+[data-theme="neon-hud"]::-webkit-scrollbar-corner,
+[data-theme="neon-hud"] ::-webkit-scrollbar-corner {
+  background: var(--bg-2);
+}

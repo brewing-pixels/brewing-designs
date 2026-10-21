@@ -196,6 +196,8 @@ of the skin.
 
 ---
 
+Scrollbars: 12 px bezel thumb on the card screen; accent on hover.
+
 ## Accessibility
 
 - Body 14–16px; labels 10–11px; no game-HUD 8px body copy.

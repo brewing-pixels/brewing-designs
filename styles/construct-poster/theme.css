@@ -319,3 +319,37 @@ button { font: inherit; color: inherit; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0ms !important; animation-duration: 0ms !important; }
 }
+
+/* ------------------------------------------------------------ scrollbars */
+[data-theme="construct-poster"] {
+  scrollbar-color: var(--line) var(--surface-2);
+  scrollbar-width: thin;
+}
+
+[data-theme="construct-poster"]::-webkit-scrollbar,
+[data-theme="construct-poster"] ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+[data-theme="construct-poster"]::-webkit-scrollbar-track,
+[data-theme="construct-poster"] ::-webkit-scrollbar-track {
+  background: var(--surface-2);
+}
+
+[data-theme="construct-poster"]::-webkit-scrollbar-thumb,
+[data-theme="construct-poster"] ::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border: 2px solid var(--surface-2);
+  border-radius: 0;
+}
+
+[data-theme="construct-poster"]::-webkit-scrollbar-thumb:hover,
+[data-theme="construct-poster"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--chrome);
+}
+
+[data-theme="construct-poster"]::-webkit-scrollbar-corner,
+[data-theme="construct-poster"] ::-webkit-scrollbar-corner {
+  background: var(--surface-2);
+}

@@ -87,6 +87,8 @@ Generic recipes in `theme.css`: `.banner`, `.panel` (`.panel-head`/`.panel-title
 - **Don't** add a second hue to the chrome.
 - **Don't** round corners much; the poster is rectilinear.
 
+Scrollbars: 12 px, square black thumb on the paper track; chrome on hover.
+
 ## Accessibility
 
 - The canonical orange `--chrome` is used mostly as a **fill** with `--bg` (paper)
