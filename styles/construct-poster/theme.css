@@ -1,5 +1,5 @@
 /* ============================================================
-   soviet-poster — a flat, cell-shaded propaganda-poster web style
+   construct-poster — a flat, cell-shaded constructivist-poster web style
    Warm paper neutrals, one chrome hue, heavy flat borders, sharp
    offset "cell" shadows, constructivist background decoration.
 
@@ -8,7 +8,7 @@
    SLOTS, left for the host project to re-point.
 
    Usage:
-     <html data-theme="soviet-poster" data-accent="orange">
+     <html data-theme="construct-poster" data-accent="orange">
      <link rel="stylesheet" href="theme.css">
    Or drop just the :root token block into an existing system.
 
@@ -19,7 +19,7 @@
 
 /* ---- tokens: default = orange ---- */
 :root,
-[data-theme="soviet-poster"] {
+[data-theme="construct-poster"] {
   /* neutrals — warm paper */
   --bg:        #fdf3e3;
   --bg-2:      #f0dcc0;
@@ -32,7 +32,7 @@
   --ink-2:     #2d1400;
   --mut:       #7a5c44;
 
-  /* chrome — propaganda orange (canonical) */
+  /* chrome — constructivist orange (canonical) */
   --chrome:        #e8600a;
   --chrome-2:      #b84300;
   --chrome-bright: #ff8c2e;
@@ -71,7 +71,7 @@
 }
 
 /* ---- accent: violet (muted alt palette) ---- */
-[data-theme="soviet-poster"][data-accent="violet"] {
+[data-theme="construct-poster"][data-accent="violet"] {
   --bg:        #f7f5fa;
   --bg-2:      #e8e3f0;
   --surface:   #f7f5fa;

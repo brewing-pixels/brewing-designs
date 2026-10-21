@@ -22,7 +22,7 @@
   --ds-accent-text: var(--chrome-2);
 }
 
-[data-theme="soviet-poster"] {
+[data-theme="construct-poster"] {
   --ds-accent-text: var(--chrome-2);
   --ds-on-accent: var(--line);
 }
@@ -42,7 +42,7 @@ html[data-mode="dark"] {
   color-scheme: dark;
 }
 html[data-mode="light"],
-html[data-theme="soviet-poster"] {
+html[data-theme="construct-poster"] {
   color-scheme: light;
 }
 
@@ -3098,48 +3098,48 @@ x-specimen {
   clip-path: polygon(0 5px, 5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%);
 }
 
-/* ---- soviet-poster ------------------------------------------ */
-[data-theme="soviet-poster"] h1,
-[data-theme="soviet-poster"] h2,
-[data-theme="soviet-poster"] h3,
-[data-theme="soviet-poster"] h4,
-[data-theme="soviet-poster"] h5,
-[data-theme="soviet-poster"] h6 {
+/* ---- construct-poster ------------------------------------------ */
+[data-theme="construct-poster"] h1,
+[data-theme="construct-poster"] h2,
+[data-theme="construct-poster"] h3,
+[data-theme="construct-poster"] h4,
+[data-theme="construct-poster"] h5,
+[data-theme="construct-poster"] h6 {
   font-weight: 400;
   letter-spacing: 0.02em;
 }
 
-[data-theme="soviet-poster"] .ds-panel,
-[data-theme="soviet-poster"] .ds-card,
-[data-theme="soviet-poster"] .ds-stat,
-[data-theme="soviet-poster"] .ds-empty {
+[data-theme="construct-poster"] .ds-panel,
+[data-theme="construct-poster"] .ds-card,
+[data-theme="construct-poster"] .ds-stat,
+[data-theme="construct-poster"] .ds-empty {
   border: var(--bw) solid var(--line);
   border-radius: var(--r-md);
   box-shadow: var(--cell) var(--cell) 0 var(--cell-shadow);
 }
 
-[data-theme="soviet-poster"] .ds-stylecard,
-[data-theme="soviet-poster"] .ds-gallery-item {
+[data-theme="construct-poster"] .ds-stylecard,
+[data-theme="construct-poster"] .ds-gallery-item {
   overflow: hidden;
 }
 
-[data-theme="soviet-poster"] .ds-stylecard img,
-[data-theme="soviet-poster"] .ds-gallery-item img {
+[data-theme="construct-poster"] .ds-stylecard img,
+[data-theme="construct-poster"] .ds-gallery-item img {
   border-bottom: var(--bw) solid var(--line);
 }
 
-[data-theme="soviet-poster"] .ds-gallery-item {
+[data-theme="construct-poster"] .ds-gallery-item {
   border: var(--bw) solid var(--line);
   border-radius: var(--r-md);
   box-shadow: 3px 3px 0 var(--cell-shadow);
 }
 
-[data-theme="soviet-poster"] .ds-gallery-item[aria-pressed="true"] {
+[data-theme="construct-poster"] .ds-gallery-item[aria-pressed="true"] {
   border-color: var(--acc);
   box-shadow: 3px 3px 0 var(--cell-shadow), inset 0 0 0 2px var(--acc);
 }
 
-[data-theme="soviet-poster"] .ds-btn {
+[data-theme="construct-poster"] .ds-btn {
   border-width: var(--bw);
   border-radius: var(--r-sm);
   box-shadow: 3px 3px 0 var(--cell-shadow);
@@ -3148,67 +3148,67 @@ x-specimen {
   letter-spacing: 0.08em;
 }
 
-[data-theme="soviet-poster"] .ds-btn.primary {
+[data-theme="construct-poster"] .ds-btn.primary {
   color: var(--line);
   background: var(--chrome);
 }
 
-[data-theme="soviet-poster"] .ds-btn.primary:hover {
+[data-theme="construct-poster"] .ds-btn.primary:hover {
   background: var(--chrome-bright);
   color: var(--line);
 }
 
-[data-theme="soviet-poster"] .ds-chip,
-[data-theme="soviet-poster"] .ds-badge,
-[data-theme="soviet-poster"] .ds-breadcrumb a {
+[data-theme="construct-poster"] .ds-chip,
+[data-theme="construct-poster"] .ds-badge,
+[data-theme="construct-poster"] .ds-breadcrumb a {
   border-radius: var(--r-sm);
 }
 
-[data-theme="soviet-poster"] .ds-badge {
+[data-theme="construct-poster"] .ds-badge {
   border-width: 1px;
 }
 
-[data-theme="soviet-poster"] .ds-tablewrap,
-[data-theme="soviet-poster"] .ds-tabs,
-[data-theme="soviet-poster"] .ds-snippet {
+[data-theme="construct-poster"] .ds-tablewrap,
+[data-theme="construct-poster"] .ds-tabs,
+[data-theme="construct-poster"] .ds-snippet {
   border: var(--bw) solid var(--line);
   border-radius: var(--r-md);
   box-shadow: 3px 3px 0 var(--cell-shadow);
 }
 
-[data-theme="soviet-poster"] .ds-tabs > .ds-tablist {
+[data-theme="construct-poster"] .ds-tabs > .ds-tablist {
   border-bottom: var(--bw) solid var(--line);
 }
 
-[data-theme="soviet-poster"] .ds-tablist button[aria-selected="true"] {
+[data-theme="construct-poster"] .ds-tablist button[aria-selected="true"] {
   font-family: var(--f-display);
   letter-spacing: 0.06em;
 }
 
-[data-theme="soviet-poster"] .ds-header {
+[data-theme="construct-poster"] .ds-header {
   border-bottom: var(--bw) solid var(--line);
   background: var(--bg);
 }
 
-[data-theme="soviet-poster"] .ds-panelhead h2,
-[data-theme="soviet-poster"] .ds-panelhead h3,
-[data-theme="soviet-poster"] .ds-fieldset > legend,
-[data-theme="soviet-poster"] .ds-stat-label,
-[data-theme="soviet-poster"] .ds-kicker {
+[data-theme="construct-poster"] .ds-panelhead h2,
+[data-theme="construct-poster"] .ds-panelhead h3,
+[data-theme="construct-poster"] .ds-fieldset > legend,
+[data-theme="construct-poster"] .ds-stat-label,
+[data-theme="construct-poster"] .ds-kicker {
   font-family: var(--f-display);
   letter-spacing: 0.08em;
 }
 
-[data-theme="soviet-poster"] .ds-stat-value {
+[data-theme="construct-poster"] .ds-stat-value {
   font-size: clamp(24px, 2.4vw, 32px);
 }
 
-[data-theme="soviet-poster"] .ds-avatar {
+[data-theme="construct-poster"] .ds-avatar {
   border-width: var(--bw);
   border-radius: var(--r-sm);
 }
 
-[data-theme="soviet-poster"] .ds-dialog {
+[data-theme="construct-poster"] .ds-dialog {
   border: var(--bw) solid var(--line);
   box-shadow: 8px 8px 0 var(--cell-shadow);
 }

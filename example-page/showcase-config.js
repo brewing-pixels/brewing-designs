@@ -24,10 +24,10 @@
       demo: "../styles/neon-hud/demo.html",
       theme: "../styles/neon-hud/theme.css",
     },
-    "soviet-poster": {
-      id: "soviet-poster",
-      name: "soviet-poster",
-      tagline: "Flat cell-shaded poster",
+    "construct-poster": {
+      id: "construct-poster",
+      name: "construct-poster",
+      tagline: "Flat constructivist poster",
       description:
         "Warm paper neutrals, heavy black borders, sharp unblurred offset shadows, constructivist decoration and display type. Light only, with orange and violet accents.",
       modes: ["light"],
@@ -43,10 +43,10 @@
       },
       ornaments: null,
       extras: "2 accents",
-      preview: "../styles/soviet-poster/preview.png",
-      design: "../styles/soviet-poster/DESIGN.md",
-      demo: "../styles/soviet-poster/demo.html",
-      theme: "../styles/soviet-poster/theme.css",
+      preview: "../styles/construct-poster/preview.png",
+      design: "../styles/construct-poster/DESIGN.md",
+      demo: "../styles/construct-poster/demo.html",
+      theme: "../styles/construct-poster/theme.css",
     },
     "moderncraft-hud": {
       id: "moderncraft-hud",
@@ -94,7 +94,7 @@
     },
   };
 
-  const ORDER = ["neon-hud", "soviet-poster", "moderncraft-hud", "mechcraft-hud"];
+  const ORDER = ["neon-hud", "construct-poster", "moderncraft-hud", "mechcraft-hud"];
   const STORAGE_KEY = "designs.showcase.v2";
   const ORN_VALUES = ["css", "art", "minimal"];
 

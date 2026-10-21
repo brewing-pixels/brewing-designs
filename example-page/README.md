@@ -16,7 +16,7 @@ python3 -m http.server 8000
 ```
 
 Opening `example-page/index.html` directly with `file://` also works; the Google
-Fonts used by `soviet-poster` simply need network access.
+Fonts used by `construct-poster` simply need network access.
 
 ## GitHub Pages
 
@@ -30,7 +30,7 @@ https://<user>.github.io/<repo>/designs/example-page/
 - There is nothing to build. Push the folder and it works.
 - `.nojekyll` is included here. If Pages publishes from the repository root,
   also keep a `.nojekyll` at that root so Jekyll does not process the tree.
-- Do not publish `example-page/` alone unless you vendor the four theme
+- Do not publish `example-page/` alone unless you vendor the five theme
   stylesheets into it (the page deliberately references the canon instead of
   duplicating it).
 
@@ -39,14 +39,14 @@ https://<user>.github.io/<repo>/designs/example-page/
 | Style | Modes | Extras |
 |---|---|---|
 | `neon-hud` | dark + light | `data-orn`: `css`, `art`, `minimal` |
-| `soviet-poster` | light | `data-accent`: `orange`, `violet` |
+| `construct-poster` | light | `data-accent`: `orange`, `violet` |
 | `moderncraft-hud` | dark + light | `data-accent`: six presets |
 | `mechcraft-hud` | dark + light | single amber/cyan console palette |
 
 ## Controls and URLs
 
 - **Design tabs** (header and gallery) switch the active stylesheet.
-- **Mode** is remembered where supported; `soviet-poster` is light-only.
+- **Mode** is remembered where supported; `construct-poster` is light-only.
 - **Accent / variant** appears only for styles that declare choices.
 - **Ornaments** appears only for `neon-hud`.
 - State persists in `localStorage` and in the query string. **Copy link** copies
@@ -56,7 +56,7 @@ Examples:
 
 ```text
 ?style=neon-hud&mode=dark&orn=art
-?style=soviet-poster&mode=light&accent=violet
+?style=construct-poster&mode=light&accent=violet
 ?style=moderncraft-hud&mode=light&accent=protoss
 ?style=mechcraft-hud&mode=dark
 ```
@@ -83,7 +83,7 @@ Section hashes: `#overview`, `#typography`, `#components`, `#forms`, `#data`,
   type/radii/spacing scales, the current usage snippet, and a live check of every
   standard content element (113 at the time of writing).
 - The only external assets are the library's `preview.png` screenshots and the
-  Google Fonts for `soviet-poster`. `mechcraft-hud` self-hosts its display font
+  Google Fonts for `construct-poster`. `mechcraft-hud` self-hosts its display font
   in its style folder. All artwork is local SVG; the audio sample is an inline
   data URI, so there are no binary media files in this folder.
 

@@ -1,12 +1,12 @@
-# soviet-poster
+# construct-poster
 
-**A flat, cell-shaded propaganda-poster web style.** Warm paper neutrals, a
+**A flat, cell-shaded constructivist-poster web style.** Warm paper neutrals, a
 single chrome hue, heavy flat borders, sharp un-blurred "cell" shadows, and
 constructivist background decoration (diagonal stripes, rings, a triangle).
 Light-only. Loud, structured, poster-like — built for dashboards, control panels,
 and command decks that want personality, not subtlety.
 
-- Aliases: `aiur-poster`, `propaganda`, `orange-poster` (internal names in the AIUR project).
+- Aliases: `aiur-poster`, `construct`, `orange-poster` (internal names in the AIUR project).
 - Extracted from: AIUR (`/rabotilnica/aiur`), the original `gateway.css` theme, 2026-10.
 
 ## Files
